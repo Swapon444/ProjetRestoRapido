@@ -9,7 +9,7 @@ namespace RestoRapido.Controllers
 {
     public class HomeController : Controller
     {
-        private UtilisateurContext db = new UtilisateurContext();
+        private CRestoContext db = new CRestoContext();
 
         public ActionResult Index()
         {

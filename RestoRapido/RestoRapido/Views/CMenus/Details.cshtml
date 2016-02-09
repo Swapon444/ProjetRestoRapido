@@ -1,0 +1,42 @@
+﻿@model RestoRapido.Models.CMenu
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CMenu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.m_strNom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.m_strNom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.m_strDateDebut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.m_strDateDebut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.m_strDateFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.m_strDateFin)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CMenuId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

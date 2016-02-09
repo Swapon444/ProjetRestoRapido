@@ -10,107 +10,107 @@ using RestoRapido.Models;
 
 namespace RestoRapido.Controllers
 {
-    public class UtilisateursController : Controller
+    public class CMenusController : Controller
     {
         private CRestoContext db = new CRestoContext();
 
-        // GET: Utilisateurs
+        // GET: CMenus
         public ActionResult Index()
         {
-            return View(db.Utilisateurs.ToList());
+            return View(db.Menus.ToList());
         }
 
-        // GET: Utilisateurs/Details/5
+        // GET: CMenus/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilisateur utilisateur = db.Utilisateurs.Find(id);
-            if (utilisateur == null)
+            CMenu cMenu = db.Menus.Find(id);
+            if (cMenu == null)
             {
                 return HttpNotFound();
             }
-            return View(utilisateur);
+            return View(cMenu);
         }
 
-        // GET: Utilisateurs/Create
+        // GET: CMenus/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Utilisateurs/Create
+        // POST: CMenus/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UtilisateurID,UtilisateurMDP,UtilisateurNomUsager,UtilisateurNom,UtilisateurPrenom,UtilisateurType")] Utilisateur utilisateur)
+        public ActionResult Create([Bind(Include = "CMenuId,m_strNom,m_strDateDebut,m_strDateFin")] CMenu cMenu)
         {
             if (ModelState.IsValid)
             {
-                db.Utilisateurs.Add(utilisateur);
+                db.Menus.Add(cMenu);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(utilisateur);
+            return View(cMenu);
         }
 
-        // GET: Utilisateurs/Edit/5
+        // GET: CMenus/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilisateur utilisateur = db.Utilisateurs.Find(id);
-            if (utilisateur == null)
+            CMenu cMenu = db.Menus.Find(id);
+            if (cMenu == null)
             {
                 return HttpNotFound();
             }
-            return View(utilisateur);
+            return View(cMenu);
         }
 
-        // POST: Utilisateurs/Edit/5
+        // POST: CMenus/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UtilisateurID,UtilisateurMDP,UtilisateurNomUsager,UtilisateurNom,UtilisateurPrenom,UtilisateurType")] Utilisateur utilisateur)
+        public ActionResult Edit([Bind(Include = "CMenuId,m_strNom,m_strDateDebut,m_strDateFin")] CMenu cMenu)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(utilisateur).State = EntityState.Modified;
+                db.Entry(cMenu).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(utilisateur);
+            return View(cMenu);
         }
 
-        // GET: Utilisateurs/Delete/5
+        // GET: CMenus/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilisateur utilisateur = db.Utilisateurs.Find(id);
-            if (utilisateur == null)
+            CMenu cMenu = db.Menus.Find(id);
+            if (cMenu == null)
             {
                 return HttpNotFound();
             }
-            return View(utilisateur);
+            return View(cMenu);
         }
 
-        // POST: Utilisateurs/Delete/5
+        // POST: CMenus/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Utilisateur utilisateur = db.Utilisateurs.Find(id);
-            db.Utilisateurs.Remove(utilisateur);
+            CMenu cMenu = db.Menus.Find(id);
+            db.Menus.Remove(cMenu);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -168,6 +168,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CMenusController.cs" />
+    <Compile Include="Controllers\CTablesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UtilisateursController.cs" />
@@ -175,6 +177,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CCodeQR.cs" />
     <Compile Include="Models\CCommande.cs" />
     <Compile Include="Models\CCommandeContext.cs" />
     <Compile Include="Models\CCommandeInitializer.cs" />
@@ -182,11 +185,12 @@
     <Compile Include="Models\CMenuContext.cs" />
     <Compile Include="Models\CMenuInitializer.cs" />
     <Compile Include="Models\CRepas.cs" />
+    <Compile Include="Models\CRestoContext.cs" />
+    <Compile Include="Models\CRestoInitializer.cs" />
+    <Compile Include="Models\CTable.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Utilisateur.cs" />
-    <Compile Include="Models\UtilisateurContext.cs" />
-    <Compile Include="Models\UtilisateurInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -251,6 +255,16 @@
     <Content Include="Views\Utilisateurs\Details.cshtml" />
     <Content Include="Views\Utilisateurs\Edit.cshtml" />
     <Content Include="Views\Utilisateurs\Index.cshtml" />
+    <Content Include="Views\CMenus\Create.cshtml" />
+    <Content Include="Views\CMenus\Delete.cshtml" />
+    <Content Include="Views\CMenus\Details.cshtml" />
+    <Content Include="Views\CMenus\Edit.cshtml" />
+    <Content Include="Views\CMenus\Index.cshtml" />
+    <Content Include="Views\CTables\Create.cshtml" />
+    <Content Include="Views\CTables\Delete.cshtml" />
+    <Content Include="Views\CTables\Details.cshtml" />
+    <Content Include="Views\CTables\Edit.cshtml" />
+    <Content Include="Views\CTables\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

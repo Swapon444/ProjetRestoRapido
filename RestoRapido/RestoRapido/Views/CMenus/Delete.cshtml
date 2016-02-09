@@ -1,0 +1,48 @@
+﻿@model RestoRapido.Models.CMenu
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CMenu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.m_strNom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.m_strNom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.m_strDateDebut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.m_strDateDebut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.m_strDateFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.m_strDateFin)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -10,107 +10,107 @@ using RestoRapido.Models;
 
 namespace RestoRapido.Controllers
 {
-    public class UtilisateursController : Controller
+    public class CTablesController : Controller
     {
         private CRestoContext db = new CRestoContext();
 
-        // GET: Utilisateurs
+        // GET: CTables
         public ActionResult Index()
         {
-            return View(db.Utilisateurs.ToList());
+            return View(db.Tables.ToList());
         }
 
-        // GET: Utilisateurs/Details/5
+        // GET: CTables/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilisateur utilisateur = db.Utilisateurs.Find(id);
-            if (utilisateur == null)
+            CTable cTable = db.Tables.Find(id);
+            if (cTable == null)
             {
                 return HttpNotFound();
             }
-            return View(utilisateur);
+            return View(cTable);
         }
 
-        // GET: Utilisateurs/Create
+        // GET: CTables/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Utilisateurs/Create
+        // POST: CTables/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UtilisateurID,UtilisateurMDP,UtilisateurNomUsager,UtilisateurNom,UtilisateurPrenom,UtilisateurType")] Utilisateur utilisateur)
+        public ActionResult Create([Bind(Include = "CTableID,i_TableNum,i_RestaurantID")] CTable cTable)
         {
             if (ModelState.IsValid)
             {
-                db.Utilisateurs.Add(utilisateur);
+                db.Tables.Add(cTable);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(utilisateur);
+            return View(cTable);
         }
 
-        // GET: Utilisateurs/Edit/5
+        // GET: CTables/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilisateur utilisateur = db.Utilisateurs.Find(id);
-            if (utilisateur == null)
+            CTable cTable = db.Tables.Find(id);
+            if (cTable == null)
             {
                 return HttpNotFound();
             }
-            return View(utilisateur);
+            return View(cTable);
         }
 
-        // POST: Utilisateurs/Edit/5
+        // POST: CTables/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UtilisateurID,UtilisateurMDP,UtilisateurNomUsager,UtilisateurNom,UtilisateurPrenom,UtilisateurType")] Utilisateur utilisateur)
+        public ActionResult Edit([Bind(Include = "CTableID,i_TableNum,i_RestaurantID")] CTable cTable)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(utilisateur).State = EntityState.Modified;
+                db.Entry(cTable).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(utilisateur);
+            return View(cTable);
         }
 
-        // GET: Utilisateurs/Delete/5
+        // GET: CTables/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilisateur utilisateur = db.Utilisateurs.Find(id);
-            if (utilisateur == null)
+            CTable cTable = db.Tables.Find(id);
+            if (cTable == null)
             {
                 return HttpNotFound();
             }
-            return View(utilisateur);
+            return View(cTable);
         }
 
-        // POST: Utilisateurs/Delete/5
+        // POST: CTables/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Utilisateur utilisateur = db.Utilisateurs.Find(id);
-            db.Utilisateurs.Remove(utilisateur);
+            CTable cTable = db.Tables.Find(id);
+            db.Tables.Remove(cTable);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
