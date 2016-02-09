@@ -1,0 +1,58 @@
+﻿@model RestoRapido.Models.Utilisateur
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Utilisateur</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UtilisateurMDP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UtilisateurMDP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UtilisateurNomUsager)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UtilisateurNomUsager)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UtilisateurNom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UtilisateurNom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UtilisateurPrenom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UtilisateurPrenom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UtilisateurType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UtilisateurType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UtilisateurID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
