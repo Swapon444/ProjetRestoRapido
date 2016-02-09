@@ -24,7 +24,7 @@ namespace RestoRapido.Models
         #region Données membres
 
         // Identifiant unique du menu
-        public int m_iMenuId { get; set; }
+        public int CMenuId { get; set; }
 
         // Nom affiché du menu       
         public string m_strNom { get; set; }

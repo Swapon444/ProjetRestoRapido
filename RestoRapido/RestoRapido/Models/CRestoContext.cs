@@ -6,8 +6,10 @@ using System.Web;
 
 namespace RestoRapido.Models
 {
-    public class UtilisateurContext : DbContext
+    public class CRestoContext : DbContext
     {
         public DbSet<Utilisateur> Utilisateurs { get; set; }
+        public DbSet<CTable> Tables { get; set; }
+        public DbSet<CMenu> Menus { get; set; }
     }
 }

@@ -6,9 +6,9 @@ using System.Web;
 
 namespace RestoRapido.Models
 {
-    public class UtilisateurInitializer : DropCreateDatabaseIfModelChanges<UtilisateurContext>
+    public class CRestoInitializer : DropCreateDatabaseIfModelChanges<CRestoContext>
     {
-        protected override void Seed(UtilisateurContext Context)
+        protected override void Seed(CRestoContext Context)
         {
             var Utilisateurs = new List<Utilisateur>
             {
