@@ -12,10 +12,10 @@ namespace RestoRapido.Models
         {
             var Utilisateurs = new List<Utilisateur>
             {
-                new Utilisateur { UtilisateurNom = "Monzerol" , UtilisateurNomUsager = "AntoineM", UtilisateurPrenom = "Antoine", UtilisateurType = "Administrateur" },
-                new Utilisateur { UtilisateurNom = "Gratton" , UtilisateurNomUsager = "AlexandreG", UtilisateurPrenom = "Alexandre", UtilisateurType = "Serveur" },
-                new Utilisateur { UtilisateurNom = "Verreault" , UtilisateurNomUsager = "FrancisV", UtilisateurPrenom = "Francis", UtilisateurType = "Gerant" },
-                new Utilisateur { UtilisateurNom = "Otis" , UtilisateurNomUsager = "DaveO", UtilisateurPrenom = "Dave", UtilisateurType = "Client" }
+                new Utilisateur { UtilisateurNom = "Monzerol" , UtilisateurNomUsager = "AntoineM", UtilisateurPrenom = "Antoine", UtilisateurType = "Administrateur", UtilisateurMDP = "1234" },
+                new Utilisateur { UtilisateurNom = "Gratton" , UtilisateurNomUsager = "AlexandreG", UtilisateurPrenom = "Alexandre", UtilisateurType = "Serveur", UtilisateurMDP = "1234"  },
+                new Utilisateur { UtilisateurNom = "Verreault" , UtilisateurNomUsager = "FrancisV", UtilisateurPrenom = "Francis", UtilisateurType = "Gerant" ,  UtilisateurMDP = "1234" },
+                new Utilisateur { UtilisateurNom = "Otis" , UtilisateurNomUsager = "DaveO", UtilisateurPrenom = "Dave", UtilisateurType = "Client" ,  UtilisateurMDP = "1234" }
             };
 
             foreach (var temp in Utilisateurs)
