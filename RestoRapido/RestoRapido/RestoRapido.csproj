@@ -178,6 +178,7 @@
     <Compile Include="Models\CCommande.cs" />
     <Compile Include="Models\CCommandeContext.cs" />
     <Compile Include="Models\CCommandeInitializer.cs" />
+    <Compile Include="Models\CRepas.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Utilisateur.cs" />
