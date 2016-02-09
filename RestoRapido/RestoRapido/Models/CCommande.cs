@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,7 +8,7 @@ namespace RestoRapido.Models
 {
     public class CCommande
     {
-
+        [Key]
         public int mCmdID { get; set; }          // Donnée membre qui représente le numéro de la commande (Clé Primaire)
         public int mCmdClientID { get; set; }    // Donnée membre qui représente le numéro du client (Clé Étrangère)
         public int mCmdRestoID { get; set; }     // Donnée membre qui représente le numéro du restaurant (Clé Étrangère)
