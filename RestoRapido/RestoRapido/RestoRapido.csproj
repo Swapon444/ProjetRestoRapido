@@ -264,6 +264,11 @@
     <Content Include="Views\CTables\Details.cshtml" />
     <Content Include="Views\CTables\Edit.cshtml" />
     <Content Include="Views\CTables\Index.cshtml" />
+    <Content Include="Views\CCommandes\Create.cshtml" />
+    <Content Include="Views\CCommandes\Delete.cshtml" />
+    <Content Include="Views\CCommandes\Details.cshtml" />
+    <Content Include="Views\CCommandes\Edit.cshtml" />
+    <Content Include="Views\CCommandes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
