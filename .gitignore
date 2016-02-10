@@ -1,11 +1,8 @@
 # Compiled source #
 ###################
-*.suo
-*.csproj
+
 *.dll
-*.pdb
-*.cache
-*.so
+
 
 
 
