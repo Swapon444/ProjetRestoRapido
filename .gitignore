@@ -1,3 +1,15 @@
+# Compiled source #
+###################
+*.suo
+*.csproj
+*.dll
+*.pdb
+*.cache
+*.so
+
+
+
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
