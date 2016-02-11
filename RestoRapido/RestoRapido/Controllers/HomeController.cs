@@ -13,7 +13,7 @@ namespace RestoRapido.Controllers
 
         public ActionResult Index()
         {
-            var Utilisateurs = db.Utilisateurs.ToList();
+            //var Utilisateurs = db.Utilisateurs.ToList();
             return View();
         }
 

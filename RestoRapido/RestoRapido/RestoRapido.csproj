@@ -184,10 +184,12 @@
     <Compile Include="Models\CMenuContext.cs" />
     <Compile Include="Models\CMenuInitializer.cs" />
     <Compile Include="Models\CRepas.cs" />
+    <Compile Include="Models\CResto.cs" />
     <Compile Include="Models\CRestoContext.cs" />
     <Compile Include="Models\CRestoInitializer.cs" />
     <Compile Include="Models\CTable.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\keyAttribute.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
