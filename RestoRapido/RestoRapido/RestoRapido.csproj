@@ -168,7 +168,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CCommandesController.cs" />
     <Compile Include="Controllers\CMenusController.cs" />
+    <Compile Include="Controllers\CRestoesController.cs" />
     <Compile Include="Controllers\CTablesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -179,12 +181,11 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CCodeQR.cs" />
     <Compile Include="Models\CCommande.cs" />
-    <Compile Include="Models\CCommandeContext.cs" />
-    <Compile Include="Models\CCommandeInitializer.cs" />
     <Compile Include="Models\CMenu.cs" />
     <Compile Include="Models\CMenuContext.cs" />
     <Compile Include="Models\CMenuInitializer.cs" />
     <Compile Include="Models\CRepas.cs" />
+    <Compile Include="Models\CResto.cs" />
     <Compile Include="Models\CRestoContext.cs" />
     <Compile Include="Models\CRestoInitializer.cs" />
     <Compile Include="Models\CTable.cs" />
@@ -334,6 +335,16 @@
     <Content Include="Views\CTables\Details.cshtml" />
     <Content Include="Views\CTables\Edit.cshtml" />
     <Content Include="Views\CTables\Index.cshtml" />
+    <Content Include="Views\CRestoes\Create.cshtml" />
+    <Content Include="Views\CRestoes\Delete.cshtml" />
+    <Content Include="Views\CRestoes\Details.cshtml" />
+    <Content Include="Views\CRestoes\Edit.cshtml" />
+    <Content Include="Views\CRestoes\Index.cshtml" />
+    <Content Include="Views\CCommandes\Create.cshtml" />
+    <Content Include="Views\CCommandes\Delete.cshtml" />
+    <Content Include="Views\CCommandes\Details.cshtml" />
+    <Content Include="Views\CCommandes\Edit.cshtml" />
+    <Content Include="Views\CCommandes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -15,7 +15,6 @@ namespace RestoRapido
         protected void Application_Start()
         {
             Database.SetInitializer<CRestoContext>(new CRestoInitializer());
-            Database.SetInitializer<CCommandeContext>(new CCommandeInitializer());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

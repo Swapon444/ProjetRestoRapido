@@ -1,0 +1,96 @@
+﻿@model RestoRapido.Models.CCommande
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CCommande</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdClientID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdClientID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdRestoID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdRestoID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdTableID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdTableID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdServerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdServerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdCommentCommandes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdCommentCommandes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdPrixAvantTaxes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdPrixAvantTaxes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdPrixTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdPrixTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdStatusCommande)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdStatusCommande)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

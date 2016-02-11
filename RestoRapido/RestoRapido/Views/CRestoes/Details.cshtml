@@ -1,0 +1,50 @@
+﻿@model RestoRapido.Models.CResto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CResto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.resNom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.resNom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.resPostal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.resPostal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.resRue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.resRue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.resNoCiv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.resNoCiv)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CRestoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

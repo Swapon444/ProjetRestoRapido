@@ -1,0 +1,51 @@
+﻿@model IEnumerable<RestoRapido.Models.CResto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.resNom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.resPostal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.resRue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.resNoCiv)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.resNom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.resPostal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.resRue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.resNoCiv)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CRestoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CRestoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CRestoID })
+        </td>
+    </tr>
+}
+
+</table>
