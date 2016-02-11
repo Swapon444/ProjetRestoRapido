@@ -8,13 +8,8 @@ namespace RestoRapido.Models
 {
     public class CRestoContext : DbContext
     {
-        public DbSet<CResto> Resto { get; set; }
         public DbSet<Utilisateur> Utilisateurs { get; set; }
         public DbSet<CTable> Tables { get; set; }
         public DbSet<CMenu> Menus { get; set; }
-        public DbSet<CCommande> Commandes { get; set; }
-        public DbSet<CRepas> Repas { get; set; }
-
-        
     }
 }
