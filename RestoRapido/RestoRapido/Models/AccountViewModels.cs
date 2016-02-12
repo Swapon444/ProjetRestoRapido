@@ -6,8 +6,8 @@ namespace RestoRapido.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Courrier électronique")]
-        public string Email { get; set; }
+        [Display(Name = "Nom d'utilisateur")]
+        public string NomUtilisateur { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -42,15 +42,14 @@ namespace RestoRapido.Models
     public class ForgotViewModel
     {
         [Required]
-        [Display(Name = "Courrier électronique")]
+        [Display(Name = "Nom d'utilisateur")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Courrier électronique")]
-        [EmailAddress]
+        [Display(Name = "Nom d'utilisateur")]
         public string Email { get; set; }
 
         [Required]
@@ -65,8 +64,7 @@ namespace RestoRapido.Models
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Courrier électronique")]
+        [Display(Name = "Nom d'utilisateur")]
         public string Email { get; set; }
 
         [Required]
@@ -84,8 +82,7 @@ namespace RestoRapido.Models
     public class ResetPasswordViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Courrier électronique")]
+        [Display(Name = "Nom d'utilisateur")]
         public string Email { get; set; }
 
         [Required]
@@ -105,8 +102,7 @@ namespace RestoRapido.Models
     public class ForgotPasswordViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "E-mail")]
+        [Display(Name = "Nom d'utilisateur")]
         public string Email { get; set; }
     }
 }

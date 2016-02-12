@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RestoRapido.Models;
+using System.Data.SqlClient;
 
 namespace RestoRapido.Controllers
 {
@@ -68,23 +69,31 @@ namespace RestoRapido.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            string type = "";
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
+            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestaurant.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+            SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "'", conn);
+            conn.Open();
+            SqlDataReader dr = checkuser.ExecuteReader();
 
-            // Ceci ne comptabilise pas les échecs de connexion pour le verrouillage du compte
-            // Pour que les échecs de mot de passe déclenchent le verrouillage du compte, utilisez shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            while (dr.Read())
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
+                type = dr.GetString(0);
+            }
+            
+            switch (type)
+            {
+                case "Administrateur":
+                    return View("MainPageAdmin");
+                case "Gérant":
+                    return View("MainPageGerant");
+                case "Serveur":
+                    return View("MainPageServeur");
+                case "Client":
+                    return View("MainPageClient");
                 default:
                     ModelState.AddModelError("", "Tentative de connexion non valide.");
                     return View(model);
@@ -343,7 +352,7 @@ namespace RestoRapido.Controllers
                     // Si l'utilisateur n'a pas de compte, invitez alors celui-ci à créer un compte
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { NomUtilisateur = loginInfo.Email });
             }
         }
 
@@ -367,7 +376,7 @@ namespace RestoRapido.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.NomUtilisateur, Email = model.NomUtilisateur };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
