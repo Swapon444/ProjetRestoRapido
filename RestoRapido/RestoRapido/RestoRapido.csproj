@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CCommandesController.cs" />
     <Compile Include="Controllers\CMenusController.cs" />
+    <Compile Include="Controllers\CRepasController.cs" />
     <Compile Include="Controllers\CRestoesController.cs" />
     <Compile Include="Controllers\CTablesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -286,7 +287,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -345,6 +348,11 @@
     <Content Include="Views\CCommandes\Details.cshtml" />
     <Content Include="Views\CCommandes\Edit.cshtml" />
     <Content Include="Views\CCommandes\Index.cshtml" />
+    <Content Include="Views\CRepas\Create.cshtml" />
+    <Content Include="Views\CRepas\Delete.cshtml" />
+    <Content Include="Views\CRepas\Details.cshtml" />
+    <Content Include="Views\CRepas\Edit.cshtml" />
+    <Content Include="Views\CRepas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

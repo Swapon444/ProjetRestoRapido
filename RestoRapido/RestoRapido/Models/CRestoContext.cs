@@ -13,6 +13,6 @@ namespace RestoRapido.Models
         public DbSet<CMenu> Menus { get; set; }
         public DbSet<CResto> Resto { get; set; }
         public DbSet<CCommande> Commandes { get; set; }
-
+        public DbSet<CRepas> Repas { get; set; }
     }
 }

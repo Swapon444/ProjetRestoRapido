@@ -1,0 +1,26 @@
+﻿@model RestoRapido.Models.CRepas
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CRepas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.mRepNom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mRepNom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.mRepID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
