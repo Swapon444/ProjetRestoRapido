@@ -185,6 +185,7 @@
     <Compile Include="Models\CMenu.cs" />
     <Compile Include="Models\CMenuContext.cs" />
     <Compile Include="Models\CMenuInitializer.cs" />
+    <Compile Include="Models\CMenuRepas.cs" />
     <Compile Include="Models\CRepas.cs" />
     <Compile Include="Models\CResto.cs" />
     <Compile Include="Models\CRestoContext.cs" />
@@ -328,11 +329,6 @@
     <Content Include="Views\Utilisateurs\Details.cshtml" />
     <Content Include="Views\Utilisateurs\Edit.cshtml" />
     <Content Include="Views\Utilisateurs\Index.cshtml" />
-    <Content Include="Views\CMenus\Create.cshtml" />
-    <Content Include="Views\CMenus\Delete.cshtml" />
-    <Content Include="Views\CMenus\Details.cshtml" />
-    <Content Include="Views\CMenus\Edit.cshtml" />
-    <Content Include="Views\CMenus\Index.cshtml" />
     <Content Include="Views\CTables\Create.cshtml" />
     <Content Include="Views\CTables\Delete.cshtml" />
     <Content Include="Views\CTables\Details.cshtml" />
@@ -348,6 +344,11 @@
     <Content Include="Views\CCommandes\Details.cshtml" />
     <Content Include="Views\CCommandes\Edit.cshtml" />
     <Content Include="Views\CCommandes\Index.cshtml" />
+    <Content Include="Views\CMenus\Create.cshtml" />
+    <Content Include="Views\CMenus\Delete.cshtml" />
+    <Content Include="Views\CMenus\Details.cshtml" />
+    <Content Include="Views\CMenus\Edit.cshtml" />
+    <Content Include="Views\CMenus\Index.cshtml" />
     <Content Include="Views\CRepas\Create.cshtml" />
     <Content Include="Views\CRepas\Delete.cshtml" />
     <Content Include="Views\CRepas\Details.cshtml" />

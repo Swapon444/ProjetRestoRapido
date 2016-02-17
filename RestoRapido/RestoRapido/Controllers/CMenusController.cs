@@ -46,7 +46,7 @@ namespace RestoRapido.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CMenuId,m_strNom,m_strDateDebut,m_strDateFin")] CMenu cMenu)
+        public ActionResult Create([Bind(Include = "m_iMenuId,m_strNom,m_DateDebut,m_DateFin")] CMenu cMenu)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace RestoRapido.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CMenuId,m_strNom,m_strDateDebut,m_strDateFin")] CMenu cMenu)
+        public ActionResult Edit([Bind(Include = "m_iMenuId,m_strNom,m_DateDebut,m_DateFin")] CMenu cMenu)
         {
             if (ModelState.IsValid)
             {

@@ -42,11 +42,11 @@ namespace RestoRapido.Controllers
         }
 
         // POST: CRepas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "mRepID,mRepNom")] CRepas cRepas)
+        public ActionResult Create([Bind(Include = "m_iRepasId,m_strNom,m_iPrix,m_strDescription,m_boBle,m_boLait,m_boOeuf,m_boArachide,m_boSoja,m_boFruitCoque,m_boPoisson,m_boSesame,m_boCrustace,m_boMollusque")] CRepas cRepas)
         {
             if (ModelState.IsValid)
             {
@@ -74,11 +74,11 @@ namespace RestoRapido.Controllers
         }
 
         // POST: CRepas/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "mRepID,mRepNom")] CRepas cRepas)
+        public ActionResult Edit([Bind(Include = "m_iRepasId,m_strNom,m_iPrix,m_strDescription,m_boBle,m_boLait,m_boOeuf,m_boArachide,m_boSoja,m_boFruitCoque,m_boPoisson,m_boSesame,m_boCrustace,m_boMollusque")] CRepas cRepas)
         {
             if (ModelState.IsValid)
             {
