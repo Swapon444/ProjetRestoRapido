@@ -80,7 +80,7 @@ namespace RestoRapido.Models
         public bool m_boCrustace { get; set; }
 
         // Indique si le repas contient des mollusques (true pour oui, false pour non)
-        [DisplayName("Mullusque")]
+        [DisplayName("Mollusque")]
         public bool m_boMollusque { get; set; }
 
         #endregion
