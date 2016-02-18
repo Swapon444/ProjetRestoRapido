@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CCommandesController.cs" />
     <Compile Include="Controllers\CMenusController.cs" />
+    <Compile Include="Controllers\CRabaisController.cs" />
     <Compile Include="Controllers\CRepasController.cs" />
     <Compile Include="Controllers\CRestoesController.cs" />
     <Compile Include="Controllers\CTablesController.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Models\CMenuContext.cs" />
     <Compile Include="Models\CMenuInitializer.cs" />
     <Compile Include="Models\CMenuRepas.cs" />
+    <Compile Include="Models\CRabais.cs" />
     <Compile Include="Models\CRepas.cs" />
     <Compile Include="Models\CResto.cs" />
     <Compile Include="Models\CRestoContext.cs" />
@@ -354,6 +356,11 @@
     <Content Include="Views\CRepas\Details.cshtml" />
     <Content Include="Views\CRepas\Edit.cshtml" />
     <Content Include="Views\CRepas\Index.cshtml" />
+    <Content Include="Views\CRabais\Create.cshtml" />
+    <Content Include="Views\CRabais\Delete.cshtml" />
+    <Content Include="Views\CRabais\Details.cshtml" />
+    <Content Include="Views\CRabais\Edit.cshtml" />
+    <Content Include="Views\CRabais\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

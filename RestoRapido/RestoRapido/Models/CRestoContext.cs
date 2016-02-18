@@ -14,5 +14,6 @@ namespace RestoRapido.Models
         public DbSet<CResto> Resto { get; set; }
         public DbSet<CCommande> Commandes { get; set; }
         public DbSet<CRepas> Repas { get; set; }
+        public DbSet<CRabais> Rabais { get; set; }
     }
 }
