@@ -88,6 +88,7 @@ namespace RestoRapido.Models
         /* Collection contenant des CMenuRepas pour permettre de lier le repas
            à des menus */
         public ICollection<CMenuRepas> m_MenuRepas;
+        public ICollection<CRabais> Rabais;
 
         #endregion
     }

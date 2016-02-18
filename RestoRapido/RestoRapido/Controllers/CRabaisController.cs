@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RestoRapido.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace RestoRapido.Controllers
 {
@@ -38,6 +39,7 @@ namespace RestoRapido.Controllers
         // GET: CRabais/Create
         public ActionResult Create()
         {
+            PopulateRepasDropDownList();
             return View();
         }
 
@@ -46,14 +48,24 @@ namespace RestoRapido.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RabaisID,RabaisRepasNom,RabaisPrix,RabaisDateDebut,RabaisDateFin")] CRabais cRabais)
+        public ActionResult Create([Bind(Include = "RabaisID,RabaisRepasID,RabaisPrix,RabaisDateDebut,RabaisDateFin")] CRabais cRabais)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Rabais.Add(cRabais);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Rabais.Add(cRabais);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.)
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
+            PopulateRepasDropDownList(cRabais.RabaisRepasID);
 
             return View(cRabais);
         }
@@ -66,27 +78,40 @@ namespace RestoRapido.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             CRabais cRabais = db.Rabais.Find(id);
+
             if (cRabais == null)
             {
                 return HttpNotFound();
             }
+            PopulateRepasDropDownList(cRabais.RabaisRepasID);
             return View(cRabais);
         }
 
         // POST: CRabais/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RabaisID,RabaisRepasNom,RabaisPrix,RabaisDateDebut,RabaisDateFin")] CRabais cRabais)
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            var RabaisToUpdate = db.Rabais.Find(id);
+            if (TryUpdateModel(RabaisToUpdate, "",
+               new string[] { "Nom du repas", "Rabais en %", "Date de début", "Date de fin" }))
             {
-                db.Entry(cRabais).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
             }
-            return View(cRabais);
+            PopulateRepasDropDownList(RabaisToUpdate.RabaisID);
+            return View(RabaisToUpdate);
         }
 
         // GET: CRabais/Delete/5
@@ -123,5 +148,14 @@ namespace RestoRapido.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private void PopulateRepasDropDownList(object selectedRepas = null)
+        {
+            var RepasQuery = from d in db.Repas
+                                   orderby d.m_strNom
+                                   select d;
+            ViewBag.RepasID = new SelectList(RepasQuery, "RepasID", "Nom", selectedRepas);
+        }
     }
+
 }
