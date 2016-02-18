@@ -1,28 +1,18 @@
 ﻿@model IEnumerable<RestoRapido.Models.CResto>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Restaurants";
 }
 
-<h2>Index</h2>
+<h2>Restaurants</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Créer un restaurant", "Create")
 </p>
-
-@using (Html.BeginForm())
-{
-    <p>
-        Recherche par noms: @Html.TextBox("searchString")
-        <input type="submit" value="Rechercher" />
-    </p>
-}
-
 <table class="table">
     <tr>
         <th>
-            <!-- va trier par nom lorsque l'on clique sur le lien -->
-            @Html.ActionLink("Nom", "Index", new { sortOrder = ViewBag.NameSortParm })
+            @Html.DisplayNameFor(model => model.resNom)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.resPostal)

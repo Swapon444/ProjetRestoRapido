@@ -15,42 +15,9 @@ namespace RestoRapido.Controllers
         private CRestoContext db = new CRestoContext();
 
         // GET: CRestoes
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index()
         {
-            //ViewBag.salut = "salut";
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DataSortParm = sortOrder == "Data" ? "data+desc" : "";
-
-            //prend tous les étudiants dans la BD
-            var etudiants = from s in db.Resto
-                            select s;
-
-            //permet de rechercher dans la table
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                etudiants = etudiants.Where(s => s.resNom.Contains(searchString)
-                                            || s.resPostal.Contains(searchString)
-                                            || s.resRue.Contains(searchString)
-                                            || s.resNoCiv.Contains(searchString)
-                                            );
-
-            }
-
-            //fait l'ordre
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    etudiants = etudiants.OrderByDescending(s => s.resNom);
-                    break;
-                default:
-                    etudiants = etudiants.OrderBy(s => s.resNom);
-                    break;
-
-
-            }
-
-
-            return View(etudiants);
+            return View(db.Resto.ToList());
         }
 
         // GET: CRestoes/Details/5

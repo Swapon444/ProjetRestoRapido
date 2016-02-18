@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using ZXing;
+using ZXing.Common;
 
 /*
 ++++++++++++++++++++
@@ -12,7 +17,7 @@ using System.Web;
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-+ Auteur: Francis Verreault       -      420-W63-JO       +
++ Auteur: Francis Verreault et Dave Otis  -  420-W63-JO  +
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 */
@@ -24,11 +29,12 @@ namespace RestoRapido.Models
         //Ientifiant unique du code qr
         public int i_CodeQRID { get; set; }
 
-        /*
-        //L'image du code qr de la table
-        public Image Img_CodeQR { get; set; }
-        */
 
-        public ICollection<CCodeQR> CodesQR { get; set; }
+        //information du code QR de la table
+        public string str_InfoCodeQR { get; set; }
+
     }
+
+
+
 }

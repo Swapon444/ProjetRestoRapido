@@ -36,8 +36,9 @@ namespace RestoRapido.Controllers
         }
 
         // GET: CTables/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
+            ViewBag.id = id;
             return View();
         }
 
@@ -46,7 +47,7 @@ namespace RestoRapido.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CTableID,i_TableNum,i_RestaurantID")] CTable cTable)
+        public ActionResult Create([Bind(Include = "CTableID,i_TableNum,cqr_TableCodeQR")] CTable cTable)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +79,7 @@ namespace RestoRapido.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CTableID,i_TableNum,i_RestaurantID")] CTable cTable)
+        public ActionResult Edit([Bind(Include = "CTableID,i_TableNum,cqr_TableCodeQR")] CTable cTable)
         {
             if (ModelState.IsValid)
             {

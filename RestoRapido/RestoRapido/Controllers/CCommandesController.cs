@@ -35,6 +35,7 @@ namespace RestoRapido.Controllers
             return View(cCommande);
         }
 
+
         // GET: CCommandes/Create
         public ActionResult Create()
         {

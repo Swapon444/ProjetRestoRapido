@@ -15,10 +15,10 @@
             @Html.DisplayNameFor(model => model.m_strNom)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.m_DateDebut)
+            @Html.DisplayNameFor(model => model.m_strDateDebut)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.m_DateFin)
+            @Html.DisplayNameFor(model => model.m_strDateFin)
         </th>
         <th></th>
     </tr>
@@ -29,15 +29,15 @@
             @Html.DisplayFor(modelItem => item.m_strNom)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.m_DateDebut)
+            @Html.DisplayFor(modelItem => item.m_strDateDebut)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.m_DateFin)
+            @Html.DisplayFor(modelItem => item.m_strDateFin)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.m_iMenuId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.m_iMenuId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.m_iMenuId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.CMenuId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CMenuId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CMenuId })
         </td>
     </tr>
 }

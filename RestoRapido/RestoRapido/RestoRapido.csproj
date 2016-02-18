@@ -110,6 +110,14 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="zxing, Version=0.14.0.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.14.0.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.presentation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -170,8 +178,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CCommandesController.cs" />
     <Compile Include="Controllers\CMenusController.cs" />
-    <Compile Include="Controllers\CRabaisController.cs" />
-    <Compile Include="Controllers\CRepasController.cs" />
     <Compile Include="Controllers\CRestoesController.cs" />
     <Compile Include="Controllers\CTablesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -186,8 +192,6 @@
     <Compile Include="Models\CMenu.cs" />
     <Compile Include="Models\CMenuContext.cs" />
     <Compile Include="Models\CMenuInitializer.cs" />
-    <Compile Include="Models\CMenuRepas.cs" />
-    <Compile Include="Models\CRabais.cs" />
     <Compile Include="Models\CRepas.cs" />
     <Compile Include="Models\CResto.cs" />
     <Compile Include="Models\CRestoContext.cs" />
@@ -201,7 +205,6 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\RabaisAssignes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
@@ -291,9 +294,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -332,11 +333,11 @@
     <Content Include="Views\Utilisateurs\Details.cshtml" />
     <Content Include="Views\Utilisateurs\Edit.cshtml" />
     <Content Include="Views\Utilisateurs\Index.cshtml" />
-    <Content Include="Views\CTables\Create.cshtml" />
-    <Content Include="Views\CTables\Delete.cshtml" />
-    <Content Include="Views\CTables\Details.cshtml" />
-    <Content Include="Views\CTables\Edit.cshtml" />
-    <Content Include="Views\CTables\Index.cshtml" />
+    <Content Include="Views\CMenus\Create.cshtml" />
+    <Content Include="Views\CMenus\Delete.cshtml" />
+    <Content Include="Views\CMenus\Details.cshtml" />
+    <Content Include="Views\CMenus\Edit.cshtml" />
+    <Content Include="Views\CMenus\Index.cshtml" />
     <Content Include="Views\CRestoes\Create.cshtml" />
     <Content Include="Views\CRestoes\Delete.cshtml" />
     <Content Include="Views\CRestoes\Details.cshtml" />
@@ -347,21 +348,11 @@
     <Content Include="Views\CCommandes\Details.cshtml" />
     <Content Include="Views\CCommandes\Edit.cshtml" />
     <Content Include="Views\CCommandes\Index.cshtml" />
-    <Content Include="Views\CMenus\Create.cshtml" />
-    <Content Include="Views\CMenus\Delete.cshtml" />
-    <Content Include="Views\CMenus\Details.cshtml" />
-    <Content Include="Views\CMenus\Edit.cshtml" />
-    <Content Include="Views\CMenus\Index.cshtml" />
-    <Content Include="Views\CRepas\Create.cshtml" />
-    <Content Include="Views\CRepas\Delete.cshtml" />
-    <Content Include="Views\CRepas\Details.cshtml" />
-    <Content Include="Views\CRepas\Edit.cshtml" />
-    <Content Include="Views\CRepas\Index.cshtml" />
-    <Content Include="Views\CRabais\Create.cshtml" />
-    <Content Include="Views\CRabais\Delete.cshtml" />
-    <Content Include="Views\CRabais\Details.cshtml" />
-    <Content Include="Views\CRabais\Edit.cshtml" />
-    <Content Include="Views\CRabais\Index.cshtml" />
+    <Content Include="Views\CTables\Create.cshtml" />
+    <Content Include="Views\CTables\Delete.cshtml" />
+    <Content Include="Views\CTables\Details.cshtml" />
+    <Content Include="Views\CTables\Edit.cshtml" />
+    <Content Include="Views\CTables\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

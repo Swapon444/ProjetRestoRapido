@@ -6,17 +6,17 @@
 
 <h2>Delete</h2>
 
-<h3>Êtes-vous certain de vouloir supprimer ce rabais ?</h3>
+<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>CRabais</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Nom du repas
+            @Html.DisplayNameFor(model => model.RabaisRepasNom)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Repas.m_strNom)
+            @Html.DisplayFor(model => model.RabaisRepasNom)
         </dd>
 
         <dt>

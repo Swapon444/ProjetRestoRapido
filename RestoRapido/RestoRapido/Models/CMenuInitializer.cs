@@ -32,28 +32,28 @@ namespace RestoRapido.Models
         protected override void Seed(CMenuContext context)
         {
             // Liste de menus initialisés
-            //List<CMenu> lstMenus = new List<CMenu>
-            //{
-            //    new CMenu { m_strNom = "Menu1", m_strDateDebut = "2016-02-15",
-            //        m_strDateFin = "2016-03-15" },
-            //    new CMenu { m_strNom = "Menu2", m_strDateDebut = "2016-03-16",
-            //        m_strDateFin = "2016-04-16" },
-            //    new CMenu { m_strNom = "Menu3", m_strDateDebut = "2016-04-17",
-            //        m_strDateFin = "2016-05-17" },
-            //    new CMenu { m_strNom = "Menu4", m_strDateDebut = "2016-05-18",
-            //        m_strDateFin = "2016-06-18" },
-            //    new CMenu { m_strNom = "Menu5", m_strDateDebut = "2016-06-19",
-            //        m_strDateFin = "2016-07-19" }
-            //};
+            List<CMenu> lstMenus = new List<CMenu>
+            {
+                new CMenu { m_strNom = "Menu1", m_strDateDebut = "2016-02-15",
+                    m_strDateFin = "2016-03-15" },
+                new CMenu { m_strNom = "Menu2", m_strDateDebut = "2016-03-16",
+                    m_strDateFin = "2016-04-16" },
+                new CMenu { m_strNom = "Menu3", m_strDateDebut = "2016-04-17",
+                    m_strDateFin = "2016-05-17" },
+                new CMenu { m_strNom = "Menu4", m_strDateDebut = "2016-05-18",
+                    m_strDateFin = "2016-06-18" },
+                new CMenu { m_strNom = "Menu5", m_strDateDebut = "2016-06-19",
+                    m_strDateFin = "2016-07-19" }
+            };
 
             /* Pour tous les menus initialisés ci-dessus, l'ajouter dans le
                contexte */
-            //foreach (CMenu menu in lstMenus)
-            //{
-            //    context.m_Menus.Add(menu);
-            //}
-            //
-            //context.SaveChanges();
+            foreach (CMenu menu in lstMenus)
+            {
+                context.m_Menus.Add(menu);
+            }
+
+            context.SaveChanges();
         }
     }
 }
