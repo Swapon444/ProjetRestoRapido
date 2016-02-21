@@ -15,9 +15,38 @@ namespace RestoRapido.Controllers
         private CRestoContext db = new CRestoContext();
 
         // GET: CCommandes
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            return View(db.Commandes.ToList());
+            
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
+
+            //var Repas = from s in db.Repas where s.mRepColletionCommande select s;
+            // Linq
+            var Cmd = db.Commandes.First();
+
+            var Repas = Cmd.mCmdColletionRepas;
+
+            IOrderedEnumerable<CRepas> lstRepas;
+
+            //Permet de faire le tri entre nom et prix, mais la classe repas ne les contients pas TO DO
+            /*switch (sortOrder)
+            {
+                case "name_desc":
+                    lstRepas = Repas.OrderByDescending(s => s.m_strNom);
+                    break;
+                case "Price":
+                    lstRepas = Repas.OrderBy(s => s.m_iPrix);
+                    break;
+                case "price_desc":
+                    lstRepas = Repas.OrderByDescending(s => s.m_iPrix);
+                    break;
+                default:
+                    lstRepas = Repas.OrderBy(s => s.m_strNom);
+                    break;
+            }*/
+            //Renvoi une liste...  a besoin du order by
+            //return View(lstRepas.ToList());
         }
 
         // GET: CCommandes/Details/5

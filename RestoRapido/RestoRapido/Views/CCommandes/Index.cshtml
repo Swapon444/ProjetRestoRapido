@@ -1,77 +1,7 @@
-﻿@model IEnumerable<RestoRapido.Models.CCommande>
+﻿@model IEnumerable<RestoRapido.Models.CRepas>
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.mCmdClientID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mCmdRestoID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mCmdTableID)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.mCmdCommentCommandes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mCmdPrixAvantTaxes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mCmdPrixTotal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mCmdStatusCommande)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mCmdDate)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.mCmdClientID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mCmdRestoID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mCmdTableID)
-        </td>
-
-        <td>
-            @Html.DisplayFor(modelItem => item.mCmdCommentCommandes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mCmdPrixAvantTaxes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mCmdPrixTotal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mCmdStatusCommande)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mCmdDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.mCmdID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.mCmdID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.mCmdID })
-        </td>
-    </tr>
-}
-
-</table>
