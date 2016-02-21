@@ -50,14 +50,35 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                <input type="button" onclick="ajoutertable(model => model.CRestoID)" value="Ajouter une table" class="btn btn-default" />
                 <input type="submit" value="Sauvegarder" class="btn btn-default" />
             </div>
         </div>
+        <table class="table">
+            <tr>
+                <th>Numéro de table</th>
+            </tr>
+            @if (Model.Tables != null)
+            {
+                foreach (var item in Model.Tables)
+                {
+                    < tr >
+                        < td >
+                            @Html.DisplayFor(modelItem => item.i_TableNum)
+                        </ td >
+                        < td >
+                            @Html.ActionLink("supprimer", "supprimertable")
+                        </ td >
+                    </ tr >
+                }
+            }
+
+        </table>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Retoure aux restaurants", "Index")
+    @Html.ActionLink("Retour aux restaurants", "Index")
 </div>
 
 @section Scripts {

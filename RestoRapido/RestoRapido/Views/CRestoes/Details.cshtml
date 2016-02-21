@@ -44,6 +44,28 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Modifier", "Edit", new { id = Model.CRestoID }) |
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.CRestoID })
+</p>
+<h2>Les tables du restaurant</h2>
+<div>
+    <table class="table">
+        <tr>
+            <th>Numéro de table</th>
+        </tr>
+        @if (Model.Tables != null)
+        {
+            foreach(var item in Model.Tables)
+            {
+                < tr >
+                    < td >
+                        @Html.DisplayFor(modelItem => item.i_TableNum)
+                    </ td >
+                </ tr >
+            }
+        }
+    </table>
+</div>
+
+<p>
     @Html.ActionLink("Retoure aux restaurants", "Index")
 </p>

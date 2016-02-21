@@ -36,15 +36,14 @@ namespace RestoRapido.Controllers
         }
 
         // GET: CTables/Create
-        public ActionResult Create(int id)
+        public ActionResult Create()
         {
-            ViewBag.id = id;
             return View();
         }
 
         // POST: CTables/Create
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CTableID,i_TableNum,cqr_TableCodeQR")] CTable cTable)
@@ -75,8 +74,8 @@ namespace RestoRapido.Controllers
         }
 
         // POST: CTables/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CTableID,i_TableNum,cqr_TableCodeQR")] CTable cTable)

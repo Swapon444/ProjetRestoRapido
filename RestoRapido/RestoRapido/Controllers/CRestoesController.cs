@@ -123,5 +123,24 @@ namespace RestoRapido.Controllers
             }
             base.Dispose(disposing);
         }
+
+        protected  void supprimertable()
+        {
+            
+        }
+
+        [NonAction]
+        protected void ajoutertable(int id)
+        {
+            CResto cResto = db.Resto.Find(id);
+            if (cResto.Tables.Count < 1)
+            {
+                cResto.Tables.Add(new CTable(1, id));
+            }
+            else
+            {
+                cResto.Tables.Add(new CTable(cResto.Tables.Count, id));
+            }
+        }
     }
 }
