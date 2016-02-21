@@ -13,5 +13,8 @@ namespace RestoRapido.Models
         public string UtilisateurNom { get; set; }
         public string UtilisateurPrenom { get; set; }
         public string UtilisateurType { get; set; }
+
+
+
     }
 }

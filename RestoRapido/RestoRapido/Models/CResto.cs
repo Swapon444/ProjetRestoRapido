@@ -24,6 +24,9 @@ namespace RestoRapido.Models
         [RegularExpression(@"^[0-9]*$", ErrorMessage = "Veuillez entrer le numéro d'établissement")]
         public string resNoCiv { get; set; }
 
-        public ICollection<CTable> Tables { get; set; } 
+        public ICollection<CTable> Tables { get; set; }
+
+
+    //    public virtual ICollection<CCommande> Commandes { get; set; }
     }
 }

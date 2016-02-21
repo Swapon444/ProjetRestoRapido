@@ -178,6 +178,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CCommandesController.cs" />
     <Compile Include="Controllers\CMenusController.cs" />
+    <Compile Include="Controllers\CRabaisController.cs" />
+    <Compile Include="Controllers\CRepasController.cs" />
     <Compile Include="Controllers\CRestoesController.cs" />
     <Compile Include="Controllers\CTablesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -192,6 +194,8 @@
     <Compile Include="Models\CMenu.cs" />
     <Compile Include="Models\CMenuContext.cs" />
     <Compile Include="Models\CMenuInitializer.cs" />
+    <Compile Include="Models\CMenuRepas.cs" />
+    <Compile Include="Models\CRabais.cs" />
     <Compile Include="Models\CRepas.cs" />
     <Compile Include="Models\CResto.cs" />
     <Compile Include="Models\CRestoContext.cs" />
@@ -205,6 +209,7 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\RabaisAssignes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
@@ -353,6 +358,16 @@
     <Content Include="Views\CTables\Details.cshtml" />
     <Content Include="Views\CTables\Edit.cshtml" />
     <Content Include="Views\CTables\Index.cshtml" />
+    <Content Include="Views\CRepas\Create.cshtml" />
+    <Content Include="Views\CRepas\Delete.cshtml" />
+    <Content Include="Views\CRepas\Details.cshtml" />
+    <Content Include="Views\CRepas\Edit.cshtml" />
+    <Content Include="Views\CRepas\Index.cshtml" />
+    <Content Include="Views\CRabais\Create.cshtml" />
+    <Content Include="Views\CRabais\Delete.cshtml" />
+    <Content Include="Views\CRabais\Details.cshtml" />
+    <Content Include="Views\CRabais\Edit.cshtml" />
+    <Content Include="Views\CRabais\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
