@@ -47,6 +47,8 @@ namespace RestoRapido.Controllers
             }*/
             //Renvoi une liste...  a besoin du order by
             //return View(lstRepas.ToList());
+
+            return View();
         }
 
         // GET: CCommandes/Details/5
