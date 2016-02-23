@@ -1,4 +1,5 @@
 ﻿@model RestoRapido.Models.CResto
+@using RestoRapido.Models
 
 @{
     ViewBag.Title = "Modification du restaurant";
@@ -10,7 +11,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -50,33 +51,42 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="button" onclick="ajoutertable(model => model.CRestoID)" value="Ajouter une table" class="btn btn-default" />
                 <input type="submit" value="Sauvegarder" class="btn btn-default" />
             </div>
         </div>
-        <table class="table">
-            <tr>
-                <th>Numéro de table</th>
-            </tr>
-            @if (Model.Tables != null)
-            {
-                foreach (var item in Model.Tables)
-                {
-                    < tr >
-                        < td >
-                            @Html.DisplayFor(modelItem => item.i_TableNum)
-                        </ td >
-                        < td >
-                            @Html.ActionLink("supprimer", "supprimertable")
-                        </ td >
-                    </ tr >
-                }
-            }
 
-        </table>
     </div>
 }
 
+<table class="table">
+    <tr>
+        <th>Numéro de table</th>
+    </tr>
+    @if (Model.Tables != null)
+    {
+        foreach (var item in Model.Tables)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.i_TableNum)
+                </td>
+                <td>
+
+                    @Html.GenerateQrCode(item.str_TableCodeQR)
+                </td>
+                <td>
+                    @Html.ActionLink("supprimer", "supprimertable", new { id = Model.CRestoID, idTable = item.CTableID })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+
+<div>
+    @Html.ActionLink("Ajouter une table", "ajoutertable", new { id = Model.CRestoID })
+</div>
 <div>
     @Html.ActionLink("Retour aux restaurants", "Index")
 </div>

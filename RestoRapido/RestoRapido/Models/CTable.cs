@@ -38,10 +38,6 @@ namespace RestoRapido.Models
         //Code QR de la table
         public string str_TableCodeQR { get; set; }
 
-        /*//Id de son restaurent
-        public int CRestoID { get; set; }
-        public virtual CResto Restorant{ get; set;}*/
-
         public CTable(){ }
 
         public CTable(int i_num, int i_restoId)

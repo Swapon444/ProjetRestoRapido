@@ -124,23 +124,38 @@ namespace RestoRapido.Controllers
             base.Dispose(disposing);
         }
 
-        protected  void supprimertable()
+
+        /*
+        Permet de supprimer une table
+            id : Clé primaire du restaurant
+            idTable = Clé primaire de la table
+        */
+        public ActionResult supprimertable(int id, int idTable)
         {
-            
+            CResto cResto = db.Resto.Find(id); //va chercher le restaurant
+            CTable Table = db.Tables.Find(idTable); //va chercher la table
+
+            cResto.Tables.Remove(Table); //enlève cette table
+
+            db.SaveChanges(); //Sauvegarde la BD
+
+            return RedirectToAction("Edit", new { ID = id });
         }
 
-        [NonAction]
-        protected void ajoutertable(int id)
+        /*
+        Permet d'ajouter une table
+            id : clé primaire du restaurant
+        */
+        public ActionResult ajoutertable(int id)
         {
-            CResto cResto = db.Resto.Find(id);
-            if (cResto.Tables.Count < 1)
-            {
-                cResto.Tables.Add(new CTable(1, id));
-            }
-            else
-            {
-                cResto.Tables.Add(new CTable(cResto.Tables.Count, id));
-            }
+            CResto cResto = db.Resto.Find(id); //va chercher le restaurant
+
+            //Ajoute la table au restaurant
+            cResto.Tables.Add(new CTable(cResto.Tables.Last().CTableID + 1, id));
+
+            db.SaveChanges(); //Sauvegarde la BD
+
+            return RedirectToAction("Edit", new { ID = id });
         }
     }
 }

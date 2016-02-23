@@ -1,4 +1,5 @@
 ﻿@model RestoRapido.Models.CResto
+@using RestoRapido.Models
 
 @{
     ViewBag.Title = "Détails sur le restaurant";
@@ -54,13 +55,17 @@
         </tr>
         @if (Model.Tables != null)
         {
-            foreach(var item in Model.Tables)
+            foreach (var item in Model.Tables)
             {
-                < tr >
-                    < td >
+                <tr>
+                    <td>
                         @Html.DisplayFor(modelItem => item.i_TableNum)
-                    </ td >
-                </ tr >
+                    </td>
+                    <td>
+
+                        @Html.GenerateQrCode(item.str_TableCodeQR)
+                    </td>
+                </tr>
             }
         }
     </table>
