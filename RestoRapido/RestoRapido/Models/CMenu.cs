@@ -10,7 +10,10 @@
 
 #region Espace de noms utilisés
 
-using System.Collections;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 #endregion
 
@@ -23,20 +26,25 @@ namespace RestoRapido.Models
     {
         #region Données membres
 
-        // Identifiant unique du menu
-        public int CMenuId { get; set; }
+        // Identifiant unique d'un menu
+        [Key]
+        public int m_iMenuId { get; set; }
 
-        // Nom affiché du menu       
+        // Nom affiché du menu      
+        [DisplayName("Nom")]
         public string m_strNom { get; set; }
 
         // Indique la date ou le menu commencera à être actif     
-        public string m_strDateDebut { get; set; }
+        [DisplayName("Date de début")]
+        public DateTime m_DateDebut { get; set; }
 
         // Indique la date ou le menu finit d'être actif
-        public string m_strDateFin { get; set; }
+        [DisplayName("Date de fin")]
+        public DateTime m_DateFin { get; set; }
 
-        // Collection contenant les repas du menu
-        // public ICollection/*<CRepas>*/ m_Repas;  
+        /* Collection contenant des CRepas pour permettre de lier le menu à
+           des repas */
+        public ICollection<CRepas> m_Repas;
 
         #endregion
     }

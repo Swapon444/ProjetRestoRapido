@@ -192,8 +192,6 @@
     <Compile Include="Models\CCodeQR.cs" />
     <Compile Include="Models\CCommande.cs" />
     <Compile Include="Models\CMenu.cs" />
-    <Compile Include="Models\CMenuContext.cs" />
-    <Compile Include="Models\CMenuInitializer.cs" />
     <Compile Include="Models\CMenuRepas.cs" />
     <Compile Include="Models\CRabais.cs" />
     <Compile Include="Models\CRepas.cs" />
@@ -338,11 +336,6 @@
     <Content Include="Views\Utilisateurs\Details.cshtml" />
     <Content Include="Views\Utilisateurs\Edit.cshtml" />
     <Content Include="Views\Utilisateurs\Index.cshtml" />
-    <Content Include="Views\CMenus\Create.cshtml" />
-    <Content Include="Views\CMenus\Delete.cshtml" />
-    <Content Include="Views\CMenus\Details.cshtml" />
-    <Content Include="Views\CMenus\Edit.cshtml" />
-    <Content Include="Views\CMenus\Index.cshtml" />
     <Content Include="Views\CRestoes\Create.cshtml" />
     <Content Include="Views\CRestoes\Delete.cshtml" />
     <Content Include="Views\CRestoes\Details.cshtml" />
@@ -353,11 +346,6 @@
     <Content Include="Views\CCommandes\Details.cshtml" />
     <Content Include="Views\CCommandes\Edit.cshtml" />
     <Content Include="Views\CCommandes\Index.cshtml" />
-    <Content Include="Views\CRepas\Create.cshtml" />
-    <Content Include="Views\CRepas\Delete.cshtml" />
-    <Content Include="Views\CRepas\Details.cshtml" />
-    <Content Include="Views\CRepas\Edit.cshtml" />
-    <Content Include="Views\CRepas\Index.cshtml" />
     <Content Include="Views\CRabais\Create.cshtml" />
     <Content Include="Views\CRabais\Delete.cshtml" />
     <Content Include="Views\CRabais\Details.cshtml" />
@@ -368,6 +356,16 @@
     <Content Include="Views\CTables\Details.cshtml" />
     <Content Include="Views\CTables\Edit.cshtml" />
     <Content Include="Views\CTables\Index.cshtml" />
+    <Content Include="Views\CMenus\Create.cshtml" />
+    <Content Include="Views\CMenus\Delete.cshtml" />
+    <Content Include="Views\CMenus\Details.cshtml" />
+    <Content Include="Views\CMenus\Edit.cshtml" />
+    <Content Include="Views\CMenus\Index.cshtml" />
+    <Content Include="Views\CRepas\Create.cshtml" />
+    <Content Include="Views\CRepas\Delete.cshtml" />
+    <Content Include="Views\CRepas\Details.cshtml" />
+    <Content Include="Views\CRepas\Edit.cshtml" />
+    <Content Include="Views\CRepas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
