@@ -25,19 +25,24 @@ namespace RestoRapido.Models
     {
         #region Données membres
 
-        // Identifiant unique d'un repas
+        // Identifiant unique du repas
         [Key]
         public int m_iRepasId { get; set; }
 
         // Nom affiché du repas
+        [Required]
         [DisplayName("Nom")]
+        [StringLength(50, MinimumLength = 1)]
         public string m_strNom { get; set; }
 
         // Prix du repas
+        [Required]
         [DisplayName("Prix")]
+        [Range(0, int.MaxValue)]
         public int m_iPrix { get; set; }
 
         // Description du repas
+        [DataType(DataType.MultilineText)]
         [DisplayName("Description")]
         public string m_strDescription { get; set; }
 
@@ -85,12 +90,9 @@ namespace RestoRapido.Models
 
         #endregion
 
-        /* Collection contenant des CRepas pour permettre de lier le repas
+        /* Collection contenant des CMenus pour permettre de lier le repas
            à des menus */
-        public ICollection<CRepas> m_Repas;
-
-        // Donnée membre qui représente la liste des repas commandés
-        public virtual ICollection<CCommande> mRepColletionCommande { get; set; } 
+        public virtual ICollection<CMenu> m_Repas { get; set; }
 
         #endregion
     }
