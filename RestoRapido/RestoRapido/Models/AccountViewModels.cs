@@ -49,8 +49,7 @@ namespace RestoRapido.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Courrier électronique")]
-        [EmailAddress]
+        [Display(Name = "Nom d'utilisateur")]
         public string Email { get; set; }
 
         [Required]
@@ -105,8 +104,7 @@ namespace RestoRapido.Models
     public class ForgotPasswordViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "E-mail")]
+        [Display(Name = "Nom d'utilisateur")]
         public string Email { get; set; }
     }
 }

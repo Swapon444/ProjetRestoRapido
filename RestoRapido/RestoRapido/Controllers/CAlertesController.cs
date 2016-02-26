@@ -10,107 +10,107 @@ using RestoRapido.Models;
 
 namespace RestoRapido.Controllers
 {
-    public class CRestoesController : Controller
+    public class CAlertesController : Controller
     {
         private CRestoContext db = new CRestoContext();
 
-        // GET: CRestoes
+        // GET: CAlertes
         public ActionResult Index()
         {
-            return View(db.Resto.ToList());
+            return View(db.Alertes.ToList());
         }
 
-        // GET: CRestoes/Details/5
+        // GET: CAlertes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CResto cResto = db.Resto.Find(id);
-            if (cResto == null)
+            CAlerte cAlerte = db.Alertes.Find(id);
+            if (cAlerte == null)
             {
                 return HttpNotFound();
             }
-            return View(cResto);
+            return View(cAlerte);
         }
 
-        // GET: CRestoes/Create
+        // GET: CAlertes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CRestoes/Create
+        // POST: CAlertes/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CRestoID,resNom,resPostal,resRue,resNoCiv")] CResto cResto)
+        public ActionResult Create([Bind(Include = "AlerteID,AlerteClientID,AlerteServeurID")] CAlerte cAlerte)
         {
             if (ModelState.IsValid)
             {
-                db.Resto.Add(cResto);
+                db.Alertes.Add(cAlerte);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(cResto);
+            return View(cAlerte);
         }
 
-        // GET: CRestoes/Edit/5
+        // GET: CAlertes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CResto cResto = db.Resto.Find(id);
-            if (cResto == null)
+            CAlerte cAlerte = db.Alertes.Find(id);
+            if (cAlerte == null)
             {
                 return HttpNotFound();
             }
-            return View(cResto);
+            return View(cAlerte);
         }
 
-        // POST: CRestoes/Edit/5
+        // POST: CAlertes/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CRestoID,resNom,resPostal,resRue,resNoCiv")] CResto cResto)
+        public ActionResult Edit([Bind(Include = "AlerteID,AlerteClientID,AlerteServeurID")] CAlerte cAlerte)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cResto).State = EntityState.Modified;
+                db.Entry(cAlerte).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cResto);
+            return View(cAlerte);
         }
 
-        // GET: CRestoes/Delete/5
+        // GET: CAlertes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CResto cResto = db.Resto.Find(id);
-            if (cResto == null)
+            CAlerte cAlerte = db.Alertes.Find(id);
+            if (cAlerte == null)
             {
                 return HttpNotFound();
             }
-            return View(cResto);
+            return View(cAlerte);
         }
 
-        // POST: CRestoes/Delete/5
+        // POST: CAlertes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CResto cResto = db.Resto.Find(id);
-            db.Resto.Remove(cResto);
+            CAlerte cAlerte = db.Alertes.Find(id);
+            db.Alertes.Remove(cAlerte);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -122,40 +122,6 @@ namespace RestoRapido.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-
-        /*
-        Permet de supprimer une table
-            id : Clé primaire du restaurant
-            idTable = Clé primaire de la table
-        */
-        public ActionResult supprimertable(int id, int idTable)
-        {
-            CResto cResto = db.Resto.Find(id); //va chercher le restaurant
-            CTable Table = db.Tables.Find(idTable); //va chercher la table
-
-            cResto.Tables.Remove(Table); //enlève cette table
-
-            db.SaveChanges(); //Sauvegarde la BD
-
-            return RedirectToAction("Edit", new { ID = id });
-        }
-
-        /*
-        Permet d'ajouter une table
-            id : clé primaire du restaurant
-        */
-        public ActionResult ajoutertable(int id)
-        {
-            CResto cResto = db.Resto.Find(id); //va chercher le restaurant
-
-            //Ajoute la table au restaurant
-            //cResto.Tables.Add(new CTable(cResto.Tables.Last().CTableID + 1, id));
-
-            db.SaveChanges(); //Sauvegarde la BD
-
-            return RedirectToAction("Edit", new { ID = id });
         }
     }
 }

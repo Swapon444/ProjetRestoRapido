@@ -9,6 +9,7 @@ namespace RestoRapido.Models
 {
     public class CResto
     {
+        [Key]
         public int CRestoID { get; set; }
 
         [DisplayName("Nom du restaurant")]

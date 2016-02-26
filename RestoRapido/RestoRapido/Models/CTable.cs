@@ -28,6 +28,7 @@ namespace RestoRapido.Models
     public class CTable
     {
         //Identificateur unique de la table
+        [Key]
         public int CTableID { get; set; }
 
         //Numéro de la table
@@ -37,7 +38,13 @@ namespace RestoRapido.Models
 
         //Code QR de la table
         public string str_TableCodeQR { get; set; }
+        //ID de restaurant
 
+        public int CRestoID { get; set; }
+
+        public virtual CResto Restaurant { get; set; }
+
+        public virtual ICollection<CTableUtilisateurs> TableUtilisateur { get; set; }
         public CTable(){ }
 
         public CTable(int i_num, int i_restoId)
@@ -45,7 +52,9 @@ namespace RestoRapido.Models
             i_TableNum = i_num;
             str_TableCodeQR = Convert.ToString(i_num) + Convert.ToString(i_restoId);
         }
+
         
+
     }
     
     /*

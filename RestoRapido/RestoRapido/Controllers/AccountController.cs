@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RestoRapido.Models;
+using System.Data.SqlClient;
 
 namespace RestoRapido.Controllers
 {
@@ -68,23 +69,59 @@ namespace RestoRapido.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            string type = "";
+            string prenom = "";
+            int id = -1;
+            int tableId = -1;
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
+            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV6.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+            SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "'", conn);
+            checkuser.Connection = conn;
+            conn.Open();
+            SqlDataReader dr = checkuser.ExecuteReader();
 
-            // Ceci ne comptabilise pas les échecs de connexion pour le verrouillage du compte
-            // Pour que les échecs de mot de passe déclenchent le verrouillage du compte, utilisez shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+
+            while (dr.Read())
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
+                type = dr.GetString(0);
+                prenom = dr.GetString(1);
+                id = dr.GetInt32(2);
+            }
+
+            conn.Close();
+
+            Session["Type"] = type;
+            Session["Prenom"] = prenom;
+            Session["ID"] = id;
+
+
+            switch (type)
+            {
+                case "Administrateur":
+                    return View("../Administrateur/Index");
+                case "Gerant":
+                    return View("../Gerant/Index");
+                case "Serveur":
+                    return View("../Serveur/Index");
+                case "Client":
+                    {
+                        SqlCommand checktable = new SqlCommand("SELECT CTableID FROM CTableUtilisateurs WHERE " + id + " = UtilisateurID", conn);
+                        checktable.Connection = conn;
+                        conn.Open();
+                        SqlDataReader dr2 = checktable.ExecuteReader();
+
+
+                        while (dr2.Read())
+                            tableId = dr2.GetInt32(0);
+
+                        Session["Table"] = tableId;
+
+                        return View("../Client/Index");
+                    }
                 default:
                     ModelState.AddModelError("", "Tentative de connexion non valide.");
                     return View(model);
