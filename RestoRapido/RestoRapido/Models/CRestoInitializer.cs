@@ -29,16 +29,27 @@ namespace RestoRapido.Models
 
             Context.SaveChanges();
 
+            var Restaurants = new List<CResto>
+            {
+                new CResto { resNom = "McDonald's" , resRue = "Lacombe" },
+                
+            };
+
+            foreach (var temp in Restaurants)
+            {
+                Context.Resto.Add(temp);
+            }
+
             var Tables = new List<CTable>
             {
-                new CTable {i_TableNum = 1, CRestoID = 1 },
-                new CTable {i_TableNum = 2, CRestoID = 1 },
-                new CTable {i_TableNum = 3, CRestoID = 1 },
-                new CTable {i_TableNum = 4, CRestoID = 1 },
-                new CTable {i_TableNum = 5, CRestoID = 1 },
-                new CTable {i_TableNum = 6, CRestoID = 1 },
-                new CTable {i_TableNum = 7, CRestoID = 1 },
-                new CTable {i_TableNum = 8, CRestoID = 1 },
+                new CTable {i_TableNum = 1, Restaurant = Restaurants[0] },
+                new CTable {i_TableNum = 2, Restaurant = Restaurants[0] },
+                new CTable {i_TableNum = 3, Restaurant = Restaurants[0] },
+                new CTable {i_TableNum = 4, Restaurant = Restaurants[0] },
+                new CTable {i_TableNum = 5, Restaurant = Restaurants[0] },
+                new CTable {i_TableNum = 6, Restaurant = Restaurants[0] },
+                new CTable {i_TableNum = 7, Restaurant = Restaurants[0] },
+                new CTable {i_TableNum = 8, Restaurant = Restaurants[0] },
 
             };
 
