@@ -26,6 +26,7 @@ namespace RestoRapido.Models
         public string resNoCiv { get; set; }
 
         public virtual ICollection<CTable> Tables { get; set; }
+        public virtual ICollection<CCommande> RestoCommande { get; set; }
 
 
         //public virtual ICollection<CCommande> Commandes { get; set; }

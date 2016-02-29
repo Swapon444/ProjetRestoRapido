@@ -176,19 +176,26 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CCommandesController.cs" />
+    <Compile Include="Controllers\AdministrateurController.cs" />
+    <Compile Include="Controllers\CAlertesController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\CMenusController.cs" />
+    <Compile Include="Controllers\CommandesController.cs" />
     <Compile Include="Controllers\CRabaisController.cs" />
     <Compile Include="Controllers\CRepasController.cs" />
     <Compile Include="Controllers\CRestoesController.cs" />
     <Compile Include="Controllers\CTablesController.cs" />
+    <Compile Include="Controllers\GerantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ServeurController.cs" />
     <Compile Include="Controllers\UtilisateursController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CAlerte.cs" />
+    <Compile Include="Models\CCodeQR.cs" />
     <Compile Include="Models\CCommande.cs" />
     <Compile Include="Models\CMenu.cs" />
     <Compile Include="Models\CMenuRepas.cs" />
@@ -198,6 +205,7 @@
     <Compile Include="Models\CRestoContext.cs" />
     <Compile Include="Models\CRestoInitializer.cs" />
     <Compile Include="Models\CTable.cs" />
+    <Compile Include="Models\CTableUtilisateurs.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Utilisateur.cs" />
@@ -297,7 +305,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -341,11 +351,6 @@
     <Content Include="Views\CRestoes\Details.cshtml" />
     <Content Include="Views\CRestoes\Edit.cshtml" />
     <Content Include="Views\CRestoes\Index.cshtml" />
-    <Content Include="Views\CCommandes\Create.cshtml" />
-    <Content Include="Views\CCommandes\Delete.cshtml" />
-    <Content Include="Views\CCommandes\Details.cshtml" />
-    <Content Include="Views\CCommandes\Edit.cshtml" />
-    <Content Include="Views\CCommandes\Index.cshtml" />
     <Content Include="Views\CRabais\Create.cshtml" />
     <Content Include="Views\CRabais\Delete.cshtml" />
     <Content Include="Views\CRabais\Details.cshtml" />
@@ -366,6 +371,28 @@
     <Content Include="Views\CMenus\Details.cshtml" />
     <Content Include="Views\CMenus\Edit.cshtml" />
     <Content Include="Views\CMenus\Index.cshtml" />
+    <Content Include="Views\Administrateur\Creation.cshtml" />
+    <Content Include="Views\Administrateur\Index.cshtml" />
+    <Content Include="Views\CAlertes\Create.cshtml" />
+    <Content Include="Views\CAlertes\Delete.cshtml" />
+    <Content Include="Views\CAlertes\Details.cshtml" />
+    <Content Include="Views\CAlertes\Edit.cshtml" />
+    <Content Include="Views\CAlertes\Index.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Gerant\Creation.cshtml" />
+    <Content Include="Views\Gerant\Index.cshtml" />
+    <Content Include="Views\Serveur\Alertes.cshtml" />
+    <Content Include="Views\Serveur\Index.cshtml" />
+    <Content Include="Views\Account\Creation.cshtml" />
+    <Content Include="Views\Account\MainPageAdmin.cshtml" />
+    <Content Include="Views\Account\MainPageClient.cshtml" />
+    <Content Include="Views\Account\MainPageGerant.cshtml" />
+    <Content Include="Views\Account\MainPageServeur.cshtml" />
+    <Content Include="Views\Commandes\Create.cshtml" />
+    <Content Include="Views\Commandes\Delete.cshtml" />
+    <Content Include="Views\Commandes\Details.cshtml" />
+    <Content Include="Views\Commandes\Edit.cshtml" />
+    <Content Include="Views\Commandes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

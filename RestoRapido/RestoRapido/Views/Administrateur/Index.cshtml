@@ -7,9 +7,15 @@
 <h2>@ViewBag.Title.</h2>
 <div class="row">
     <h4> Bienvenue cher @Session["Prenom"] !</h4>
+
     @Html.ActionLink("Ajouter un utilisateur", "Creation","Administrateur")
    
 </div>
+
+
+<br>
+
+@Html.ActionLink("Voir les Commandes", "Index", "Commandes")
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

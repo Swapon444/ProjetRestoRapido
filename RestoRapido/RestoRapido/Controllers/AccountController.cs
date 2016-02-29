@@ -73,12 +73,13 @@ namespace RestoRapido.Controllers
             string prenom = "";
             int id = -1;
             int tableId = -1;
+           // bool siConnecter = false;
 
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV6.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV20.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
             SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "'", conn);
             checkuser.Connection = conn;
             conn.Open();
@@ -97,6 +98,7 @@ namespace RestoRapido.Controllers
             Session["Type"] = type;
             Session["Prenom"] = prenom;
             Session["ID"] = id;
+            Session["Connexion"] = true;
 
 
             switch (type)

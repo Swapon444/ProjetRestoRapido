@@ -93,6 +93,7 @@ namespace RestoRapido.Models
         /* Collection contenant des CMenus pour permettre de lier le repas
            à des menus */
         public virtual ICollection<CMenu> m_Repas { get; set; }
+        public virtual ICollection<CCommande> RepasCommandes { get; set; }
 
         #endregion
     }

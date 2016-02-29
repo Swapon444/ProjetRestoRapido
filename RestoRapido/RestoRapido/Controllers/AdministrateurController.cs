@@ -19,7 +19,11 @@ namespace RestoRapido.Controllers
         public ActionResult Index()
         {
             if (@Session["Type"].ToString() == "Administrateur")
+            {
+               // @Session["IDUser"] = db.
                 return View();
+            }
+               
             else
                 return View("../Shared/Error");
         }

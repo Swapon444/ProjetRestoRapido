@@ -27,7 +27,7 @@ namespace RestoRapido.Controllers
         {
             if (@Session["Type"].ToString() == "Client")
             {
-                SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV6.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV20.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
                 SqlCommand ajouteralerte = new SqlCommand("INSERT INTO CAlertes VALUES (" + Session["ID"] + ", " + Session["Table"] + ")");
                 ajouteralerte.Connection = conn;
                 conn.Open();

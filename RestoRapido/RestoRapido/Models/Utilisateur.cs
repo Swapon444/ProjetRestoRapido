@@ -29,5 +29,7 @@ namespace RestoRapido.Models
         public string UtilisateurType { get; set; }
 
         public virtual ICollection<CTableUtilisateurs> TableUtilisateur { get; set; }
+        public virtual ICollection<CCommande> CollectionCommande { get; set; }
+
     }
 }
