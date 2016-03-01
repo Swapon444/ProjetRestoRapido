@@ -179,15 +179,15 @@
     <Compile Include="Controllers\AdministrateurController.cs" />
     <Compile Include="Controllers\CAlertesController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
-    <Compile Include="Controllers\CMenusController.cs" />
     <Compile Include="Controllers\CommandesController.cs" />
     <Compile Include="Controllers\CRabaisController.cs" />
-    <Compile Include="Controllers\CRepasController.cs" />
     <Compile Include="Controllers\CRestoesController.cs" />
     <Compile Include="Controllers\CTablesController.cs" />
     <Compile Include="Controllers\GerantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MenusController.cs" />
+    <Compile Include="Controllers\RepasController.cs" />
     <Compile Include="Controllers\ServeurController.cs" />
     <Compile Include="Controllers\UtilisateursController.cs" />
     <Compile Include="Global.asax.cs">
@@ -361,16 +361,6 @@
     <Content Include="Views\CTables\Details.cshtml" />
     <Content Include="Views\CTables\Edit.cshtml" />
     <Content Include="Views\CTables\Index.cshtml" />
-    <Content Include="Views\CRepas\Create.cshtml" />
-    <Content Include="Views\CRepas\Delete.cshtml" />
-    <Content Include="Views\CRepas\Details.cshtml" />
-    <Content Include="Views\CRepas\Edit.cshtml" />
-    <Content Include="Views\CRepas\Index.cshtml" />
-    <Content Include="Views\CMenus\Create.cshtml" />
-    <Content Include="Views\CMenus\Delete.cshtml" />
-    <Content Include="Views\CMenus\Details.cshtml" />
-    <Content Include="Views\CMenus\Edit.cshtml" />
-    <Content Include="Views\CMenus\Index.cshtml" />
     <Content Include="Views\Administrateur\Creation.cshtml" />
     <Content Include="Views\Administrateur\Index.cshtml" />
     <Content Include="Views\CAlertes\Create.cshtml" />
@@ -393,6 +383,16 @@
     <Content Include="Views\Commandes\Details.cshtml" />
     <Content Include="Views\Commandes\Edit.cshtml" />
     <Content Include="Views\Commandes\Index.cshtml" />
+    <Content Include="Views\Menus\Create.cshtml" />
+    <Content Include="Views\Menus\Delete.cshtml" />
+    <Content Include="Views\Menus\Details.cshtml" />
+    <Content Include="Views\Menus\Edit.cshtml" />
+    <Content Include="Views\Menus\Index.cshtml" />
+    <Content Include="Views\Repas\Create.cshtml" />
+    <Content Include="Views\Repas\Delete.cshtml" />
+    <Content Include="Views\Repas\Details.cshtml" />
+    <Content Include="Views\Repas\Edit.cshtml" />
+    <Content Include="Views\Repas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

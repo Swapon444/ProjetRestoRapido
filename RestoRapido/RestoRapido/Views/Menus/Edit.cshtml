@@ -1,19 +1,22 @@
 ﻿@model RestoRapido.Models.CMenu
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Create</h2>
+<h2>Modifier</h2>
 
-@using (Html.BeginForm()) 
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>CMenu</h4>
+        <h4>Menu</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.m_iMenuId)
+
         <div class="form-group">
             @Html.LabelFor(model => model.m_strNom, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -40,12 +43,44 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <table>
+                    <tr>
+                        @{ 
+                            int cnt = 0;
+                            List<RestoRapido.ViewModels.CRepasAssignes> lstRepas = ViewBag.Repas;
+
+                            foreach (var repas in lstRepas)
+                            {
+                                if (cnt++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
+                                }
+
+                                @:<td>
+                                    <input type="checkbox" name="repasChoisis" value="@repas.m_iRepasId"
+                                            @(Html.Raw(repas.m_boAssigne ? "checked=\"checked\"" : "")) />
+                                    
+                                    @repas.m_strNom
+                                @:</td>
+                            }
+                        }
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Enregistrer" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -7,20 +7,47 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RestoRapido.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace RestoRapido.Controllers
 {
-    public class CRepasController : Controller
+    public class RepasController : Controller
     {
         private CRestoContext db = new CRestoContext();
 
-        // GET: CRepas
-        public ActionResult Index()
+        // GET: Repas
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            return View(db.Repas.ToList());
+            ViewBag.NomSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.PrixSortParm = sortOrder == "Prix" ? "prix_desc" : "Prix";
+
+            var repas = from s in db.Repas select s;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                repas = repas.Where(s => s.m_strNom.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    repas = repas.OrderByDescending(s => s.m_strNom);
+                    break;
+                case "Prix":
+                    repas = repas.OrderBy(s => s.m_iPrix);
+                    break;
+                case "prix_desc":
+                    repas = repas.OrderByDescending(s => s.m_iPrix);
+                    break;
+                default:
+                    repas = repas.OrderBy(s => s.m_strNom);
+                    break;
+            }
+
+            return View(repas.ToList());
         }
 
-        // GET: CRepas/Details/5
+        // GET: Repas/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,30 +62,37 @@ namespace RestoRapido.Controllers
             return View(cRepas);
         }
 
-        // GET: CRepas/Create
+        // GET: Repas/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CRepas/Create
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Repas/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "m_iRepasId,m_strNom,m_iPrix,m_strDescription,m_boBle,m_boLait,m_boOeuf,m_boArachide,m_boSoja,m_boFruitCoque,m_boPoisson,m_boSesame,m_boCrustace,m_boMollusque")] CRepas cRepas)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Repas.Add(cRepas);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Repas.Add(cRepas);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (RetryLimitExceededException)
+            {
+                ModelState.AddModelError("", "Création impossible. Veuillez réessayer.");
             }
 
             return View(cRepas);
         }
 
-        // GET: CRepas/Edit/5
+        // GET: Repas/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,23 +107,31 @@ namespace RestoRapido.Controllers
             return View(cRepas);
         }
 
-        // POST: CRepas/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Repas/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "m_iRepasId,m_strNom,m_iPrix,m_strDescription,m_boBle,m_boLait,m_boOeuf,m_boArachide,m_boSoja,m_boFruitCoque,m_boPoisson,m_boSesame,m_boCrustace,m_boMollusque")] CRepas cRepas)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(cRepas).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(cRepas).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+            catch (RetryLimitExceededException)
+            {
+                ModelState.AddModelError("", "Modification impossible. Veuillez réessayer.");
+            }
+
             return View(cRepas);
         }
 
-        // GET: CRepas/Delete/5
+        // GET: Repas/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +146,7 @@ namespace RestoRapido.Controllers
             return View(cRepas);
         }
 
-        // POST: CRepas/Delete/5
+        // POST: Repas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

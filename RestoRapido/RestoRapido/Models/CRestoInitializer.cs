@@ -10,7 +10,7 @@ namespace RestoRapido.Models
     {
         protected override void Seed(CRestoContext Context)
         {
-            //--------------------------------------------------------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------
             // UTILISATEURS
             var Utilisateurs = new List<Utilisateur>
             {
@@ -22,7 +22,6 @@ namespace RestoRapido.Models
                 new Utilisateur { UtilisateurID = 6, UtilisateurNom = "Beaudoin" , UtilisateurNomUsager = "KevinB", UtilisateurPrenom = "Kevin", UtilisateurType = "Serveur" ,  UtilisateurMDP = "1234" }
             };
 
-
             foreach (var temp in Utilisateurs)
             {
                 Context.Utilisateurs.Add(temp);
@@ -30,9 +29,7 @@ namespace RestoRapido.Models
 
             Context.SaveChanges();
 
-
-
-            //--------------------------------------------------------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------
             // RESTAURANTS
             var Restos = new List<CResto>
             {
@@ -47,12 +44,8 @@ namespace RestoRapido.Models
 
             Context.SaveChanges();
 
-
-
-            //--------------------------------------------------------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------
             // TABLES
-
-
             var Tables = new List<CTable>
             {
                 new CTable {CTableID = 1, i_TableNum = 1, CRestoID = 1 },
@@ -71,9 +64,7 @@ namespace RestoRapido.Models
                 new CTable {CTableID = 14, i_TableNum = 6, CRestoID = 2 },
                 new CTable {CTableID = 15, i_TableNum = 7, CRestoID = 2 },
                 new CTable {CTableID = 16, i_TableNum = 8, CRestoID = 2 }
-
             };
-
 
             foreach (var tempC in Tables)
             {
@@ -82,8 +73,7 @@ namespace RestoRapido.Models
 
             Context.SaveChanges();
 
-
-            //--------------------------------------------------------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------
             // REPAS
             var Repas = new List<CRepas>
             {
@@ -99,7 +89,6 @@ namespace RestoRapido.Models
 
             Context.SaveChanges();
 
-
             List<CRepas> lstRepas = new List<CRepas>();
             lstRepas.Add(Repas[0]);
             lstRepas.Add(Repas[1]);
@@ -107,9 +96,24 @@ namespace RestoRapido.Models
 
             List<string> lstComment = new List<string> { "Papa", "Maman", "Bebe" };
 
+            //---------------------------------------------------------------------------------------------------------
+            // MENUS
+            var Menus = new List<CMenu>
+            {
+                new CMenu { m_iMenuId = 1, m_strNom = "Menu fin de semaine", m_DateDebut = DateTime.Parse("2016-01-01"), m_DateFin = DateTime.Parse("2016-02-01"), m_Repas = new List<CRepas>() },
+                new CMenu { m_iMenuId = 2, m_strNom = "Menu semaine", m_DateDebut = DateTime.Parse("2016-01-01"), m_DateFin = DateTime.Parse("2016-12-01"), m_Repas = new List<CRepas>() },
+                new CMenu { m_iMenuId = 3, m_strNom = "Menu spécial", m_DateDebut = DateTime.Parse("2016-05-01"), m_DateFin = DateTime.Parse("2016-05-10"), m_Repas = new List<CRepas>() }
+            };
 
+            foreach (var menu in Menus)
+            {
+                Context.Menus.Add(menu);
+            }
 
+            Context.SaveChanges();
 
+            //---------------------------------------------------------------------------------------------------------
+            // TABLE_UTILISATEUR
             var UtilisateursTables = new List<CTableUtilisateurs>
             {
                 //Serveurs
@@ -125,7 +129,6 @@ namespace RestoRapido.Models
                 //Clients
                 new CTableUtilisateurs { CTableID = 1, UtilisateurID = 4 },
                 new CTableUtilisateurs { CTableID = 2, UtilisateurID = 5 }
-
             };
 
             foreach (var temp in UtilisateursTables)
@@ -133,15 +136,9 @@ namespace RestoRapido.Models
                 Context.TableUtilisateurs.Add(temp);
             }
 
-
-
             Context.SaveChanges();
-
-
-
-
-
-            //--------------------------------------------------------------------------------------------------------
+            
+            //---------------------------------------------------------------------------------------------------------
             // COMMANDES
             var Commandes = new List<CCommande>
             {
@@ -158,10 +155,6 @@ namespace RestoRapido.Models
             }
 
             Context.SaveChanges();  
-
-
-
-            
         } 
     } 
 }
