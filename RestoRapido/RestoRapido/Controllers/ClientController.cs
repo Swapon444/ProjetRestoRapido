@@ -28,10 +28,22 @@ namespace RestoRapido.Controllers
             if (@Session["Type"].ToString() == "Client")
             {
                 SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV20.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
-                SqlCommand ajouteralerte = new SqlCommand("INSERT INTO CAlertes VALUES (" + Session["ID"] + ", " + Session["Table"] + ")");
-                ajouteralerte.Connection = conn;
                 conn.Open();
-                ajouteralerte.ExecuteReader();
+
+                SqlCommand regarderalerte = new SqlCommand("SELECT * FROM CAlertes WHERE UtilisateurID = " + Session["ID"]);
+                regarderalerte.Connection = conn;
+                SqlDataReader dr = regarderalerte.ExecuteReader();
+                
+
+                if (!dr.HasRows)
+                {
+                    conn.Close();
+                    conn.Open();
+                    SqlCommand ajouteralerte = new SqlCommand("INSERT INTO CAlertes VALUES (" + Session["ID"] + ", " + Session["Table"] + ")");
+                    ajouteralerte.Connection = conn;
+                    ajouteralerte.ExecuteReader();
+                }
+                conn.Close();
                 return View("Index");
             }
             else
