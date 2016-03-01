@@ -216,6 +216,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CRepasAssignes.cs" />
     <Compile Include="ViewModels\RabaisAssignes.cs" />
+    <Compile Include="ViewModels\RepasZCommandes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
@@ -383,6 +384,7 @@
     <Content Include="Views\Commandes\Details.cshtml" />
     <Content Include="Views\Commandes\Edit.cshtml" />
     <Content Include="Views\Commandes\Index.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Menus\Create.cshtml" />
     <Content Include="Views\Menus\Delete.cshtml" />
     <Content Include="Views\Menus\Details.cshtml" />
@@ -393,6 +395,12 @@
     <Content Include="Views\Repas\Details.cshtml" />
     <Content Include="Views\Repas\Edit.cshtml" />
     <Content Include="Views\Repas\Index.cshtml" />
+=======
+    <Content Include="Views\Commandes\PayerFacture.cshtml" />
+    <Content Include="Views\Commandes\IndexServeur.cshtml" />
+    <Content Include="Views\Commandes\CommanderClient.cshtml" />
+    <Content Include="Views\Serveur\SelectTable.cshtml" />
+>>>>>>> 9c977bfa5b6b275e80039ffc16e6791773d86410
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

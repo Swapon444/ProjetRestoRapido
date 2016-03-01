@@ -43,8 +43,10 @@ namespace RestoRapido.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Creation([Bind(Include = "UtilisateurID,UtilisateurMDP,UtilisateurNomUsager,UtilisateurNom,UtilisateurPrenom,UtilisateurType")] Utilisateur utilisateur)
         {
+
             if (ModelState.IsValid)
             {
+                utilisateur.UtilisateurMDP = CEncryption.CalculateMD5Hash(utilisateur.UtilisateurMDP);
                 db.Utilisateurs.Add(utilisateur);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -67,20 +67,50 @@ namespace RestoRapido.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        public int LoginAPI(string login, string mdp)
+        {
+            string type = "";
+
+            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV20.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+            SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + login + "' AND UtilisateurMDP = '" + CEncryption.CalculateMD5Hash(mdp) + "'", conn);
+            checkuser.Connection = conn;
+            conn.Open();
+            SqlDataReader dr = checkuser.ExecuteReader();
+
+            if (dr.HasRows) //S'il l'utilisateur existe
+            {
+                while (dr.Read())
+                    type = dr.GetString(0);
+
+                if (type == "Client")
+                    return 1; //Si le l'utilisateur est un client
+                else return 0; //Si l'utilisateur n'est pas un client
+            }
+            else return 0; //S'il ne fonctionne pas
+
+
+        }
+
+        //
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             string type = "";
             string prenom = "";
             int id = -1;
             int tableId = -1;
-           // bool siConnecter = false;
+            // bool siConnecter = false;
 
+            int login = LoginAPI(model.Email, model.Password);
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
             SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV20.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
-            SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "'", conn);
+            SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "' AND UtilisateurMDP = '" + CEncryption.CalculateMD5Hash(model.Password.ToString()) + "'", conn);
             checkuser.Connection = conn;
             conn.Open();
             SqlDataReader dr = checkuser.ExecuteReader();
