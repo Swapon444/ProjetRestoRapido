@@ -179,10 +179,8 @@
     <Compile Include="Controllers\AdministrateurController.cs" />
     <Compile Include="Controllers\CAlertesController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
-    <Compile Include="Controllers\CMenusController.cs" />
     <Compile Include="Controllers\CommandesController.cs" />
     <Compile Include="Controllers\CRabaisController.cs" />
-    <Compile Include="Controllers\CRepasController.cs" />
     <Compile Include="Controllers\CRestoesController.cs" />
     <Compile Include="Controllers\CTablesController.cs" />
     <Compile Include="Controllers\GerantController.cs" />
@@ -365,16 +363,6 @@
     <Content Include="Views\CTables\Details.cshtml" />
     <Content Include="Views\CTables\Edit.cshtml" />
     <Content Include="Views\CTables\Index.cshtml" />
-    <Content Include="Views\CRepas\Create.cshtml" />
-    <Content Include="Views\CRepas\Delete.cshtml" />
-    <Content Include="Views\CRepas\Details.cshtml" />
-    <Content Include="Views\CRepas\Edit.cshtml" />
-    <Content Include="Views\CRepas\Index.cshtml" />
-    <Content Include="Views\CMenus\Create.cshtml" />
-    <Content Include="Views\CMenus\Delete.cshtml" />
-    <Content Include="Views\CMenus\Details.cshtml" />
-    <Content Include="Views\CMenus\Edit.cshtml" />
-    <Content Include="Views\CMenus\Index.cshtml" />
     <Content Include="Views\Administrateur\Creation.cshtml" />
     <Content Include="Views\Administrateur\Index.cshtml" />
     <Content Include="Views\CAlertes\Create.cshtml" />
