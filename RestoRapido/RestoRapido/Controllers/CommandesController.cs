@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RestoRapido.Models;
+using RestoRapido.ViewModels;
 
 namespace RestoRapido.Controllers
 {
@@ -17,30 +18,128 @@ namespace RestoRapido.Controllers
         // GET: Commandes
         public ActionResult Index()
         {
-            var commandes = from s in db.Commandes
-                            select s;
+            ViewBag.SiPaye = true;
+
+            if (@Session["Connexion"] != null)
+            {
+                if ((bool)@Session["Connexion"] == false)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                else if (@Session["Type"].ToString() == "Client")
+                {
+                    int i = Convert.ToInt32(@Session["ID"]);
+
+                    var commandes = from s in db.Commandes
+                                    where s.UtilisateurID == i
+                                    select s;
+
+                    commandes = commandes.Include(c => c.mCmdResto).Include(c => c.mCmdTable).Include(c => c.mUtilisateurClient);
+
+                    foreach (var k in commandes)
+                    {
+                        if (k.mCmdStatusCommande == 1)
+                            ViewBag.SiPaye = false;
+                    }
+
+                    return View(commandes.ToList());
+
+                }
+
+                else if (@Session["Type"].ToString() == "Serveur")
+                {
+                    return RedirectToAction("IndexServeur");
+                }
+
+                var cmd = from s in db.Commandes
+                          select s;
+
+                cmd = cmd.Include(c => c.mCmdResto).Include(c => c.mCmdTable).Include(c => c.mUtilisateurClient);
+                return View(cmd.ToList());
+            
+            }
+
+            else
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+           
+        }
 
 
-            if (Session["Connexion"] == null)
+        // GET: Commandes
+        public ActionResult IndexServeur()
+        {
+
+            if (@Session["Connexion"] != null)
+            {
+                if ((bool)@Session["Connexion"] == false)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                else
+                {
+                    int i = Convert.ToInt32(@Session["ID"]);
+
+                    var commandes = from t1 in db.Commandes
+                                    join t2 in db.Tables on t1.CTableID equals t2.CTableID
+                                    join t3 in db.TableUtilisateurs on t2.CTableID equals t3.CTableID
+                                    join t4 in db.Utilisateurs on t3.UtilisateurID equals t4.UtilisateurID
+                                    where t1.mCmdStatusCommande == 0 && t3.UtilisateurID == i
+                                    select t1;
+
+                    
+                    commandes = commandes.Include(c => c.mCmdResto).Include(c => c.mCmdTable).Include(c => c.mUtilisateurClient);
+                    commandes.OrderBy(y => y.mCmdTable.i_TableNum);
+                    return View(commandes.ToList());
+                }
+            }
+
+            else
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+
+        }
+
+
+        // KEVIN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // GET: Commandes
+        public ActionResult CommanderClient(int? id)
+        {
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            CCommande cCommande = db.Commandes.Find(id);
 
-            else if (Session["Type"].ToString() == "Client")
+            if (cCommande == null)
             {
-                commandes.Where(s => s.UtilisateurID == Convert.ToInt32(@Session["ID"]));
+                return HttpNotFound();
             }
-
-            else if (Session["Type"].ToString() == "Serveur")
-            {
-
-
-            }
-
-
-            commandes = commandes.Include(c => c.mCmdResto).Include(c => c.mCmdTable).Include(c => c.mUtilisateurClient);
-            return View(commandes.ToList());
+            return View(cCommande);
         }
+
+
+
+        // GET: Commandes
+        public ActionResult PayerFacture(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CCommande cCommande = db.Commandes.Find(id);
+
+            if (cCommande == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cCommande);
+        }
+
+
+
+
 
         // GET: Commandes/Details/5
         public ActionResult Details(int? id)
@@ -60,10 +159,49 @@ namespace RestoRapido.Controllers
         // GET: Commandes/Create
         public ActionResult Create()
         {
-            ViewBag.CRestoID = new SelectList(db.Resto, "CRestoID", "resNom");
-            ViewBag.CTableID = new SelectList(db.Tables, "CTableID", "i_TableNum");
-            ViewBag.UtilisateurID = new SelectList(db.Utilisateurs, "UtilisateurID", "UtilisateurNomUsager");
-            return View();
+            if (@Session["Connexion"] != null)
+            {
+                if ((bool)@Session["Connexion"] == false)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                else
+                {
+                    
+
+                                        
+                    if (@Session["Type"].ToString() == "Client")
+                    {
+                        return RedirectToAction("CommanderClient", new { id = Convert.ToInt32(@Session["ID"]) });
+                    }
+
+                    else if(@Session["Type"].ToString() != "Serveur")
+                    {
+                        //Eager Loading
+                        var vmCommande = new RepasZCommandes();
+
+                        var lstRepas = from s in db.Repas
+                                       select s;
+
+                        vmCommande.AllRepas = lstRepas.ToList();
+
+                        ViewBag.LesRepas = vmCommande.AllRepas;
+                        ViewBag.CRestoID = new SelectList(db.Resto, "CRestoID", "resNom");
+                        ViewBag.CTableID = new SelectList(db.Tables, "CTableID", "i_TableNum");
+                        ViewBag.UtilisateurID = new SelectList(db.Utilisateurs, "UtilisateurID", "UtilisateurNomUsager");
+
+
+                        return View();
+                    }
+
+                    else
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+            }
+
+            else
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         // POST: Commandes/Create

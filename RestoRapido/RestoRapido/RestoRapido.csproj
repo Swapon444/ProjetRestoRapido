@@ -216,6 +216,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CRepasAssignes.cs" />
     <Compile Include="ViewModels\RabaisAssignes.cs" />
+    <Compile Include="ViewModels\RepasZCommandes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
@@ -393,6 +394,10 @@
     <Content Include="Views\Commandes\Details.cshtml" />
     <Content Include="Views\Commandes\Edit.cshtml" />
     <Content Include="Views\Commandes\Index.cshtml" />
+    <Content Include="Views\Commandes\PayerFacture.cshtml" />
+    <Content Include="Views\Commandes\IndexServeur.cshtml" />
+    <Content Include="Views\Commandes\CommanderClient.cshtml" />
+    <Content Include="Views\Serveur\SelectTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
