@@ -75,5 +75,14 @@ namespace RestoRapido.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+
+        public ActionResult SelectTable()
+        {
+            return View();
+        }
+
     }
 }

@@ -134,6 +134,48 @@ namespace RestoRapido.Controllers
             {
                 return HttpNotFound();
             }
+
+
+            /*
+            using (SqlConnection conn = new SqlConnection("Data Source=stephenp\\sqlexpress;Initial Catalog=Asset management System DB;Integrated Security=True"))
+            {
+                string sql = "UPDATE Peripherals SET PeripheralType=@PeripheralType, Model=@Model, PeripheralSerialNumber=@SerialNum, " +
+                    "Company = @Company, Department=@Department, Status=@Status, WarrantyExpirationDate=@Warranty, PeripheralCapexNumber=@CapexNum, " +
+                    "IPAddress=@IPAddress, LastModifiedDate = @LastMD, LastModifiedBy=@LastMB WHERE (PeripheralTagNumber = @PeripheralTagNumber)";
+
+
+                //try
+                //{
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@PeripheralType", TypeDDL.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Model", ModelTB.Text.Trim());
+                    cmd.Parameters.AddWithValue("@SerialNum", SerialNumTB.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Company", CompanyDDL.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Department", DepartmentDDL.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Status", StatusDDL.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Warranty", DateTime.Parse(WarrantyTB.Text.Trim()).ToShortDateString());
+                    cmd.Parameters.AddWithValue("@CapexNum", CapexNumTB.Text.Trim());
+                    cmd.Parameters.AddWithValue("@IPAddress", IPAddressTB.Text.Trim());
+                    cmd.Parameters.AddWithValue("@LastMD", DateTime.Now.Date.ToShortDateString());
+                    cmd.Parameters.AddWithValue("@LastMB", Session["username"].ToString());
+                    cmd.Parameters.AddWithValue("@PeripheralTagNumber", ID);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+                //}
+                //catch (SqlException ex) { }
+            }
+
+            */
+
+
+
+
+
+
             return View(cCommande);
         }
 
