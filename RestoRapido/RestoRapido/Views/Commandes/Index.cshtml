@@ -17,7 +17,7 @@
         
         else
         { 
-            @Html.ActionLink("Payer la Facture", "PayerFacture", null, new { @style = "font-size: 20px; color: white" })
+            @Html.ActionLink("Payer la Facture", "PayerFacture", new { id = ViewBag.cmdAPayer }, new { @style = "font-size: 20px; color: white" })
         }
            
     </div>

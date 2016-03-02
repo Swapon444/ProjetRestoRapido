@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using RestoRapido.Models;
 using RestoRapido.ViewModels;
+using System.Data.SqlClient;
 
 namespace RestoRapido.Controllers
 {
@@ -31,6 +32,13 @@ namespace RestoRapido.Controllers
                 {
                     int i = Convert.ToInt32(@Session["ID"]);
 
+                 /*   var tempo = from s in db.Commandes
+                                        where s.mCmdStatusCommande == 0 && s.UtilisateurID == i
+                                        select s;*/
+
+                    ViewBag.cmdAPayer = null;
+
+
                     var commandes = from s in db.Commandes
                                     where s.UtilisateurID == i
                                     select s;
@@ -39,9 +47,17 @@ namespace RestoRapido.Controllers
 
                     foreach (var k in commandes)
                     {
-                        if (k.mCmdStatusCommande == 1)
+                        if (k.mCmdStatusCommande == 0)
+                        {
                             ViewBag.SiPaye = false;
+                            ViewBag.cmdAPayer = k.mCmdID; 
+                        }
+                           
                     }
+
+            //        if(ViewBag.cmdAPayer != null)
+            //             ViewBag.SiPaye = false;
+
 
                     return View(commandes.ToList());
 
@@ -128,6 +144,7 @@ namespace RestoRapido.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             CCommande cCommande = db.Commandes.Find(id);
 
             if (cCommande == null)
@@ -135,6 +152,19 @@ namespace RestoRapido.Controllers
                 return HttpNotFound();
             }
 
+            using (SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV20.mdf;Initial Catalog=RestoRapido;Integrated Security=True"))
+            {
+                string sql = "UPDATE CCommandes SET mCmdStatusCommande = 1 WHERE mCmdID = @comID";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@comID", id);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }   
 
             /*
             using (SqlConnection conn = new SqlConnection("Data Source=stephenp\\sqlexpress;Initial Catalog=Asset management System DB;Integrated Security=True"))
@@ -176,7 +206,7 @@ namespace RestoRapido.Controllers
 
 
 
-            return View(cCommande);
+            return RedirectToAction("Index");
         }
 
 
@@ -218,7 +248,8 @@ namespace RestoRapido.Controllers
                         return RedirectToAction("CommanderClient", new { id = Convert.ToInt32(@Session["ID"]) });
                     }
 
-                    else if(@Session["Type"].ToString() != "Serveur")
+                    else
+                  //  else if(@Session["Type"].ToString() != "Serveur")
                     {
                         //Eager Loading
                         var vmCommande = new RepasZCommandes();
@@ -237,8 +268,8 @@ namespace RestoRapido.Controllers
                         return View();
                     }
 
-                    else
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                  //  else
+                       // return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
             }
 
