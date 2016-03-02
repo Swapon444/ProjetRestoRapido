@@ -8,66 +8,109 @@
 
 <div>
     <h4>CCommande</h4>
+
     <hr />
-    <dl class="dl-horizontal">
+
+    <dl>
         <dt>
-            @Html.DisplayNameFor(model => model.mCmdResto.resNom)
+            @Html.DisplayNameFor(model => model.mCmdDate)        
+        </dt>
+        
+        <dd>
+            @Html.DisplayFor(model => model.mCmdDate)        
+        </dd>
+        <br>
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdResto.resNom)    
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.mCmdResto.resNom)
-        </dd>
+       </dd>
+        <br>
 
         <dt>
-            @Html.DisplayNameFor(model => model.mCmdTable.i_TableNum)
+            @Html.DisplayNameFor(model => model.mCmdTable.i_TableNum)        
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.mCmdTable.i_TableNum)
+            @Html.DisplayFor(model => model.mCmdTable.i_TableNum)        
         </dd>
-
+        <br>
         <dt>
-            @Html.DisplayNameFor(model => model.mUtilisateurClient.UtilisateurNomUsager)
+            @Html.DisplayNameFor(model => model.mUtilisateurClient.UtilisateurNomUsager)        
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.mUtilisateurClient.UtilisateurNomUsager)
+            @Html.DisplayFor(model => model.mUtilisateurClient.UtilisateurNomUsager)        
         </dd>
-
+        <br>
         <dt>
-            @Html.DisplayNameFor(model => model.mCmdCommentCommandes)
+            @Html.DisplayNameFor(model => model.mCmdCommentCommandes)        
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.mCmdCommentCommandes)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.mCmdPrixAvantTaxes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.mCmdPrixAvantTaxes)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.mCmdPrixTotal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.mCmdPrixTotal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.mCmdDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.mCmdDate)
-        </dd>
-
     </dl>
+
+    <label> Liste des Repas : </label>
+
+    <table border="1" align="center" >
+
+        <tr>
+            <th>
+                NOM
+            </th>
+            <th>
+                PRIX
+            </th>
+        </tr>
+
+
+
+        @{
+            List<RestoRapido.Models.CRepas> Repas = ViewBag.YourMeet;
+
+            foreach (var item in Repas)
+            {
+                <tr style="text-align: left">
+                    <td>
+                        @item.m_strNom
+                    </td>
+                    <td>
+                        @(item.m_iPrix + ".00 $")
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+
+    <br>
+
+    <div style="text-align:center">
+          <label> Montant Avant Taxes : </label> @(Model.mCmdPrixAvantTaxes)
+
+            <br>
+          <label> Montant Total : </label> @(Model.mCmdPrixTotal)
+    <div> 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
 </div>
+
 <p>
     @Html.ActionLink("Retour", "Index")
 </p>
