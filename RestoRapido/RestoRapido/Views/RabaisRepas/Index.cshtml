@@ -1,18 +1,18 @@
-﻿@model IEnumerable<RestoRapido.Models.CRabais>
+﻿@model IEnumerable<RestoRapido.Models.CRabaisRepas>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Index des rabais";
 }
 
-<h2>Index</h2>
+<h2>Les rabais</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Ajouter un rabais", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.RabaisRepasNom)
+            @Html.DisplayNameFor(model => model.Repas.m_strNom)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.RabaisPrix)
@@ -29,7 +29,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.RabaisRepasNom)
+            @Html.DisplayFor(modelItem => item.Repas.m_strNom)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.RabaisPrix)
@@ -41,9 +41,9 @@
             @Html.DisplayFor(modelItem => item.RabaisDateFin)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RabaisID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RabaisID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RabaisID })
+            @Html.ActionLink("Modifier", "Edit", new { id=item.RabaisID }) |
+            @Html.ActionLink("Détails", "Details", new { id=item.RabaisID }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.RabaisID })
         </td>
     </tr>
 }

@@ -1,21 +1,20 @@
-﻿@model RestoRapido.Models.CRabais
+﻿@model RestoRapido.Models.CRabaisRepas
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Détails d'un rabais";
 }
 
-<h2>Details</h2>
+<h2>Détails</h2>
 
 <div>
-    <h4>CRabais</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.RabaisRepasNom)
+            @Html.DisplayNameFor(model => model.Repas.m_strNom)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RabaisRepasNom)
+            @Html.DisplayFor(model => model.Repas.m_strNom)
         </dd>
 
         <dt>
@@ -45,6 +44,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.RabaisID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.RabaisID }) |
+    @Html.ActionLink("Retour à la liste des rabais", "Index")
 </p>

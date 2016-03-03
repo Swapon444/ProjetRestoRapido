@@ -94,6 +94,7 @@ namespace RestoRapido.Models
            à des menus */
         public virtual ICollection<CMenu> m_Menus { get; set; }
         public virtual ICollection<CCommande> RepasCommandes { get; set; }
+        public virtual ICollection<CRabaisRepas> RepasRabais { get; set; }
 
         #endregion
     }

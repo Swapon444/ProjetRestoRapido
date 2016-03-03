@@ -14,7 +14,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RestoRapido.Models
 {
-    public class CRabais
+    public class CRabaisRepas
     {
         #region Données membres
 
@@ -24,10 +24,8 @@ namespace RestoRapido.Models
 
         // Nom affiché du repas auquel affecter un rabais
         [DisplayName("Nom du repas")]
-        public int RabaisRepasID { get; set; }
+        public int m_iRepasId { get; set; }
 
-
-        
         // % de rabais à appliquer au repas
         [DisplayName("Rabais en %")]
         public int RabaisPrix { get; set; }
@@ -40,10 +38,7 @@ namespace RestoRapido.Models
         [DisplayName("Date de fin")]
         public string RabaisDateFin { get; set; }
 
-        /* Collection contenant des CMenuRepas pour permettre de lier le repas
-           à des menus 
-        public ICollection<CMenuRepas> m_MenuRepas;*/
-
+        public virtual CRepas Repas { get; set; }
         #endregion
     }
 }

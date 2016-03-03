@@ -180,13 +180,13 @@
     <Compile Include="Controllers\CAlertesController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\CommandesController.cs" />
-    <Compile Include="Controllers\CRabaisController.cs" />
     <Compile Include="Controllers\CRestoesController.cs" />
     <Compile Include="Controllers\CTablesController.cs" />
     <Compile Include="Controllers\GerantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenusController.cs" />
+    <Compile Include="Controllers\RabaisRepasController.cs" />
     <Compile Include="Controllers\RepasController.cs" />
     <Compile Include="Controllers\ServeurController.cs" />
     <Compile Include="Controllers\UtilisateursController.cs" />
@@ -200,7 +200,7 @@
     <Compile Include="Models\CEncryption.cs" />
     <Compile Include="Models\CMenu.cs" />
     <Compile Include="Models\CMenuRepas.cs" />
-    <Compile Include="Models\CRabais.cs" />
+    <Compile Include="Models\CRabaisRepas.cs" />
     <Compile Include="Models\CRepas.cs" />
     <Compile Include="Models\CResto.cs" />
     <Compile Include="Models\CRestoContext.cs" />
@@ -353,11 +353,6 @@
     <Content Include="Views\CRestoes\Details.cshtml" />
     <Content Include="Views\CRestoes\Edit.cshtml" />
     <Content Include="Views\CRestoes\Index.cshtml" />
-    <Content Include="Views\CRabais\Create.cshtml" />
-    <Content Include="Views\CRabais\Delete.cshtml" />
-    <Content Include="Views\CRabais\Details.cshtml" />
-    <Content Include="Views\CRabais\Edit.cshtml" />
-    <Content Include="Views\CRabais\Index.cshtml" />
     <Content Include="Views\CTables\Create.cshtml" />
     <Content Include="Views\CTables\Delete.cshtml" />
     <Content Include="Views\CTables\Details.cshtml" />
@@ -399,6 +394,11 @@
     <Content Include="Views\Repas\Edit.cshtml" />
     <Content Include="Views\Repas\Index.cshtml" />
     <Content Include="Views\Commandes\IndexAGS.cshtml" />
+    <Content Include="Views\RabaisRepas\Create.cshtml" />
+    <Content Include="Views\RabaisRepas\Delete.cshtml" />
+    <Content Include="Views\RabaisRepas\Details.cshtml" />
+    <Content Include="Views\RabaisRepas\Edit.cshtml" />
+    <Content Include="Views\RabaisRepas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

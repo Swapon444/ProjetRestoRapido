@@ -10,107 +10,112 @@ using RestoRapido.Models;
 
 namespace RestoRapido.Controllers
 {
-    public class CRabaisController : Controller
+    public class RabaisRepasController : Controller
     {
         private CRestoContext db = new CRestoContext();
 
-        // GET: CRabais
+        // GET: RabaisRepas
         public ActionResult Index()
         {
-            return View(db.Rabais.ToList());
+            var rabais = db.Rabais.Include(c => c.Repas);
+            return View(rabais.ToList());
         }
 
-        // GET: CRabais/Details/5
+        // GET: RabaisRepas/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CRabais cRabais = db.Rabais.Find(id);
-            if (cRabais == null)
+            CRabaisRepas cRabaisRepas = db.Rabais.Find(id);
+            if (cRabaisRepas == null)
             {
                 return HttpNotFound();
             }
-            return View(cRabais);
+            return View(cRabaisRepas);
         }
 
-        // GET: CRabais/Create
+        // GET: RabaisRepas/Create
         public ActionResult Create()
         {
+            ViewBag.m_iRepasId = new SelectList(db.Repas, "m_iRepasId", "m_strNom");
             return View();
         }
 
-        // POST: CRabais/Create
+        // POST: RabaisRepas/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RabaisID,RabaisRepasNom,RabaisPrix,RabaisDateDebut,RabaisDateFin")] CRabais cRabais)
+        public ActionResult Create([Bind(Include = "RabaisID,m_iRepasId,RabaisPrix,RabaisDateDebut,RabaisDateFin")] CRabaisRepas cRabaisRepas)
         {
             if (ModelState.IsValid)
             {
-                db.Rabais.Add(cRabais);
+                db.Rabais.Add(cRabaisRepas);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(cRabais);
+            ViewBag.m_iRepasId = new SelectList(db.Repas, "m_iRepasId", "m_strNom", cRabaisRepas.m_iRepasId);
+            return View(cRabaisRepas);
         }
 
-        // GET: CRabais/Edit/5
+        // GET: RabaisRepas/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CRabais cRabais = db.Rabais.Find(id);
-            if (cRabais == null)
+            CRabaisRepas cRabaisRepas = db.Rabais.Find(id);
+            if (cRabaisRepas == null)
             {
                 return HttpNotFound();
             }
-            return View(cRabais);
+            ViewBag.m_iRepasId = new SelectList(db.Repas, "m_iRepasId", "m_strNom", cRabaisRepas.m_iRepasId);
+            return View(cRabaisRepas);
         }
 
-        // POST: CRabais/Edit/5
+        // POST: RabaisRepas/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RabaisID,RabaisRepasNom,RabaisPrix,RabaisDateDebut,RabaisDateFin")] CRabais cRabais)
+        public ActionResult Edit([Bind(Include = "RabaisID,m_iRepasId,RabaisPrix,RabaisDateDebut,RabaisDateFin")] CRabaisRepas cRabaisRepas)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cRabais).State = EntityState.Modified;
+                db.Entry(cRabaisRepas).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cRabais);
+            ViewBag.m_iRepasId = new SelectList(db.Repas, "m_iRepasId", "m_strNom", cRabaisRepas.m_iRepasId);
+            return View(cRabaisRepas);
         }
 
-        // GET: CRabais/Delete/5
+        // GET: RabaisRepas/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CRabais cRabais = db.Rabais.Find(id);
-            if (cRabais == null)
+            CRabaisRepas cRabaisRepas = db.Rabais.Find(id);
+            if (cRabaisRepas == null)
             {
                 return HttpNotFound();
             }
-            return View(cRabais);
+            return View(cRabaisRepas);
         }
 
-        // POST: CRabais/Delete/5
+        // POST: RabaisRepas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CRabais cRabais = db.Rabais.Find(id);
-            db.Rabais.Remove(cRabais);
+            CRabaisRepas cRabaisRepas = db.Rabais.Find(id);
+            db.Rabais.Remove(cRabaisRepas);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
