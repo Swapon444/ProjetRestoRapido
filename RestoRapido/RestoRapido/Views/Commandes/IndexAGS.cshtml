@@ -4,40 +4,20 @@
     ViewBag.Title = "Vos Commandes";
 }
 
-@if (ViewBag.Type == "Client")
-{
     <h2>Vos Commandes</h2>
-}
-
-else
-{
-    <h2>Liste des Commandes</h2>
-}
-
-
-
 
 <p>
     <div height="50px" style="border-style: solid; border-color: white; background-color: black">
         @if (ViewBag.SiPaye == true)
         {
-            if (ViewBag.Type == "Client")
-            {
-                @Html.ActionLink("Commander", "Create", null, new { @style = "font-size: 20px; color: white" })
-            }
-
-            else
-            {
-                @Html.ActionLink("Voir mes Commandes", "IndexAGS", null, new { @style = "font-size: 20px; color: white" })
-            }
-
+            @Html.ActionLink("Commander", "Create", null, new { @style = "font-size: 20px; color: white" })
         }
 
         else
         {
             @Html.ActionLink("Payer la Facture", "PayerFacture", new { id = ViewBag.cmdAPayer }, new { @style = "font-size: 20px; color: white" })
         }
-           
+
     </div>
 </p>
 
@@ -45,7 +25,7 @@ else
 
 <h4 style="text-align:left; font-weight: bold; font-style: italic;">Commandes en Cours :</h4>
 
-<table class="table" >
+<table class="table">
     <tr style="text-align: left">
         <th>
             @Html.DisplayNameFor(model => model.mCmdResto.resNom)
@@ -157,13 +137,11 @@ else
                 </td>
                 <td>
                     @Html.ActionLink("Details", "Details", new { id = item.mCmdID })
-                    @if (ViewBag.Type != "Client")
-                    {
-                        <br>
-                        @Html.ActionLink("Supprimer", "Delete", new { id = item.mCmdID })
-                    }
                 </td>
             </tr>
         }
     }
 </table>
+
+
+@Html.ActionLink("Retour", "Index")

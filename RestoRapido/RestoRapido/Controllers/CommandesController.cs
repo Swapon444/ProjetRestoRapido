@@ -20,6 +20,8 @@ namespace RestoRapido.Controllers
         public ActionResult Index()
         {
             ViewBag.SiPaye = true;
+            ViewBag.cmdAPayer = null;
+            ViewBag.Type = Session["Type"].ToString();
 
             if (@Session["Connexion"] != null)
             {
@@ -31,13 +33,6 @@ namespace RestoRapido.Controllers
                 else if (@Session["Type"].ToString() == "Client")
                 {
                     int i = Convert.ToInt32(@Session["ID"]);
-
-                 /*   var tempo = from s in db.Commandes
-                                        where s.mCmdStatusCommande == 0 && s.UtilisateurID == i
-                                        select s;*/
-
-                    ViewBag.cmdAPayer = null;
-
 
                     var commandes = from s in db.Commandes
                                     where s.UtilisateurID == i
@@ -51,12 +46,10 @@ namespace RestoRapido.Controllers
                         {
                             ViewBag.SiPaye = false;
                             ViewBag.cmdAPayer = k.mCmdID; 
-                        }
-                           
+                        }     
                     }
 
                     return View(commandes.ToList());
-
                 }
 
                 else if (@Session["Type"].ToString() == "Serveur")
@@ -76,6 +69,7 @@ namespace RestoRapido.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
            
         }
+        
 
 
         // GET: Commandes
@@ -112,6 +106,48 @@ namespace RestoRapido.Controllers
 
 
         }
+
+
+         // GET: Commandes
+        public ActionResult IndexAGS()
+        {
+            ViewBag.SiPaye = true;
+            ViewBag.cmdAPayer = null;
+
+            if (@Session["Connexion"] != null)
+            {
+                if ((bool)@Session["Connexion"] == false)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                else
+                {
+                    int i = Convert.ToInt32(@Session["ID"]);
+
+                    var commandes = from s in db.Commandes
+                                    where s.UtilisateurID == i
+                                    select s;
+
+                    commandes = commandes.Include(c => c.mCmdResto).Include(c => c.mCmdTable).Include(c => c.mUtilisateurClient);
+
+                    foreach (var k in commandes)
+                    {
+                        if (k.mCmdStatusCommande == 0)
+                        {
+                            ViewBag.SiPaye = false;
+                            ViewBag.cmdAPayer = k.mCmdID;
+                        }
+                    }
+
+                    return View(commandes.ToList());
+                }
+            }
+
+            else
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
 
 
         // KEVIN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -162,8 +198,10 @@ namespace RestoRapido.Controllers
                 }
             }   
 
-
-            return RedirectToAction("Index");
+            if(Session["Type"].ToString() == "Client")
+                return RedirectToAction("Index");
+            else
+                return RedirectToAction("IndexAGS");
         }
 
 
@@ -186,8 +224,6 @@ namespace RestoRapido.Controllers
             }
 
 
-
-
             List<CRepas> lstRepas = cCommande.mCmdColletionRepas.ToList();
 
             ViewBag.YourMeet = lstRepas;
@@ -206,10 +242,7 @@ namespace RestoRapido.Controllers
                 }
 
                 else
-                {
-                    
-
-                                        
+                {                 
                     if (@Session["Type"].ToString() == "Client")
                     {
                         return RedirectToAction("CommanderClient", new { id = Convert.ToInt32(@Session["ID"]) });
@@ -255,7 +288,7 @@ namespace RestoRapido.Controllers
             {
                 db.Commandes.Add(cCommande);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAGS");
             }
 
             ViewBag.CRestoID = new SelectList(db.Resto, "CRestoID", "resNom", cCommande.CRestoID);
@@ -313,6 +346,11 @@ namespace RestoRapido.Controllers
             {
                 return HttpNotFound();
             }
+
+            List<CRepas> lstRepas = cCommande.mCmdColletionRepas.ToList();
+
+            ViewBag.YourMeet = lstRepas;
+
             return View(cCommande);
         }
 
