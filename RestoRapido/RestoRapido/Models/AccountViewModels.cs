@@ -48,6 +48,7 @@ namespace RestoRapido.Models
 
     public class LoginViewModel
     {
+
         [Required]
         [Display(Name = "Nom d'utilisateur")]
         public string Email { get; set; }
@@ -57,8 +58,6 @@ namespace RestoRapido.Models
         [Display(Name = "Mot de passe")]
         public string Password { get; set; }
 
-        [Display(Name = "Mémoriser le mot de passe ?")]
-        public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel

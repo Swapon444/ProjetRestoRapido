@@ -18,6 +18,7 @@ namespace RestoRapido.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private CRestoContext db = new CRestoContext();
 
         public AccountController()
         {
@@ -59,6 +60,11 @@ namespace RestoRapido.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+
+            var restaurants = from s in db.Resto
+                            select s;
+
+            ViewBag.Restos = restaurants.ToList();
             return View();
         }
 
@@ -96,8 +102,9 @@ namespace RestoRapido.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl, int Restaurants)
         {
+
             string type = "";
             string prenom = "";
             int id = -1;
@@ -123,13 +130,17 @@ namespace RestoRapido.Controllers
                 id = dr.GetInt32(2);
             }
 
+            
+            if (dr.HasRows)
+            {
+                Session["Type"] = type;
+                Session["Restaurant"] = Restaurants;
+                Session["Prenom"] = prenom;
+                Session["ID"] = id;
+                Session["Connexion"] = true;
+            }
+
             conn.Close();
-
-            Session["Type"] = type;
-            Session["Prenom"] = prenom;
-            Session["ID"] = id;
-            Session["Connexion"] = true;
-
 
             switch (type)
             {
@@ -156,7 +167,7 @@ namespace RestoRapido.Controllers
                     }
                 default:
                     ModelState.AddModelError("", "Tentative de connexion non valide.");
-                    return View(model);
+                    return Login(returnUrl);
             }
         }
 
