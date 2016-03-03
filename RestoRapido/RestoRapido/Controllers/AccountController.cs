@@ -57,9 +57,13 @@ namespace RestoRapido.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login(string returnUrl, int? _IDResto, int? _IDTable)
         {
             ViewBag.ReturnUrl = returnUrl;
+
+            @Session["RestoID"] = _IDResto;
+            @Session["TableID"] = _IDTable;
+            
 
             var restaurants = from s in db.Resto
                             select s;
@@ -77,7 +81,7 @@ namespace RestoRapido.Controllers
         {
             string type = "";
 
-            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV20.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV22.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
             SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + login + "' AND UtilisateurMDP = '" + CEncryption.CalculateMD5Hash(mdp) + "'", conn);
             checkuser.Connection = conn;
             conn.Open();
@@ -116,8 +120,10 @@ namespace RestoRapido.Controllers
             {
                 return View(model);
             }
-            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV20.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
-            SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "' AND UtilisateurMDP = '" + CEncryption.CalculateMD5Hash(model.Password.ToString()) + "'", conn);
+            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV22.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+           // SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "' AND UtilisateurMDP = '" + CEncryption.CalculateMD5Hash(model.Password.ToString()) + "'", conn);
+            SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "' AND UtilisateurMDP = '" + model.Password.ToString() + "'", conn);
+            
             checkuser.Connection = conn;
             conn.Open();
             SqlDataReader dr = checkuser.ExecuteReader();
@@ -167,7 +173,7 @@ namespace RestoRapido.Controllers
                     }
                 default:
                     ModelState.AddModelError("", "Tentative de connexion non valide.");
-                    return Login(returnUrl);
+                    return Login(returnUrl, 0, 0);
             }
         }
 

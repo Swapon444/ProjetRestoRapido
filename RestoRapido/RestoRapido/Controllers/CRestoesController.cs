@@ -132,10 +132,10 @@ namespace RestoRapido.Controllers
         */
         public ActionResult supprimertable(int id, int idTable)
         {
-            CResto cResto = db.Resto.Find(id); //va chercher le restaurant
+           // CResto cResto = db.Resto.Find(id); //va chercher le restaurant
             CTable Table = db.Tables.Find(idTable); //va chercher la table
 
-            cResto.Tables.Remove(Table); //enlève cette table
+            db.Tables.Remove(Table); //enlève cette table
 
             db.SaveChanges(); //Sauvegarde la BD
 
@@ -150,8 +150,17 @@ namespace RestoRapido.Controllers
         {
             CResto cResto = db.Resto.Find(id); //va chercher le restaurant
 
-            //Ajoute la table au restaurant
-            //cResto.Tables.Add(new CTable(cResto.Tables.Last().CTableID + 1, id));
+
+
+            try
+            {
+                //Ajoute la table au restaurant
+                cResto.Tables.Add(new CTable(cResto.Tables.Last().i_TableNum + 1, id));
+            }
+            catch (Exception e)
+            {
+                cResto.Tables.Add(new CTable(1, id));
+            }
 
             db.SaveChanges(); //Sauvegarde la BD
 

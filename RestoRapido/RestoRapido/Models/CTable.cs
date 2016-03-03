@@ -49,14 +49,21 @@ namespace RestoRapido.Models
         public virtual ICollection<CCommande> TableCommande { get; set; }
 
         public CTable(){ }
-
+/*
         public CTable(int i_num, int i_restoId)
         {
             i_TableNum = i_num;
             str_TableCodeQR = Convert.ToString(i_num) + Convert.ToString(i_restoId);
         }
 
-        
+        */
+
+        public CTable(int i_num, int i_restoId)
+        {
+            i_TableNum = i_num;
+            str_TableCodeQR = "URL/Account/Login/?_IDResto=" + Convert.ToString(i_restoId) + "&_IDTable=" + Convert.ToString(i_num);
+        }
+
 
     }
     

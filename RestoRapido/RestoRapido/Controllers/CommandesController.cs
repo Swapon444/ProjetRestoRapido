@@ -30,6 +30,8 @@ namespace RestoRapido.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
+                
+
                 else if (@Session["Type"].ToString() == "Client")
                 {
                     int i = Convert.ToInt32(@Session["ID"]);
@@ -184,7 +186,7 @@ namespace RestoRapido.Controllers
                 return HttpNotFound();
             }
 
-            using (SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV20.mdf;Initial Catalog=RestoRapido;Integrated Security=True"))
+            using (SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV22.mdf;Initial Catalog=RestoRapido;Integrated Security=True"))
             {
                 string sql = "UPDATE CCommandes SET mCmdStatusCommande = 1 WHERE mCmdID = @comID";
 

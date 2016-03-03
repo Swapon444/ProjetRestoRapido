@@ -48,6 +48,7 @@ namespace RestoRapido.Models
             // TABLES
             var Tables = new List<CTable>
             {
+                /*
                 new CTable {CTableID = 1, i_TableNum = 1, CRestoID = 1 },
                 new CTable {CTableID = 2, i_TableNum = 2, CRestoID = 1 },
                 new CTable {CTableID = 3, i_TableNum = 3, CRestoID = 1 },
@@ -64,6 +65,7 @@ namespace RestoRapido.Models
                 new CTable {CTableID = 14, i_TableNum = 6, CRestoID = 2 },
                 new CTable {CTableID = 15, i_TableNum = 7, CRestoID = 2 },
                 new CTable {CTableID = 16, i_TableNum = 8, CRestoID = 2 }
+                  */
             };
 
             foreach (var tempC in Tables)
@@ -114,22 +116,22 @@ namespace RestoRapido.Models
 
             //---------------------------------------------------------------------------------------------------------
             // TABLE_UTILISATEUR
-            var UtilisateursTables = new List<CTableUtilisateurs>
-            {
+    //        var UtilisateursTables = new List<CTableUtilisateurs>
+           // {
                 //Serveurs
-                new CTableUtilisateurs { CTableID = 1, UtilisateurID = 2 },
-                new CTableUtilisateurs { CTableID = 2, UtilisateurID = 2 },
-                new CTableUtilisateurs { CTableID = 3, UtilisateurID = 2 },
-                new CTableUtilisateurs { CTableID = 4, UtilisateurID = 2 },
-                new CTableUtilisateurs { CTableID = 5, UtilisateurID = 6 },
-                new CTableUtilisateurs { CTableID = 6, UtilisateurID = 6 },
-                new CTableUtilisateurs { CTableID = 7, UtilisateurID = 6 },
-                new CTableUtilisateurs { CTableID = 8, UtilisateurID = 6 },
+            //    new CTableUtilisateurs { CTableID = 1, UtilisateurID = 2 },
+            //    new CTableUtilisateurs { CTableID = 2, UtilisateurID = 2 },
+             //   new CTableUtilisateurs { CTableID = 3, UtilisateurID = 2 },
+            //    new CTableUtilisateurs { CTableID = 4, UtilisateurID = 2 },
+              //  new CTableUtilisateurs { CTableID = 5, UtilisateurID = 6 },
+              //  new CTableUtilisateurs { CTableID = 6, UtilisateurID = 6 },
+              //  new CTableUtilisateurs { CTableID = 7, UtilisateurID = 6 },
+              //  new CTableUtilisateurs { CTableID = 8, UtilisateurID = 6 },
 
                 //Clients
-                new CTableUtilisateurs { CTableID = 1, UtilisateurID = 4 },
-                new CTableUtilisateurs { CTableID = 2, UtilisateurID = 5 }
-            };
+              //  new CTableUtilisateurs { CTableID = 1, UtilisateurID = 4 },
+              //  new CTableUtilisateurs { CTableID = 2, UtilisateurID = 5 }
+     /*       };
 
             foreach (var temp in UtilisateursTables)
             {
@@ -137,16 +139,16 @@ namespace RestoRapido.Models
             }
 
             Context.SaveChanges();
-            
+            */
             //---------------------------------------------------------------------------------------------------------
             // COMMANDES
-            var Commandes = new List<CCommande>
+     /*       var Commandes = new List<CCommande>
             {
                 //new CCommande { mCmdID = 1, mCmdStatusCommande = 0, CRestoID = 1, CTableID = 1,  UtilisateurID = 4, mCmdColletionRepas = lstRepas, mCmdTabCommentRepas = lstComment, mCmdCommentCommandes = "Coucou les coucous", mCmdPrixAvantTaxes = 100, mCmdPrixTotal = 100}
-                new CCommande { mCmdID = 1, mCmdStatusCommande = 0, CRestoID = 1, CTableID = 1,  UtilisateurID = 4, mCmdColletionRepas = lstRepas, mCmdTabCommentRepas = lstComment, mCmdCommentCommandes = "Coucou les coucous", mCmdPrixAvantTaxes = 100, mCmdPrixTotal = 100, mCmdDate = "2016-02-29"},
-                new CCommande { mCmdID = 2, mCmdStatusCommande = 1, CRestoID = 1, CTableID = 2,  UtilisateurID = 4, mCmdColletionRepas = lstRepas, mCmdTabCommentRepas = lstComment, mCmdCommentCommandes = "J'aime les patates", mCmdPrixAvantTaxes = 100, mCmdPrixTotal = 100,  mCmdDate = "2016-02-28"},
-                new CCommande { mCmdID = 3, mCmdStatusCommande = 1, CRestoID = 1, CTableID = 3,  UtilisateurID = 4, mCmdColletionRepas = lstRepas, mCmdTabCommentRepas = lstComment, mCmdCommentCommandes = "Vive les chats", mCmdPrixAvantTaxes = 50, mCmdPrixTotal = 50,  mCmdDate = "2016-02-26"},
-                new CCommande { mCmdID = 4, mCmdStatusCommande = 2, CRestoID = 1, CTableID = 4,  UtilisateurID = 4, mCmdColletionRepas = lstRepas, mCmdTabCommentRepas = lstComment, mCmdCommentCommandes = "Patati Patata", mCmdPrixAvantTaxes = 0, mCmdPrixTotal = 0,  mCmdDate = "2016-02-26"}
+                new CCommande { mCmdID = 1, mCmdStatusCommande = 0, CRestoID = 1,   UtilisateurID = 4, mCmdColletionRepas = lstRepas, mCmdTabCommentRepas = lstComment, mCmdCommentCommandes = "Coucou les coucous", mCmdPrixAvantTaxes = 100, mCmdPrixTotal = 100, mCmdDate = "2016-02-29"},
+                new CCommande { mCmdID = 2, mCmdStatusCommande = 1, CRestoID = 1,   UtilisateurID = 4, mCmdColletionRepas = lstRepas, mCmdTabCommentRepas = lstComment, mCmdCommentCommandes = "J'aime les patates", mCmdPrixAvantTaxes = 100, mCmdPrixTotal = 100,  mCmdDate = "2016-02-28"},
+                new CCommande { mCmdID = 3, mCmdStatusCommande = 1, CRestoID = 1,   UtilisateurID = 4, mCmdColletionRepas = lstRepas, mCmdTabCommentRepas = lstComment, mCmdCommentCommandes = "Vive les chats", mCmdPrixAvantTaxes = 50, mCmdPrixTotal = 50,  mCmdDate = "2016-02-26"},
+                new CCommande { mCmdID = 4, mCmdStatusCommande = 2, CRestoID = 1,   UtilisateurID = 4, mCmdColletionRepas = lstRepas, mCmdTabCommentRepas = lstComment, mCmdCommentCommandes = "Patati Patata", mCmdPrixAvantTaxes = 0, mCmdPrixTotal = 0,  mCmdDate = "2016-02-26"}
             };
 
             foreach (var tempE in Commandes)
@@ -154,7 +156,7 @@ namespace RestoRapido.Models
                 Context.Commandes.Add(tempE);
             }
 
-            Context.SaveChanges();  
+            Context.SaveChanges();  */
         } 
     } 
 }
