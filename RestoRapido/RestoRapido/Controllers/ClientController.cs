@@ -17,14 +17,22 @@ namespace RestoRapido.Controllers
 
         public ActionResult Index()
         {
-            if (@Session["Type"].ToString() == "Client")
-                return View();
+            if (@Session["Type"] != null)
+            {
+                if (@Session["Type"].ToString() == "Client")
+                    return View();
+                return View("../Shared/Error");
+            }
             else
                 return View("../Shared/Error");
         }
 
         public ActionResult AppelerServeur()
         {
+
+            if (@Session["Type"] == null)
+                return View("../Shared/Error");
+
             if (@Session["Type"].ToString() == "Client")
             {
                 SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV22.mdf;Initial Catalog=RestoRapido;Integrated Security=True");

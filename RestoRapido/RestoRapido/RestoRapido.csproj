@@ -209,7 +209,6 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CAlerte.cs" />
-    <Compile Include="Models\CCodeQR.cs" />
     <Compile Include="Models\CCommande.cs" />
     <Compile Include="Models\CEncryption.cs" />
     <Compile Include="Models\CMenu.cs" />

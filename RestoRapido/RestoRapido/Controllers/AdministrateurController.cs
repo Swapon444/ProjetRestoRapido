@@ -18,12 +18,12 @@ namespace RestoRapido.Controllers
 
         public ActionResult Index()
         {
-            if (@Session["Type"].ToString() == "Administrateur")
+            if (@Session["Type"] != null)
             {
-               // @Session["IDUser"] = db.
-                return View();
+                if (@Session["Type"].ToString() == "Administrateur")
+                    return View();
+                return View("../Shared/Error");
             }
-               
             else
                 return View("../Shared/Error");
         }
@@ -32,8 +32,12 @@ namespace RestoRapido.Controllers
 
         public ActionResult Creation()
         {
-            if (@Session["Type"].ToString() == "Administrateur")
-                return View();
+            if (@Session["Type"] != null)
+            {
+                if (@Session["Type"].ToString() == "Administrateur")
+                    return View();
+                return View("../Shared/Error");
+            }
             else
                 return View("../Shared/Error");
         }

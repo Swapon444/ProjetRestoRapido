@@ -17,7 +17,10 @@ namespace RestoRapido.Controllers
 
         public ActionResult Index()
         {
-            if (@Session["Type"].ToString() == "Gerant")
+            if (@Session["Type"] == null)
+                return View("../Shared/Error");
+
+            else if (@Session["Type"].ToString() == "Gerant")
                 return View();
             else
                 return View("../Shared/Error");
@@ -27,8 +30,12 @@ namespace RestoRapido.Controllers
 
         public ActionResult Creation()
         {
-            if (@Session["Type"].ToString() == "Gerant")
+            if (@Session["Type"] == null)
+                return View("../Shared/Error");
+
+            else if (@Session["Type"].ToString() == "Gerant")
                 return View();
+
             else
                 return View("../Shared/Error");
         }

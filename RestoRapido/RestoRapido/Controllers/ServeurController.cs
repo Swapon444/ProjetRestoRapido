@@ -17,7 +17,10 @@ namespace RestoRapido.Controllers
 
         public ActionResult Index()
         {
-            if (@Session["Type"].ToString() == "Serveur")
+            if (@Session["Type"] == null)
+                return View("../Shared/Error");
+
+            else if (@Session["Type"].ToString() == "Serveur")
                 return View();
             else
                 return View("../Shared/Error");
@@ -25,7 +28,10 @@ namespace RestoRapido.Controllers
 
         public ActionResult Alertes()
         {
-            if (@Session["Type"].ToString() == "Serveur")
+            if (@Session["Type"] == null)
+                return View("../Shared/Error");
+
+           else if (@Session["Type"].ToString() == "Serveur")
             {
                 SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV22.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
                 SqlCommand alertes = new SqlCommand("SELECT i_TableNum FROM CTables INNER JOIN CAlertes ON CTables.CTableID = CAlertes.CTableID INNER JOIN CTableUtilisateurs ON CAlertes.CTableID = CTableUtilisateurs.CTableID WHERE CTableUtilisateurs.UtilisateurID = " + Session["ID"], conn);
@@ -47,7 +53,10 @@ namespace RestoRapido.Controllers
 
         public ActionResult Supprimer()
         {
-            if (@Session["Type"].ToString() == "Serveur")
+            if (@Session["Type"] == null)
+                return View("../Shared/Error");
+
+          else if (@Session["Type"].ToString() == "Serveur")
             {
                 SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV22.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
                 SqlCommand alertes = new SqlCommand("DELETE CAlertes FROM CAlertes INNER JOIN CTableUtilisateurs on CAlertes.CTableID = CTableUtilisateurs.CTableID WHERE CTableUtilisateurs.UtilisateurID = " + Session["ID"], conn);
@@ -74,14 +83,6 @@ namespace RestoRapido.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-
-
-
-        public ActionResult SelectTable()
-        {
-            return View();
         }
 
     }
