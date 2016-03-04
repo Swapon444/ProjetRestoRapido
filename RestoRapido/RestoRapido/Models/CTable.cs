@@ -44,9 +44,9 @@ namespace RestoRapido.Models
 
         public virtual CResto Restaurant { get; set; }
 
-        public virtual ICollection<CTableUtilisateurs> TableUtilisateur { get; set; }
-
         public virtual ICollection<CCommande> TableCommande { get; set; }
+
+        public virtual ICollection<Utilisateur> Utilisateurs { get; set; }
 
         public CTable(){ }
 /*

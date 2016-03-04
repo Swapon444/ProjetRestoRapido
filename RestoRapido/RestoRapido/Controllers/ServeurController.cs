@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using RestoRapido.Models;
 using System.Data.SqlClient;
+using RestoRapido.ViewModels;
 
 namespace RestoRapido.Controllers
 {
@@ -87,24 +88,34 @@ namespace RestoRapido.Controllers
 
         public ActionResult SelectTable()
         {
-            PopulateAssignedTableData();
-            return View("SelectTable");
+            int ID = Convert.ToInt32(Session["ID"]);
+
+            Utilisateur serveur = db.Utilisateurs
+                .Include(i => i.Tables)
+                .Where(i => i.UtilisateurID == ID)
+                .Single();
+
+            PopulateAssignedTableData(serveur);
+            return View(serveur);
         }
-        private void PopulateAssignedTableData()
+
+        private void PopulateAssignedTableData(Utilisateur serveur)
         {
-            var allTables = db.Tables;
-            var serveurTables = new HashSet<int>()
-            var viewModel = new List<AssignedCourseData>();
-            foreach (var course in allCourses)
+            int RestoID = Convert.ToInt32(Session["RestoID"]);
+            var allTables = db.Tables
+                .Where(i => i.CRestoID == RestoID);
+            var serveurTables = new HashSet<int>(serveur.Tables.Select(c => c.CTableID));
+            var viewModel = new List<AssignedTableData>();
+            foreach (var table in allTables)
             {
-                viewModel.Add(new AssignedCourseData
+                viewModel.Add(new AssignedTableData
                 {
-                    CourseID = course.CourseID,
-                    Title = course.Title,
-                    Assigned = instructorCourses.Contains(course.CourseID)
+                    CTableID = table.CTableID,
+                    NumTable = table.i_TableNum,
+                    Assigned = serveurTables.Contains(table.CTableID)
                 });
             }
-            ViewBag.Courses = viewModel;
+            ViewBag.Tables = viewModel;
         }
 
     }

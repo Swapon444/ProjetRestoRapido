@@ -72,8 +72,7 @@ namespace RestoRapido.Models
         public bool m_boMollusque { get; set; }
 
         #endregion
-
-        public virtual ICollection<CTableUtilisateurs> TableUtilisateur { get; set; }
+        public virtual ICollection<CTable> Tables { get; set; }
         public virtual ICollection<CCommande> CollectionCommande { get; set; }
 
     }

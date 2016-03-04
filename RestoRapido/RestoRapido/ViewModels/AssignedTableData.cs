@@ -11,6 +11,6 @@ namespace RestoRapido.ViewModels
 
         public int NumTable { get; set; }
 
-        public bool Assigned { get; set; }  
+        public bool Assigned { get; set; }
     }
 }
