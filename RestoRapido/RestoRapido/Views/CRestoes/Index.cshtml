@@ -20,7 +20,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.resNom)
+            @Html.ActionLink("Nom", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.resPostal)
