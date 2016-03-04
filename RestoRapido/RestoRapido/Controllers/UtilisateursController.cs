@@ -14,13 +14,13 @@ namespace RestoRapido.Controllers
     {
         private CRestoContext db = new CRestoContext();
 
-        // GET: Utilisateurs
+        // GET: Utilisateurs1
         public ActionResult Index()
         {
             return View(db.Utilisateurs.ToList());
         }
 
-        // GET: Utilisateurs/Details/5
+        // GET: Utilisateurs1/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,18 +35,18 @@ namespace RestoRapido.Controllers
             return View(utilisateur);
         }
 
-        // GET: Utilisateurs/Create
+        // GET: Utilisateurs1/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Utilisateurs/Create
+        // POST: Utilisateurs1/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UtilisateurID,UtilisateurMDP,UtilisateurNomUsager,UtilisateurNom,UtilisateurPrenom,UtilisateurType")] Utilisateur utilisateur)
+        public ActionResult Create([Bind(Include = "UtilisateurID,UtilisateurMDP,UtilisateurNomUsager,UtilisateurNom,UtilisateurPrenom,UtilisateurType,m_boBle,m_boLait,m_boOeuf,m_boArachide,m_boSoja,m_boFruitCoque,m_boPoisson,m_boSesame,m_boCrustace,m_boMollusque")] Utilisateur utilisateur)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace RestoRapido.Controllers
             return View(utilisateur);
         }
 
-        // GET: Utilisateurs/Edit/5
+        // GET: Utilisateurs1/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,12 +73,12 @@ namespace RestoRapido.Controllers
             return View(utilisateur);
         }
 
-        // POST: Utilisateurs/Edit/5
+        // POST: Utilisateurs1/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UtilisateurID,UtilisateurMDP,UtilisateurNomUsager,UtilisateurNom,UtilisateurPrenom,UtilisateurType")] Utilisateur utilisateur)
+        public ActionResult Edit([Bind(Include = "UtilisateurID,UtilisateurMDP,UtilisateurNomUsager,UtilisateurNom,UtilisateurPrenom,UtilisateurType,m_boBle,m_boLait,m_boOeuf,m_boArachide,m_boSoja,m_boFruitCoque,m_boPoisson,m_boSesame,m_boCrustace,m_boMollusque")] Utilisateur utilisateur)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace RestoRapido.Controllers
             return View(utilisateur);
         }
 
-        // GET: Utilisateurs/Delete/5
+        // GET: Utilisateurs1/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +104,7 @@ namespace RestoRapido.Controllers
             return View(utilisateur);
         }
 
-        // POST: Utilisateurs/Delete/5
+        // POST: Utilisateurs1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

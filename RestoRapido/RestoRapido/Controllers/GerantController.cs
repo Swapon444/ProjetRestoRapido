@@ -43,7 +43,7 @@ namespace RestoRapido.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Creation([Bind(Include = "UtilisateurID,UtilisateurMDP,UtilisateurNomUsager,UtilisateurNom,UtilisateurPrenom,UtilisateurType")] Utilisateur utilisateur)
+        public ActionResult Creation([Bind(Include = "UtilisateurID,UtilisateurMDP,UtilisateurNomUsager,UtilisateurNom,UtilisateurPrenom,UtilisateurType,m_boBle,m_boLait,m_boOeuf,m_boArachide,m_boSoja,m_boFruitCoque,m_boPoisson,m_boSesame,m_boCrustace,m_boMollusque")] Utilisateur utilisateur)
         {
             
                
