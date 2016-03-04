@@ -85,5 +85,27 @@ namespace RestoRapido.Controllers
             base.Dispose(disposing);
         }
 
+        public ActionResult SelectTable()
+        {
+            PopulateAssignedTableData();
+            return View("SelectTable");
+        }
+        private void PopulateAssignedTableData()
+        {
+            var allTables = db.Tables;
+            var serveurTables = new HashSet<int>()
+            var viewModel = new List<AssignedCourseData>();
+            foreach (var course in allCourses)
+            {
+                viewModel.Add(new AssignedCourseData
+                {
+                    CourseID = course.CourseID,
+                    Title = course.Title,
+                    Assigned = instructorCourses.Contains(course.CourseID)
+                });
+            }
+            ViewBag.Courses = viewModel;
+        }
+
     }
 }
