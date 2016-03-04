@@ -14,6 +14,11 @@ namespace RestoRapido.Controllers
         public ActionResult Index()
         {
             var Utilisateurs = db.Utilisateurs.ToList();
+
+            //vider la variable de session sur l'arriver sur la page d'accueil
+            Session["Prenom"] = null;
+            Session["Type"] = null;
+
             return View();
         }
 
