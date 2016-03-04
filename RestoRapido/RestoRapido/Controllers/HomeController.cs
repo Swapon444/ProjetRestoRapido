@@ -16,8 +16,7 @@ namespace RestoRapido.Controllers
             var Utilisateurs = db.Utilisateurs.ToList();
 
             //vider la variable de session sur l'arriver sur la page d'accueil
-            Session["Prenom"] = null;
-            Session["Type"] = null;
+            Session.Clear();
 
             return View();
         }
