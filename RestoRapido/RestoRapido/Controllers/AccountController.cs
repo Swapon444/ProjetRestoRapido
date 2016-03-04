@@ -61,9 +61,19 @@ namespace RestoRapido.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
 
-            @Session["RestoID"] = _IDResto;
-            @Session["TableID"] = _IDTable;
-            
+            if (_IDResto == null || _IDResto == 0)
+            {
+                @Session["Mobile"] = false;
+
+            }
+
+            else
+            {
+                @Session["Mobile"] = true;
+                @Session["RestoID"] = _IDResto;
+                @Session["TableID"] = _IDTable;
+            }
+
 
             var restaurants = from s in db.Resto
                             select s;
@@ -106,7 +116,7 @@ namespace RestoRapido.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl, int Restaurants)
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl, int? Restaurants)
         {
 
             string type = "";
@@ -139,8 +149,12 @@ namespace RestoRapido.Controllers
             
             if (dr.HasRows)
             {
+                
                 Session["Type"] = type;
-                Session["Restaurant"] = Restaurants;
+
+                if ((bool)Session["Mobile"] == false)
+                    Session["RestoID"] = Restaurants;
+
                 Session["Prenom"] = prenom;
                 Session["ID"] = id;
                 Session["Connexion"] = true;

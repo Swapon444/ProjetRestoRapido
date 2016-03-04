@@ -33,7 +33,6 @@ namespace RestoRapido.Models
         public virtual CTable mCmdTable { get; set; }                  
 
 
-
         // Donnée membre qui représente la liste des repas commandés
         public virtual ICollection<CRepas> mCmdColletionRepas { get; set; }
 
@@ -46,17 +45,19 @@ namespace RestoRapido.Models
 
         // Donnée membre qui représente le prix de la commande avant taxes
         [Display(Name = "Prix avant Taxes")]
-        public double mCmdPrixAvantTaxes { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal mCmdPrixAvantTaxes { get; set; }
 
         // Donnée membre qui représente la prix de la commande avec taxes
+        [DataType(DataType.Currency)]
         [Display(Name = "Prix Total")]
-        public double mCmdPrixTotal { get; set; }
+        public decimal mCmdPrixTotal { get; set; }
 
-        // Donnée membre qui représente la date de la commande
-       // [DataType(DataType.Date)]
-      //  [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Date début")]
-        public string mCmdDate { get; set; }
+        //Donnée membre qui représente la date de la commande
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Date")]
+        public DateTime mCmdDate { get; set; }
 
     }
 }

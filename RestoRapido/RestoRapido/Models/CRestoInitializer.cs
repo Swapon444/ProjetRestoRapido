@@ -14,12 +14,12 @@ namespace RestoRapido.Models
             // UTILISATEURS
             var Utilisateurs = new List<Utilisateur>
             {
-                new Utilisateur { UtilisateurID = 1, UtilisateurNom = "Monzerol" , UtilisateurNomUsager = "AntoineM", UtilisateurPrenom = "Antoine", UtilisateurType = "Administrateur", UtilisateurMDP = "1234" },
-                new Utilisateur { UtilisateurID = 2, UtilisateurNom = "Gratton" , UtilisateurNomUsager = "AlexandreG", UtilisateurPrenom = "Alexandre", UtilisateurType = "Serveur", UtilisateurMDP = "1234"},
-                new Utilisateur { UtilisateurID = 3, UtilisateurNom = "Verreault" , UtilisateurNomUsager = "FrancisV", UtilisateurPrenom = "Francis", UtilisateurType = "Gerant" ,  UtilisateurMDP = "1234" },
-                new Utilisateur { UtilisateurID = 4, UtilisateurNom = "Otis" , UtilisateurNomUsager = "DaveO", UtilisateurPrenom = "Dave", UtilisateurType = "Client" ,  UtilisateurMDP = "1234"},
-                new Utilisateur { UtilisateurID = 5, UtilisateurNom = "Deslandes" , UtilisateurNomUsager = "MarcD", UtilisateurPrenom = "Marc", UtilisateurType = "Client" ,  UtilisateurMDP = "1234"},
-                new Utilisateur { UtilisateurID = 6, UtilisateurNom = "Beaudoin" , UtilisateurNomUsager = "KevinB", UtilisateurPrenom = "Kevin", UtilisateurType = "Serveur" ,  UtilisateurMDP = "1234" }
+                new Utilisateur { UtilisateurID = 1, UtilisateurNom = "Monzerol" , UtilisateurNomUsager = "AntoineM", UtilisateurPrenom = "Antoine", UtilisateurType = "Administrateur", UtilisateurMDP = "81dc9bdb52d04dc20036dbd8313ed055" },
+                new Utilisateur { UtilisateurID = 2, UtilisateurNom = "Gratton" , UtilisateurNomUsager = "AlexandreG", UtilisateurPrenom = "Alexandre", UtilisateurType = "Serveur", UtilisateurMDP = "81dc9bdb52d04dc20036dbd8313ed055"},
+                new Utilisateur { UtilisateurID = 3, UtilisateurNom = "Verreault" , UtilisateurNomUsager = "FrancisV", UtilisateurPrenom = "Francis", UtilisateurType = "Gerant" ,  UtilisateurMDP = "81dc9bdb52d04dc20036dbd8313ed055" },
+                new Utilisateur { UtilisateurID = 4, UtilisateurNom = "Otis" , UtilisateurNomUsager = "DaveO", UtilisateurPrenom = "Dave", UtilisateurType = "Client" ,  UtilisateurMDP = "81dc9bdb52d04dc20036dbd8313ed055"},
+                new Utilisateur { UtilisateurID = 5, UtilisateurNom = "Deslandes" , UtilisateurNomUsager = "MarcD", UtilisateurPrenom = "Marc", UtilisateurType = "Client" ,  UtilisateurMDP = "81dc9bdb52d04dc20036dbd8313ed055"},
+                new Utilisateur { UtilisateurID = 6, UtilisateurNom = "Beaudoin" , UtilisateurNomUsager = "KevinB", UtilisateurPrenom = "Kevin", UtilisateurType = "Serveur" ,  UtilisateurMDP = "81dc9bdb52d04dc20036dbd8313ed055" }
             };
 
             foreach (var temp in Utilisateurs)

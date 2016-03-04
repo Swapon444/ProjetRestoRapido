@@ -32,8 +32,15 @@
                 <div class="form-group">
                    
                     <div class="col-md-6">
-                        @Html.Label("Dans quel restaurant êtes-vous?")
-                        @Html.DropDownList("Restaurants", new SelectList(ViewBag.Restos, "CRestoID", "resNom"))
+                        @if ((bool)Session["Mobile"] == false)
+                        {
+                            @Html.Label("Dans quel restaurant êtes-vous?")
+
+
+                            @Html.DropDownList("Restaurants", new SelectList(ViewBag.Restos, "CRestoID", "resNom"))
+                        }
+                       
+
                     </div>
                 </div>
 

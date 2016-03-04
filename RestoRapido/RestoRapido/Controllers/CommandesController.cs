@@ -21,10 +21,12 @@ namespace RestoRapido.Controllers
         {
             ViewBag.SiPaye = true;
             ViewBag.cmdAPayer = null;
-            ViewBag.Type = Session["Type"].ToString();
+
 
             if (@Session["Connexion"] != null)
             {
+                ViewBag.Type = Session["Type"].ToString();
+
                 if ((bool)@Session["Connexion"] == false)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -34,6 +36,7 @@ namespace RestoRapido.Controllers
 
                 else if (@Session["Type"].ToString() == "Client")
                 {
+
                     int i = Convert.ToInt32(@Session["ID"]);
 
                     var commandes = from s in db.Commandes
@@ -154,8 +157,9 @@ namespace RestoRapido.Controllers
 
         // KEVIN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // GET: Commandes
-        public ActionResult CommanderClient(int? id)
+        public ActionResult CommanderClient()
         {
+            /*
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -165,8 +169,8 @@ namespace RestoRapido.Controllers
             if (cCommande == null)
             {
                 return HttpNotFound();
-            }
-            return View(cCommande);
+            }*/
+            return View();
         }
 
 
@@ -247,7 +251,7 @@ namespace RestoRapido.Controllers
                 {                 
                     if (@Session["Type"].ToString() == "Client")
                     {
-                        return RedirectToAction("CommanderClient", new { id = Convert.ToInt32(@Session["ID"]) });
+                        return RedirectToAction("CommanderClient");
                     }
 
                     else
