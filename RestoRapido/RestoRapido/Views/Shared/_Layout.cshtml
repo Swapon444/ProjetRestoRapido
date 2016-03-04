@@ -79,6 +79,13 @@
                     </div>
 
                     <div class="dropdown">
+                        <button class="dropbtn">Menus </button>
+                        <div class="dropdown-content">
+                            @Html.ActionLink("Voir les menus", "Details/" + Session["RestoID"].ToString(), "Menus")
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
                         <button class="dropbtn">Gerer </button>
                         <div class="dropdown-content">
                             @Html.ActionLink("Mon compte", "Index", "Client")
