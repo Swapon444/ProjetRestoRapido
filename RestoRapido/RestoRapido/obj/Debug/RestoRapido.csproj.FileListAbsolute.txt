@@ -534,3 +534,9 @@ C:\Users\Marc\Documents\ProjetRestoRapido\RestoRapido\RestoRapido\bin\Microsoft.
 C:\Users\Marc\Documents\ProjetRestoRapido\RestoRapido\RestoRapido\obj\Debug\RestoRapido.csprojResolveAssemblyReference.cache
 C:\Users\Marc\Documents\ProjetRestoRapido\RestoRapido\RestoRapido\obj\Debug\RestoRapido.dll
 C:\Users\Marc\Documents\ProjetRestoRapido\RestoRapido\RestoRapido\obj\Debug\RestoRapido.pdb
+C:\Users\Frank\Desktop\ProjetRestoRapido\RestoRapido\RestoRapido\bin\System.Net.Http.Formatting.dll
+C:\Users\Frank\Desktop\ProjetRestoRapido\RestoRapido\RestoRapido\bin\System.Web.Http.dll
+C:\Users\Frank\Desktop\ProjetRestoRapido\RestoRapido\RestoRapido\bin\System.Web.Http.WebHost.dll
+C:\Users\Frank\Desktop\ProjetRestoRapido\RestoRapido\RestoRapido\bin\System.Net.Http.Formatting.xml
+C:\Users\Frank\Desktop\ProjetRestoRapido\RestoRapido\RestoRapido\bin\System.Web.Http.xml
+C:\Users\Frank\Desktop\ProjetRestoRapido\RestoRapido\RestoRapido\bin\System.Web.Http.WebHost.xml

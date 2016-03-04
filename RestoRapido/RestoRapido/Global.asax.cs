@@ -7,6 +7,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using RestoRapido.Models;
 using System.Data.Entity;
+using RestoRapido.App_Start;
+using System.Web.Http;
 
 namespace RestoRapido
 {
@@ -15,10 +17,13 @@ namespace RestoRapido
         protected void Application_Start()
         {
             Database.SetInitializer<CRestoContext>(new CRestoInitializer());
+            WebApiConfig.Register(GlobalConfiguration.Configuration);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
         }
     }
 }
