@@ -15,9 +15,27 @@ namespace RestoRapido.Controllers
         private CRestoContext db = new CRestoContext();
 
         // GET: CRestoes
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            return View(db.Resto.ToList());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var restos = from s in db.Resto
+                            select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                restos = restos.Where(s => s.resNom.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    restos = restos.OrderByDescending(s => s.resNom);
+                    break;
+                default:
+                    restos = restos.OrderBy(s => s.resNom);
+                    break;
+            }
+            return View(restos.ToList());
         }
 
         // GET: CRestoes/Details/5
