@@ -12,26 +12,44 @@ namespace RestoRapido.Controllers
     {
         public class ApiLoginController : ApiController
         {
-            public int GetLogin(string login, string mdp)
+            public List<object> GetLogin(string login, string mdp)
             {
                 string type = "";
-
+                List<object> results = new List<object>();
                 SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV22.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
-                SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + login + "' AND UtilisateurMDP = '" + CEncryption.CalculateMD5Hash(mdp) + "'", conn);
+                SqlCommand checkuser = new SqlCommand("SELECT UtilisateurID,UtilisateurType,UtilisateurPrenom,UtilisateurNom,UtilisateurNomUsager,m_boBle,m_boLait,m_boOeuf,m_boArachide,m_boSoja,m_boFruitCoque,m_boPoisson,m_boSesame,m_boCrustace,m_boMollusque FROM Utilisateurs WHERE UtilisateurNomUsager = '" + login + "' AND UtilisateurMDP = '" + CEncryption.CalculateMD5Hash(mdp) + "'", conn);
                 checkuser.Connection = conn;
                 conn.Open();
                 SqlDataReader dr = checkuser.ExecuteReader();
+                
 
                 if (dr.HasRows) //S'il l'utilisateur existe
                 {
-                    while (dr.Read())
-                        type = dr.GetString(0);
+                    while (dr.Read()) //Ajouter les informations de l'usager 
+                    {
+                        type = dr.GetString(1);
+                        results.Add(dr[0]);
+                        results.Add(dr[1]);
+                        results.Add(dr[2]);
+                        results.Add(dr[3]);
+                        results.Add(dr[4]);
+                        results.Add(dr[5]);
+                        results.Add(dr[6]);
+                        results.Add(dr[7]);
+                        results.Add(dr[8]);
+                        results.Add(dr[9]);
+                        results.Add(dr[10]);
+                        results.Add(dr[11]);
+                        results.Add(dr[12]);
+                        results.Add(dr[13]);
+                        results.Add(dr[14]);
+                    }
 
-                    if (type == "Client")
-                        return 1; //Si le l'utilisateur est un client
-                    else return 0; //Si l'utilisateur n'est pas un client
+                    if (type == "Client")   //Si le l'utilisateur est un client                                  
+                        return results;
+                   else return null; //Si l'utilisateur n'est pas un client
                 }
-                else return 0; //S'il ne fonctionne pas
+                else return null; //S'il n'existe pas
 
 
             }
