@@ -32,7 +32,7 @@ namespace RestoRapido.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                
+
 
                 else if (@Session["Type"].ToString() == "Client")
                 {
@@ -50,8 +50,8 @@ namespace RestoRapido.Controllers
                         if (k.mCmdStatusCommande == 0)
                         {
                             ViewBag.SiPaye = false;
-                            ViewBag.cmdAPayer = k.mCmdID; 
-                        }     
+                            ViewBag.cmdAPayer = k.mCmdID;
+                        }
                     }
 
                     return View(commandes.ToList());
@@ -67,14 +67,14 @@ namespace RestoRapido.Controllers
 
                 cmd = cmd.Include(c => c.mCmdResto).Include(c => c.mCmdTable).Include(c => c.mUtilisateurClient);
                 return View(cmd.ToList());
-            
+
             }
 
             else
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-           
+
         }
-        
+
 
 
         // GET: Commandes
@@ -99,7 +99,7 @@ namespace RestoRapido.Controllers
                                     where t1.mCmdStatusCommande == 0 && t3.UtilisateurID == i
                                     select t1;
 
-                    
+
                     commandes = commandes.Include(c => c.mCmdResto).Include(c => c.mCmdTable).Include(c => c.mUtilisateurClient);
                     commandes.OrderBy(y => y.mCmdTable.i_TableNum);
                     return View(commandes.ToList());
@@ -113,7 +113,7 @@ namespace RestoRapido.Controllers
         }
 
 
-         // GET: Commandes
+        // GET: Commandes
         public ActionResult IndexAGS()
         {
             ViewBag.SiPaye = true;
@@ -170,7 +170,56 @@ namespace RestoRapido.Controllers
             {
                 return HttpNotFound();
             }*/
-            return View();
+            var Menu = (from s in db.Menus
+                        where s.m_iMenuId == 1
+                        select s).FirstOrDefault();
+            return View(Menu);
+        }
+
+        public ActionResult AjouterCmd(FormCollection collection)
+        {
+            var Cmd = new CCommande();
+
+            Cmd.CRestoID = Convert.ToInt32(@Session["RestoID"]);
+            Cmd.CTableID = Convert.ToInt32(@Session["TableID"]);
+            Cmd.mCmdCommentCommandes = collection.Get("CmdNote");
+            Cmd.mCmdDate = DateTime.Now;
+            Cmd.mCmdStatusCommande = 0;
+            Cmd.UtilisateurID = Convert.ToInt32(@Session["ID"]);
+
+            db.Commandes.Add(Cmd);
+            db.SaveChanges();
+
+            var LastID = db.Commandes.Last().mCmdID;
+
+            var Menu = (from s in db.Menus
+                        where s.m_iMenuId == 1
+                        select s).FirstOrDefault();
+
+            List<CCmdRepas> lstRepas = new List<CCmdRepas>();
+
+            foreach(var Repas in Menu.m_Repas)
+            {
+                var Valeur = collection.Get("Rep " + Repas.m_iRepasId);
+                if(Valeur != "")
+                {
+                    int NbRep = Convert.ToInt32(Valeur);
+                    if (NbRep > 0)
+                    {
+                        CCmdRepas Rep = new CCmdRepas();
+                        Rep.mNbRep = NbRep;
+                        Rep.mCommentaire = collection.Get("Note " + Repas.m_iRepasId);
+                        Rep.mCmdID = LastID;
+                        Rep.m_iRepasId = Repas.m_iRepasId;
+
+                        db.CommandeRepas.Add(Rep);
+                        db.SaveChanges();
+                    }
+                }
+                    
+            }
+
+            return HttpNotFound();
         }
 
 
@@ -230,7 +279,7 @@ namespace RestoRapido.Controllers
             }
 
 
-            List<CRepas> lstRepas = cCommande.mCmdColletionRepas.ToList();
+            List<CCmdRepas> lstRepas = cCommande.mCmdColletionRepas.ToList();
 
             ViewBag.YourMeet = lstRepas;
 
@@ -353,7 +402,7 @@ namespace RestoRapido.Controllers
                 return HttpNotFound();
             }
 
-            List<CRepas> lstRepas = cCommande.mCmdColletionRepas.ToList();
+            List<CCmdRepas> lstRepas = cCommande.mCmdColletionRepas.ToList();
 
             ViewBag.YourMeet = lstRepas;
 

@@ -210,6 +210,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CAlerte.cs" />
+    <Compile Include="Models\CCmdRepas.cs" />
     <Compile Include="Models\CCommande.cs" />
     <Compile Include="Models\CEncryption.cs" />
     <Compile Include="Models\CMenu.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AssignedTableData.cs" />
     <Compile Include="ViewModels\CRepasAssignes.cs" />
     <Compile Include="ViewModels\RabaisAssignes.cs" />
     <Compile Include="ViewModels\RepasZCommandes.cs" />

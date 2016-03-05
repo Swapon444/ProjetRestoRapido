@@ -34,10 +34,7 @@ namespace RestoRapido.Models
 
 
         // Donnée membre qui représente la liste des repas commandés
-        public virtual ICollection<CRepas> mCmdColletionRepas { get; set; }
-
-        // Donnée membre qui représente la liste des commentaires du client sur le repas
-        public List<string> mCmdTabCommentRepas { get; set; }
+        public virtual ICollection<CCmdRepas> mCmdColletionRepas { get; set; }
 
         // Donnée membre qui représente le commentaire du client concernant la commande
         [Display(Name = "Commentaires sur la commande")]
