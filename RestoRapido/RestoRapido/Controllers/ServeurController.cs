@@ -99,6 +99,52 @@ namespace RestoRapido.Controllers
             return View(serveur);
         }
 
+        public ActionResult SaveSelectTable(string[] selectedTables)
+        {
+            int ID = Convert.ToInt32(Session["ID"]);
+
+            Utilisateur serveurToUpdate = db.Utilisateurs
+                .Include(i => i.Tables)
+                .Where(i => i.UtilisateurID == ID)
+                .Single();
+
+            UpdateServeurTables(selectedTables, serveurToUpdate);
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        private void UpdateServeurTables(string[] selectedTables, Utilisateur serveurToUpdate)
+        {
+            if (selectedTables == null)
+            {
+                serveurToUpdate.Tables = new List<CTable>();
+                return;
+            }
+
+            var selectedTablesHS = new HashSet<string>(selectedTables);
+            var serveurTables = new HashSet<int>
+                (serveurToUpdate.Tables.Select(c => c.CTableID));
+            foreach (var table in db.Tables)
+            {
+                if (selectedTablesHS.Contains(table.CTableID.ToString()))
+                {
+                    if (!serveurTables.Contains(table.CTableID))
+                    {
+                        serveurToUpdate.Tables.Add(table);
+                    }
+                }
+                else
+                {
+                    if (serveurTables.Contains(table.CTableID))
+                    {
+                        serveurToUpdate.Tables.Remove(table);
+                    }
+                }
+            }
+        }
+
         private void PopulateAssignedTableData(Utilisateur serveur)
         {
             int RestoID = Convert.ToInt32(Session["RestoID"]);

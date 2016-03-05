@@ -3,34 +3,44 @@
     ViewBag.Title = "SelectTable";
 }
 
-<h2>SelectTable</h2>
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <table>
-            <tr>
-                @{
-                    int cnt = 0;
-                    List<RestoRapido.ViewModels.AssignedTableData> tables = ViewBag.Tables;
+<h2>Sélection des tables</h2>
 
-                    foreach (var table in tables)
-                    {
-                        if (cnt++ % 3 == 0)
-                        {
-                            @:</tr><tr>
+@using (Html.BeginForm("SaveSelectTable", "Serveur"))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <table>
+                    <tr>
+                        @{
+                            int cnt = 0;
+                            List<RestoRapido.ViewModels.AssignedTableData> tables = ViewBag.Tables;
+
+                            foreach (var table in tables)
+                            {
+                                if (cnt++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
+                                }
+                                @:<td>
+                                    <input type="checkbox"
+                                           name="selectedTables"
+                                           style="margin-left:20px"
+                                           value="@table.CTableID"
+                                           @(Html.Raw(table.Assigned ? "checked=\"checked\"" : "")) />
+                                    @:  @table.NumTable
+                                @:</td>
+                            }
+                            @:</tr>
                         }
-                        @:<td>
-                            <input type="checkbox"
-                                   name="selectedTables"
-                                   value="@table.CTableID"
-                                   @(Html.Raw(table.Assigned ? "checked=\"checked\"" : "")) />
-                            @table.CTableID @:  @table.NumTable
-                        @:</td>
-                    }
-                    @:</tr>
-                }
-            </table>
+                </table>
+
+                <input type="submit" value="Ajouter" class="btn btn-default" />
+
+            </div>
         </div>
     </div>
+}
 <div>
     @Html.ActionLink("Retour", "Index")
 </div>
