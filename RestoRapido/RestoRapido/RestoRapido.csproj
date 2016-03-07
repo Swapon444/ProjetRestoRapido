@@ -240,6 +240,10 @@
     <Content Include="App_Data\dbRestoRapidoV22_log.ldf">
       <DependentUpon>dbRestoRapidoV22.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\dbRestoRapidoV24.mdf" />
+    <Content Include="App_Data\dbRestoRapidoV24_log.ldf">
+      <DependentUpon>dbRestoRapidoV24.mdf</DependentUpon>
+    </Content>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\EntityFramework.dll" />

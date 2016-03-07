@@ -36,7 +36,7 @@ namespace RestoRapido.Models
         public string m_strNom { get; set; }
 
 
-        public string m_imgImage { get; set; }
+        public byte[] m_imgImage { get; set; }
 /*
         // Prix du repas
         [Required]

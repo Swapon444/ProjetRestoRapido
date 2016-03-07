@@ -34,7 +34,7 @@ namespace RestoRapido.Controllers
 
            else if (@Session["Type"].ToString() == "Serveur")
             {
-                SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV24.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
                 SqlCommand alertes = new SqlCommand("SELECT i_TableNum FROM CTables INNER JOIN CAlertes ON CTables.CTableID = CAlertes.CTableID INNER JOIN CTableUtilisateurs ON CAlertes.CTableID = CTableUtilisateurs.CTableID WHERE CTableUtilisateurs.UtilisateurID = " + Session["ID"], conn);
                 alertes.Connection = conn;
                 conn.Open();
@@ -59,7 +59,7 @@ namespace RestoRapido.Controllers
 
           else if (@Session["Type"].ToString() == "Serveur")
             {
-                SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV24.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
                 SqlCommand alertes = new SqlCommand("DELETE CAlertes FROM CAlertes INNER JOIN CTableUtilisateurs on CAlertes.CTableID = CTableUtilisateurs.CTableID WHERE CTableUtilisateurs.UtilisateurID = " + Session["ID"], conn);
 
                 alertes.Connection = conn;
@@ -152,7 +152,7 @@ namespace RestoRapido.Controllers
                 {
                     if (serveurTables.Contains(table.CTableID))
                     {
-                        SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV24.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                        SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
                         SqlCommand supprimerTableServeur = new SqlCommand("DELETE CTableUtilisateurs FROM CTableUtilisateurs WHERE CTableUtilisateurs.UtilisateurID = " + ServeurID + " AND CTableUtilisateurs.CTableID = " + table.CTableID, conn);
 
                         supprimerTableServeur.Connection = conn;
