@@ -97,7 +97,7 @@ namespace RestoRapido.Controllers
 
                    commandes = commandes.Include(c => c.mCmdResto).Include(c => c.mCmdTable).Include(c => c.mUtilisateurClient);
 
-                   SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV23.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                   SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV24.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
                    SqlCommand cmd = new SqlCommand("SELECT DISTINCT CTables.i_TableNum FROM CCommandes INNER JOIN CTables ON CCommandes.CTableID = CTables.CTableID INNER JOIN UtilisateurCTables ON CTables.CTableID = UtilisateurCTables.CTable_CTableID INNER JOIN Utilisateurs ON UtilisateurCTables.Utilisateur_UtilisateurID = Utilisateurs.UtilisateurID WHERE CCommandes.mCmdStatusCommande = 0 AND UtilisateurCTables.Utilisateur_UtilisateurID = " + Session["ID"] + " AND CCommandes.CRestoID = " + Session["RestoID"], conn);
                    cmd.Connection = conn;
                    conn.Open();
@@ -252,7 +252,7 @@ namespace RestoRapido.Controllers
 
                 foreach (var w in tabTempo)
                 {
-                    dSomme += w.mRepas.m_iPrix * w.mNbRep;
+                    dSomme += ((double)w.mRepas.m_iPrix * w.mNbRep);
                 }
 
 
@@ -261,7 +261,7 @@ namespace RestoRapido.Controllers
                 decimal ddSomme = Convert.ToDecimal(dSomme);
                 decimal ddSommeTotale = Convert.ToDecimal(dSommeTotale);
 
-                using (SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV23.mdf;Initial Catalog=RestoRapido;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV24.mdf;Initial Catalog=RestoRapido;Integrated Security=True"))
                 {
                     string sql = "UPDATE CCommandes SET mCmdPrixAvantTaxes = @Prix, mCmdPrixTotal = @PrixTotal WHERE mCmdID = @comID";
 
@@ -302,7 +302,7 @@ namespace RestoRapido.Controllers
                 return HttpNotFound();
             }
 
-            using (SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV23.mdf;Initial Catalog=RestoRapido;Integrated Security=True"))
+            using (SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV24.mdf;Initial Catalog=RestoRapido;Integrated Security=True"))
             {
                 string sql = "UPDATE CCommandes SET mCmdStatusCommande = 1 WHERE mCmdID = @comID";
 

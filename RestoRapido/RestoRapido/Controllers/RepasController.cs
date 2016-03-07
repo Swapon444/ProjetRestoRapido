@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using RestoRapido.Models;
 using System.Data.Entity.Infrastructure;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
 
 namespace RestoRapido.Controllers
 {
@@ -199,17 +200,24 @@ namespace RestoRapido.Controllers
                 string pic = System.IO.Path.GetFileName(file.FileName);
                 string path = System.IO.Path.Combine(Server.MapPath("~/App_Data/images"), pic);
 
+                using (SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV24.mdf;Initial Catalog=RestoRapido;Integrated Security=True"))
+                {
+                    string sql = "UPDATE CRepas SET m_imgImage = @image WHERE m_iRepasId = @RepId";
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@image", file.FileName);
+                        cmd.Parameters.AddWithValue("@RepId", Convert.ToInt32(Session["SpecialID"]));
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+                }   
+
+
            //     int test = Convert.ToInt32(Session["SpecialID"]);
 
 
-
-                /*
-
-                db.Image.Add(img);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-
-                */
                 /*
                 byte[] imgData;
 

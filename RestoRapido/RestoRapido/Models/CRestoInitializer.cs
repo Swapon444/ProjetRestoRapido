@@ -79,9 +79,11 @@ namespace RestoRapido.Models
             // REPAS
             var Repas = new List<CRepas>
             {
-                new CRepas { m_iRepasId = 1, m_strNom = "Poutine", m_iPrix = 10, m_strDescription = "Frites, Fromage, Sauce", m_boLait = true},
-                new CRepas { m_iRepasId = 2, m_strNom = "Coke", m_iPrix = 3, m_strDescription = "0 Calories"},
-                new CRepas { m_iRepasId = 3, m_strNom = "Hamburger", m_iPrix = 5, m_strDescription = "All Dressed Mon Ami", m_boSesame = true}
+                new CRepas { m_iRepasId = 1, m_strNom = "Poutine", m_iPrix = Convert.ToDecimal(7.50), m_strDescription = "Frites, Fromage, Sauce", m_boLait = true},
+                new CRepas { m_iRepasId = 2, m_strNom = "Coke", m_iPrix = Convert.ToDecimal(1.50), m_strDescription = "0 Calories"},
+                new CRepas { m_iRepasId = 3, m_strNom = "Hamburger", m_iPrix = Convert.ToDecimal(4.99), m_strDescription = "All Dressed Mon Ami", m_boSesame = true},
+                new CRepas { m_iRepasId = 4, m_strNom = "HotDog", m_iPrix = Convert.ToDecimal(2.99), m_strDescription = "Delicious"},
+                new CRepas { m_iRepasId = 5, m_strNom = "Pizza", m_iPrix = Convert.ToDecimal(12.99), m_strDescription = "Medium Pepperoni Fromage"}
             };
 
             foreach (var tempZ in Repas)

@@ -35,11 +35,20 @@ namespace RestoRapido.Models
         [StringLength(50, MinimumLength = 1)]
         public string m_strNom { get; set; }
 
+
+        public string m_imgImage { get; set; }
+/*
         // Prix du repas
         [Required]
         [DisplayName("Prix")]
         [Range(0, int.MaxValue)]
         public int m_iPrix { get; set; }
+        */
+
+        [DataType(DataType.Currency)]
+        [Display(Name = "Prix Total")]
+        public decimal m_iPrix { get; set; }
+
 
         // Description du repas
         [DataType(DataType.MultilineText)]
