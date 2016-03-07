@@ -123,26 +123,47 @@ namespace RestoRapido.Controllers
                 return;
             }
 
+
+           
+
+            int ServeurID = Convert.ToInt32(Session["ID"]);
             var selectedTablesHS = new HashSet<string>(selectedTables);
             var serveurTables = new HashSet<int>
                 (serveurToUpdate.Tables.Select(c => c.CTableID));
+
+
             foreach (var table in db.Tables)
             {
+                CTableUtilisateurs tableUtilisateur = new CTableUtilisateurs();
+
                 if (selectedTablesHS.Contains(table.CTableID.ToString()))
                 {
+
                     if (!serveurTables.Contains(table.CTableID))
                     {
                         serveurToUpdate.Tables.Add(table);
+
+                        tableUtilisateur.CTableID = table.CTableID;
+                        tableUtilisateur.UtilisateurID = ServeurID;
+                        db.TableUtilisateurs.Add(tableUtilisateur);
                     }
                 }
                 else
                 {
                     if (serveurTables.Contains(table.CTableID))
                     {
+                        SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV24.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                        SqlCommand supprimerTableServeur = new SqlCommand("DELETE CTableUtilisateurs FROM CTableUtilisateurs WHERE CTableUtilisateurs.UtilisateurID = " + ServeurID + " AND CTableUtilisateurs.CTableID = " + table.CTableID, conn);
+
+                        supprimerTableServeur.Connection = conn;
+                        conn.Open();
+                        supprimerTableServeur.ExecuteReader();
+
                         serveurToUpdate.Tables.Remove(table);
                     }
                 }
             }
+            db.SaveChanges();
         }
 
         private void PopulateAssignedTableData(Utilisateur serveur)
