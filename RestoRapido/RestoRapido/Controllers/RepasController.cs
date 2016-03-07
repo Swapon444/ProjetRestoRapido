@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using RestoRapido.Models;
 using System.Data.Entity.Infrastructure;
+using System.Web.UI.WebControls;
 
 namespace RestoRapido.Controllers
 {
@@ -165,5 +167,74 @@ namespace RestoRapido.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+
+        public ActionResult SelectionImage(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+          // CRepas repas = db.Repas.Find(id);
+
+            @Session["SpecialID"] = id;
+         //   ViewBag.RepasID = Convert.ToInt32(id);
+
+            return View();
+        }
+
+        public ActionResult FileUpload(HttpPostedFileBase file)
+        {
+
+            if (Session["SpecialID"] == null)
+                return RedirectToAction("Login", "Account");
+
+
+            if (file != null)
+            {
+                string pic = System.IO.Path.GetFileName(file.FileName);
+                string path = System.IO.Path.Combine(Server.MapPath("~/App_Data/images"), pic);
+
+           //     int test = Convert.ToInt32(Session["SpecialID"]);
+
+
+
+                /*
+
+                db.Image.Add(img);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+
+                */
+                /*
+                byte[] imgData;
+
+                using (BinaryReader reader = new BinaryReader(file.InputStream))
+                {
+                    imgData = reader.ReadBytes(Convert.ToInt32(file.InputStream.Length));
+                }
+
+                */
+
+
+                /*
+                // save the image path path to the database or you can send image 
+                // directly to database
+                // in-case if you want to store byte[] ie. for DB
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    file.InputStream.CopyTo(ms);
+                    byte[] array = ms.GetBuffer();
+                }*/
+
+            }
+            // after successfully uploading redirect the user
+            return RedirectToAction("Index");
+        }
+
     }
 }

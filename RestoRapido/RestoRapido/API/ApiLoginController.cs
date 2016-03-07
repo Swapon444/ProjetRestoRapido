@@ -16,7 +16,7 @@ namespace RestoRapido.Controllers
             {
                 string type = "";
                 List<object> results = new List<object>();
-                SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV22.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV23.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
                 SqlCommand checkuser = new SqlCommand("SELECT UtilisateurID,UtilisateurType,UtilisateurPrenom,UtilisateurNom,UtilisateurNomUsager,m_boBle,m_boLait,m_boOeuf,m_boArachide,m_boSoja,m_boFruitCoque,m_boPoisson,m_boSesame,m_boCrustace,m_boMollusque FROM Utilisateurs WHERE UtilisateurNomUsager = '" + login + "' AND UtilisateurMDP = '" + CEncryption.CalculateMD5Hash(mdp) + "'", conn);
                 checkuser.Connection = conn;
                 conn.Open();

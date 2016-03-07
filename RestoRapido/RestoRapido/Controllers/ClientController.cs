@@ -35,7 +35,7 @@ namespace RestoRapido.Controllers
 
             if (@Session["Type"].ToString() == "Client")
             {
-                SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV22.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV23.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
                 conn.Open();
 
                 SqlCommand regarderalerte = new SqlCommand("SELECT * FROM CAlertes WHERE UtilisateurID = " + Session["ID"]);

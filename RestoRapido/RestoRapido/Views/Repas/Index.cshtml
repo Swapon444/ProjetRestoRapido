@@ -105,8 +105,10 @@
         </td>
         <td>
             @Html.ActionLink("Modifier", "Edit", new { id=item.m_iRepasId }) |
-            @Html.ActionLink("Détails", "Details", new { id=item.m_iRepasId }) |
-            @Html.ActionLink("Supprimer", "Delete", new { id=item.m_iRepasId })
+            @Html.ActionLink("Détails", "Details", new { id=item.m_iRepasId }) 
+            <br>
+            @Html.ActionLink("Ajouter Image", "SelectionImage", new { id = item.m_iRepasId })
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.m_iRepasId }) |
         </td>
     </tr>
 }

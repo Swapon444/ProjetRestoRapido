@@ -11,6 +11,5 @@ namespace RestoRapido.ViewModels
 
         public IEnumerable<CRepas> AllRepas { get; set; }
 
-      //  public CCommande zCommandes { get; set; }
     }
 }

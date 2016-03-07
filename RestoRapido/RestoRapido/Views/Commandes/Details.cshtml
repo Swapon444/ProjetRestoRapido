@@ -63,22 +63,35 @@
             <th>
                 NOM
             </th>
+
+            <th>
+                QUANTITÉ
+            </th>
             <th>
                 PRIX
+            </th>
+            <th>
+                COMMENTAIRES
             </th>
         </tr>
 
         @{
-            List<RestoRapido.Models.CRepas> Repas = ViewBag.YourMeet;
+            List<RestoRapido.Models.CCmdRepas> Repas = ViewBag.YourMeet;
 
             foreach (var item in Repas)
             {
                 <tr style="text-align: left">
-                    <td>
-                        @item.m_strNom
+                    <td width="40px">
+                        @item.mRepas.m_strNom
                     </td>
-                    <td>
-                        @(item.m_iPrix + ".00 $")
+                    <td width="40px" style="text-align:center">
+                        @item.mNbRep
+                    </td>
+                    <td width="40px" style="text-align:center">
+                        @(item.mRepas.m_iPrix * item.mNbRep)
+                    </td>
+                    <td width="40px">
+                        @item.mCommentaire
                     </td>
                 </tr>
             }
@@ -98,5 +111,13 @@
 </div>
 
 <p>
-    @Html.ActionLink("Retour", "Index")
+    @if (Session["Type"] == "Client")
+    {
+        @Html.ActionLink("Retour", "Index")
+    }
+    else
+    {
+        @Html.ActionLink("Retour", "IndexAGS")
+    }
+      
 </p>

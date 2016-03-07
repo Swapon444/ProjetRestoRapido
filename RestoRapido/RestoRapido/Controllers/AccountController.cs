@@ -102,7 +102,7 @@ namespace RestoRapido.Controllers
             {
                 return View(model);
             }
-            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV22.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV23.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
             SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "' AND UtilisateurMDP = '" + CEncryption.CalculateMD5Hash(model.Password.ToString()) + "'", conn);
            // SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "' AND UtilisateurMDP = '" + model.Password.ToString() + "'", conn);
             

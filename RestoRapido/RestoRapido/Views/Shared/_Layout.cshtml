@@ -33,7 +33,7 @@
                         <button class="dropbtn">Gerer </button>
                         <div class="dropdown-content">
                             @Html.ActionLink("Mon compte", "Index", "Administrateur")
-                            @Html.ActionLink("Voir les Commandes", "Index", "Commandes")
+                            @Html.ActionLink("Consulter les Commandes", "Index", "Commandes")
                         </div>
                     </div>
                 }
@@ -43,8 +43,10 @@
                     <div class="dropdown">
                         <button class="dropbtn">Ajouter </button>
                         <div class="dropdown-content">
-                            @Html.ActionLink("Ajouter un utilisateur", "Creation", "Gerant")
-                            @Html.ActionLink("Ajouter un menu", "Index", "Menus")
+                            @Html.ActionLink("Ajouter un Utilisateur", "Creation", "Gerant")
+                            @Html.ActionLink("Ajouter un Menu", "Index", "Menus")
+                            @Html.ActionLink("Ajouter un Repas", "Index", "Repas")
+                            @Html.ActionLink("Ajouter un Rabais", "Index", "RabaisRepas")
                         </div>
                     </div>
 
@@ -52,7 +54,7 @@
                         <button class="dropbtn">Gerer </button>
                         <div class="dropdown-content">
                             @Html.ActionLink("Mon compte", "Index", "Gerant")
-                            @Html.ActionLink("Voir les Commandes", "Index", "Commandes")
+                            @Html.ActionLink("Consulter les Commandes", "Index", "Commandes")
                         </div>
                     </div>
                 }
@@ -65,7 +67,7 @@
                             @Html.ActionLink("Mon compte", "Index", "Serveur")
                             @Html.ActionLink("Choisir les Tables", "SelectTable", "Serveur")
                             @Html.ActionLink("Mes Alertes", "Alertes", "Serveur")
-                            @Html.ActionLink("Voir les Commandes", "Index", "Commandes")
+                            @Html.ActionLink("Consulter les Commandes", "Index", "Commandes")
                         </div>
                     </div>
                 }
