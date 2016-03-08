@@ -89,21 +89,21 @@ namespace RestoRapido.Controllers
 
                 else
                 {
-                   int iResto = Convert.ToInt32(Session["RestoID"]);
+                    int iResto = Convert.ToInt32(Session["RestoID"]);
 
-                   var commandes = from s in db.Commandes
-                                   where s.mCmdStatusCommande == 0 && s.CRestoID == iResto
-                                   select s;
+                    var commandes = from s in db.Commandes
+                                    where s.mCmdStatusCommande == 0 && s.CRestoID == iResto
+                                    select s;
 
-                   commandes = commandes.Include(c => c.mCmdResto).Include(c => c.mCmdTable).Include(c => c.mUtilisateurClient);
+                    commandes = commandes.Include(c => c.mCmdResto).Include(c => c.mCmdTable).Include(c => c.mUtilisateurClient);
 
-                   SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
-                   SqlCommand cmd = new SqlCommand("SELECT DISTINCT CTables.i_TableNum FROM CCommandes INNER JOIN CTables ON CCommandes.CTableID = CTables.CTableID INNER JOIN UtilisateurCTables ON CTables.CTableID = UtilisateurCTables.CTable_CTableID INNER JOIN Utilisateurs ON UtilisateurCTables.Utilisateur_UtilisateurID = Utilisateurs.UtilisateurID WHERE CCommandes.mCmdStatusCommande = 0 AND UtilisateurCTables.Utilisateur_UtilisateurID = " + Session["ID"] + " AND CCommandes.CRestoID = " + Session["RestoID"], conn);
-                   cmd.Connection = conn;
-                   conn.Open();
-                   SqlDataReader dr = cmd.ExecuteReader();
+                    SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                    SqlCommand cmd = new SqlCommand("SELECT DISTINCT CTables.i_TableNum FROM CCommandes INNER JOIN CTables ON CCommandes.CTableID = CTables.CTableID INNER JOIN UtilisateurCTables ON CTables.CTableID = UtilisateurCTables.CTable_CTableID INNER JOIN Utilisateurs ON UtilisateurCTables.Utilisateur_UtilisateurID = Utilisateurs.UtilisateurID WHERE CCommandes.mCmdStatusCommande = 0 AND UtilisateurCTables.Utilisateur_UtilisateurID = " + Session["ID"] + " AND CCommandes.CRestoID = " + Session["RestoID"], conn);
+                    cmd.Connection = conn;
+                    conn.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
 
-                   List<CCommande> lstCommandes = new List<CCommande>();
+                    List<CCommande> lstCommandes = new List<CCommande>();
 
                     while (dr.Read())
                     {
@@ -113,7 +113,7 @@ namespace RestoRapido.Controllers
                                 lstCommandes.Add(t);
                         }
                     }
-                        
+
                     return View(lstCommandes);
                 }
             }
@@ -168,7 +168,7 @@ namespace RestoRapido.Controllers
 
         // KEVIN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // GET: Commandes
-        public ActionResult CommanderClient()
+        public ActionResult CommanderClient(string sortOrder, string Allergy)
         {
             if (@Session["Connexion"] != null)
             {
@@ -177,9 +177,57 @@ namespace RestoRapido.Controllers
                     return RedirectToAction("Login", "Account");
                 }
 
+                ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                ViewBag.DateSortParm = sortOrder == "Prix" ? "prix_desc" : "Prix";
+                ViewBag.AllergyParam = String.IsNullOrEmpty(Allergy) ? "Show" : "Hide";
+
                 var Menu = (from s in db.Menus
                             where s.m_iMenuId == 1
                             select s).FirstOrDefault();
+
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        Menu.m_Repas = Menu.m_Repas.OrderByDescending(x => x.m_strNom).ToList();
+                        break;
+                    case "Prix":
+                        Menu.m_Repas = Menu.m_Repas.OrderBy(s => s.m_iPrix).ToList();
+                        break;
+                    case "prix_desc":
+                        Menu.m_Repas = Menu.m_Repas.OrderByDescending(s => s.m_iPrix).ToList();
+                        break;
+                    default:
+                        Menu.m_Repas = Menu.m_Repas.OrderBy(x => x.m_strNom).ToList();
+                        break;
+                }
+
+                int UseId = Convert.ToInt32(@Session["ID"]);
+
+                var User = (from s in db.Utilisateurs
+                            where s.UtilisateurID == UseId
+                            select s).FirstOrDefault();
+
+                var Repas = Menu.m_Repas;
+                List<CRepas> SansAllergie = new List<CRepas>();
+                foreach (var rep in Repas)
+                {
+
+                    if (((User.m_boArachide == rep.m_boArachide) && (User.m_boBle == rep.m_boBle) && (User.m_boCrustace == rep.m_boCrustace)
+                        && (User.m_boFruitCoque == rep.m_boFruitCoque) && (User.m_boLait == rep.m_boMollusque) && (User.m_boOeuf == rep.m_boOeuf) &&
+                        (User.m_boPoisson == rep.m_boPoisson) && (User.m_boSesame == rep.m_boSesame) && (User.m_boSoja == rep.m_boSoja)) || (Allergy == "Show"))
+                    {
+                        foreach (var rabais in rep.RepasRabais)
+                        {
+                            if ((DateTime.Parse(rabais.RabaisDateDebut) <= DateTime.Now) && (DateTime.Parse(rabais.RabaisDateFin) >= DateTime.Now))
+                            {
+                                rep.m_iPrix = rep.m_iPrix - (rep.m_iPrix * (rabais.RabaisPrix / 100));
+                            }
+                        }
+                        SansAllergie.Add(rep);
+                    }
+
+                }
+                Menu.m_Repas = SansAllergie;
                 return View(Menu);
             }
             else
@@ -208,7 +256,7 @@ namespace RestoRapido.Controllers
                 db.SaveChanges();
 
 
-               // int LastID = db.Commandes.Last().mCmdID;
+                // int LastID = db.Commandes.Last().mCmdID;
                 var tempo = db.Commandes.OrderByDescending(s => s.mCmdID).First();
 
                 int LastID = tempo.mCmdID;
@@ -223,10 +271,10 @@ namespace RestoRapido.Controllers
                 double dSomme = 0;
                 double dSommeTotale = 0;
 
-                foreach(var Repas in Menu.m_Repas)
+                foreach (var Repas in Menu.m_Repas)
                 {
                     var Valeur = collection.Get("Rep " + Repas.m_iRepasId);
-                    if(Valeur != "")
+                    if (Valeur != "")
                     {
                         int NbRep = Convert.ToInt32(Valeur);
                         if (NbRep > 0)
@@ -240,7 +288,7 @@ namespace RestoRapido.Controllers
                             db.CommandeRepas.Add(Rep);
                             db.SaveChanges();
                         }
-                    }    
+                    }
                 }
 
                 var tabTempo = from s in db.CommandeRepas
@@ -256,7 +304,7 @@ namespace RestoRapido.Controllers
                 }
 
 
-                dSommeTotale = dSomme * 1.15 ;
+                dSommeTotale = dSomme * 1.15;
 
                 decimal ddSomme = Convert.ToDecimal(dSomme);
                 decimal ddSommeTotale = Convert.ToDecimal(dSommeTotale);
@@ -274,14 +322,14 @@ namespace RestoRapido.Controllers
                         cmd.ExecuteNonQuery();
                         conn.Close();
                     }
-                }   
+                }
 
-                return RedirectToAction("Details", new { id = LastID});
-                
+                return RedirectToAction("Details", new { id = LastID });
+
             }
 
             else
-                    return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Account");
 
         }
 
@@ -314,9 +362,9 @@ namespace RestoRapido.Controllers
                     cmd.ExecuteNonQuery();
                     conn.Close();
                 }
-            }   
+            }
 
-            if(Session["Type"].ToString() == "Client")
+            if (Session["Type"].ToString() == "Client")
                 return RedirectToAction("Index");
             else
                 return RedirectToAction("IndexAGS");
@@ -325,14 +373,14 @@ namespace RestoRapido.Controllers
 
         public ActionResult SelectionTable()
         {
-             
+
             int noResto = Convert.ToInt32(Session["RestoID"]);
 
             var lstTables = from s in db.Tables
                             where s.CRestoID == noResto
                             select s;
 
-            ViewBag.listeTables = new SelectList(lstTables, "CTableID", "i_TableNum"); 
+            ViewBag.listeTables = new SelectList(lstTables, "CTableID", "i_TableNum");
 
             return View();
         }
@@ -340,7 +388,7 @@ namespace RestoRapido.Controllers
 
         public ActionResult AjouterTableSession(FormCollection collection)
         {
-            @Session["TableID"] = Convert.ToInt32(collection.Get("listeTables")); 
+            @Session["TableID"] = Convert.ToInt32(collection.Get("listeTables"));
 
             return RedirectToAction("CommanderClient");
         }
@@ -369,7 +417,7 @@ namespace RestoRapido.Controllers
             lstRepas = lstRepas.Include(x => x.mRepas);
 
 
-          //  List<CCmdRepas> lstRepas = cCommande.mCmdColletionRepas.ToList();
+            //  List<CCmdRepas> lstRepas = cCommande.mCmdColletionRepas.ToList();
 
             ViewBag.YourMeet = lstRepas.ToList();
 
@@ -411,10 +459,10 @@ namespace RestoRapido.Controllers
 
                 else
                 {
-                        if (@Session["TableID"] == null)
-                            return RedirectToAction("SelectionTable");
-                        else
-                            return RedirectToAction("CommanderClient");
+                    if (@Session["TableID"] == null)
+                        return RedirectToAction("SelectionTable");
+                    else
+                        return RedirectToAction("CommanderClient");
                 }
             }
 

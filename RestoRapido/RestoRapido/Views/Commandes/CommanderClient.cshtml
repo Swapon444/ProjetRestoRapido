@@ -8,15 +8,16 @@
 <h3>
     @Html.DisplayFor(model => model.m_strNom)
 </h3>
+@Html.ActionLink("Ignorer les allergies", "CommanderClient", new { Allergy = ViewBag.AllergyParam })
 @using (Html.BeginForm("AjouterCmd", "Commandes"))
 {
     <table class="table">
         <tr>
             <th>
-                @Html.ActionLink("Nom", "Index", new { sortOrder = ViewBag.NameSortParm })
+                @Html.ActionLink("Nom", "CommanderClient", new { sortOrder = ViewBag.NameSortParm })
             </th>
             <th>
-                @Html.ActionLink("Prix", "Index", new { sortOrder = ViewBag.DateSortParm })
+                @Html.ActionLink("Prix", "CommanderClient", new { sortOrder = ViewBag.PriceSortParm })
             </th>
             <th>
                 Allergie
