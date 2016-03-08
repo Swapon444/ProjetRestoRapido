@@ -47,6 +47,7 @@ namespace RestoRapido.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Creation([Bind(Include = "UtilisateurID,UtilisateurMDP,UtilisateurNomUsager,UtilisateurNom,UtilisateurPrenom,UtilisateurType,m_boBle,m_boLait,m_boOeuf,m_boArachide,m_boSoja,m_boFruitCoque,m_boPoisson,m_boSesame,m_boCrustace,m_boMollusque")] Utilisateur utilisateur)
         {
+            //Objectif : Créer un compte avec les valeurs reçues en paramètre
 
             if (ModelState.IsValid)
             {

@@ -29,7 +29,7 @@ namespace RestoRapido.Controllers
 
         public ActionResult AppelerServeur()
         {
-
+            //Objectif : Notifier le serveur par la table utilisée par le client courant
             if (@Session["Type"] == null)
                 return View("../Shared/Error");
 
@@ -38,12 +38,13 @@ namespace RestoRapido.Controllers
                 SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
                 conn.Open();
 
+                //Regarder tout d'abord si le server n'a pas déjà été alerté par le même client
                 SqlCommand regarderalerte = new SqlCommand("SELECT * FROM CAlertes WHERE UtilisateurID = " + Session["ID"]);
                 regarderalerte.Connection = conn;
                 SqlDataReader dr = regarderalerte.ExecuteReader();
                 
 
-                if (!dr.HasRows)
+                if (!dr.HasRows) //Si le serveur n'a pas été notifié, ajouter l'alerte dans la base de donnée 
                 {
                     conn.Close();
                     conn.Open();

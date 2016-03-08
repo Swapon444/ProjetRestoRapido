@@ -91,27 +91,28 @@ namespace RestoRapido.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl, int? Restaurants)
         {
+            //Objectif : Authentifier un utilisateur
 
-            string type = "";
-            string prenom = "";
-            int id = -1;
-            int tableId = -1;
+            string type = ""; //Type du compte de l'utilisateur
+            string prenom = ""; //Prénom de l'utilisateur
+            int id = -1; //Id de l'utilisateur
+            int tableId = -1; //Id de la table de l'utilisateur
             // bool siConnecter = false;
 
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True"); 
             SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "' AND UtilisateurMDP = '" + CEncryption.CalculateMD5Hash(model.Password.ToString()) + "'", conn);
-           // SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "' AND UtilisateurMDP = '" + model.Password.ToString() + "'", conn);
+           
             
             checkuser.Connection = conn;
             conn.Open();
             SqlDataReader dr = checkuser.ExecuteReader();
 
 
-            while (dr.Read())
+            while (dr.Read()) //Si le select retourne un champ
             {
                 type = dr.GetString(0);
                 prenom = dr.GetString(1);
@@ -119,7 +120,7 @@ namespace RestoRapido.Controllers
             }
 
             
-            if (dr.HasRows)
+            if (dr.HasRows) //Si le datareader n'est pas vide, affecter les variables de session 
             {
                 
                 Session["Type"] = type;
@@ -136,6 +137,7 @@ namespace RestoRapido.Controllers
 
             switch (type)
             {
+                //Afficher la bonne vue selon le type du compte
                 case "Administrateur":
                     return View("../Administrateur/Index");
                 case "Gerant":
@@ -144,6 +146,9 @@ namespace RestoRapido.Controllers
                     return View("../Serveur/Index");
                 case "Client":
                     {
+
+                        //Si l'utilisateur est un client, lui affecté la table qu'il a choisi
+
                         SqlCommand checktable = new SqlCommand("SELECT CTableID FROM CTableUtilisateurs WHERE " + id + " = UtilisateurID", conn);
                         checktable.Connection = conn;
                         conn.Open();

@@ -29,11 +29,14 @@ namespace RestoRapido.Controllers
 
         public ActionResult Alertes()
         {
+            //Objectif : Afficher les alertes d'un serveur
+
             if (@Session["Type"] == null)
                 return View("../Shared/Error");
 
            else if (@Session["Type"].ToString() == "Serveur")
             {
+                //Aller chercher toutes les alertes du serveur
                 SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
                 SqlCommand alertes = new SqlCommand("SELECT i_TableNum FROM CTables INNER JOIN CAlertes ON CTables.CTableID = CAlertes.CTableID INNER JOIN CTableUtilisateurs ON CAlertes.CTableID = CTableUtilisateurs.CTableID WHERE CTableUtilisateurs.UtilisateurID = " + Session["ID"], conn);
                 alertes.Connection = conn;
@@ -42,7 +45,7 @@ namespace RestoRapido.Controllers
 
                 List<string> Tables = new List<string>();
 
-                while (dr.Read())
+                while (dr.Read()) //Mettre dans la liste toutes les tables qui ont appelé le serveur
                     Tables.Add("Table #" + dr.GetInt32(0).ToString());
 
 
@@ -54,19 +57,19 @@ namespace RestoRapido.Controllers
 
         public ActionResult Supprimer()
         {
+            //Objectif : Supprimer les alertes d'un serveur
             if (@Session["Type"] == null)
                 return View("../Shared/Error");
 
           else if (@Session["Type"].ToString() == "Serveur")
             {
+                //Supprimer toutes les alertes qui ont le même UtilisateurID que l'ID du serveur
                 SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
                 SqlCommand alertes = new SqlCommand("DELETE CAlertes FROM CAlertes INNER JOIN CTableUtilisateurs on CAlertes.CTableID = CTableUtilisateurs.CTableID WHERE CTableUtilisateurs.UtilisateurID = " + Session["ID"], conn);
 
                 alertes.Connection = conn;
                 conn.Open();
                 alertes.ExecuteReader();
-
-
 
 
                 return View("Index");
