@@ -182,6 +182,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\ApiModifierController.cs" />
     <Compile Include="API\ApiLoginController.cs" />
     <Compile Include="API\ApiRepasController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -221,7 +222,6 @@
     <Compile Include="Models\CRestoContext.cs" />
     <Compile Include="Models\CRestoInitializer.cs" />
     <Compile Include="Models\CTable.cs" />
-    <Compile Include="Models\CTableUtilisateurs.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Utilisateur.cs" />
@@ -236,13 +236,9 @@
     <Compile Include="ViewModels\RepasZCommandes.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\dbRestoRapidoV22.mdf" />
-    <Content Include="App_Data\dbRestoRapidoV22_log.ldf">
-      <DependentUpon>dbRestoRapidoV22.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\dbRestoRapidoV24.mdf" />
-    <Content Include="App_Data\dbRestoRapidoV24_log.ldf">
-      <DependentUpon>dbRestoRapidoV24.mdf</DependentUpon>
+    <Content Include="App_Data\dbRestoRapidoV25.mdf" />
+    <Content Include="App_Data\dbRestoRapidoV25_log.ldf">
+      <DependentUpon>dbRestoRapidoV25.mdf</DependentUpon>
     </Content>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />

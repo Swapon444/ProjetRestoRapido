@@ -51,7 +51,10 @@ namespace RestoRapido.Controllers
                            select s.CTableID;
 
 
-                int idTable = temp.First();
+                if (temp.Count() < 1) //Si le client n'a pas passé une commande 
+                    return View("Index");
+                
+                int idTable = temp.First(); //Affecter la table au client
 
                 if (!dr.HasRows) //Si le serveur n'a pas été notifié, ajouter l'alerte dans la base de donnée 
                 {
