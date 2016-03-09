@@ -149,7 +149,7 @@ namespace RestoRapido.Controllers
 
                         //Si l'utilisateur est un client, lui affecté la table qu'il a choisi
 
-                        SqlCommand checktable = new SqlCommand("SELECT CTableID FROM CTableUtilisateurs WHERE " + id + " = UtilisateurID", conn);
+                        SqlCommand checktable = new SqlCommand("SELECT CTable_CTableID FROM UtilisateurCTables WHERE " + id + " = Utilisateur_UtilisateurID", conn);
                         checktable.Connection = conn;
                         conn.Open();
                         SqlDataReader dr2 = checktable.ExecuteReader();

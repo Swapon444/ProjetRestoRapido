@@ -17,7 +17,6 @@ namespace RestoRapido.Models
         public DbSet<CRepas> Repas { get; set; }
         public DbSet<CRabaisRepas> Rabais { get; set; }
         public DbSet<CAlerte> Alertes { get; set; }   
-        public DbSet<CTableUtilisateurs> TableUtilisateurs { get; set; }
         public DbSet<CCmdRepas> CommandeRepas { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

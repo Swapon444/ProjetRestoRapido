@@ -41,14 +41,23 @@ namespace RestoRapido.Controllers
                 //Regarder tout d'abord si le server n'a pas déjà été alerté par le même client
                 SqlCommand regarderalerte = new SqlCommand("SELECT * FROM CAlertes WHERE UtilisateurID = " + Session["ID"]);
                 regarderalerte.Connection = conn;
+
                 SqlDataReader dr = regarderalerte.ExecuteReader();
-                
+
+                int idUser = Convert.ToInt32(Session["ID"]);
+
+                var temp = from s in db.Commandes
+                           where s.UtilisateurID == idUser && s.mCmdStatusCommande == 0
+                           select s.CTableID;
+
+
+                int idTable = temp.First();
 
                 if (!dr.HasRows) //Si le serveur n'a pas été notifié, ajouter l'alerte dans la base de donnée 
                 {
                     conn.Close();
                     conn.Open();
-                    SqlCommand ajouteralerte = new SqlCommand("INSERT INTO CAlertes VALUES (" + Session["ID"] + ", " + Session["Table"] + ")");
+                    SqlCommand ajouteralerte = new SqlCommand("INSERT INTO CAlertes VALUES (" + Session["ID"] + ", " + idTable + ")");
                     ajouteralerte.Connection = conn;
                     ajouteralerte.ExecuteReader();
                 }

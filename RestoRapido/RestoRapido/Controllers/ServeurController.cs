@@ -38,7 +38,7 @@ namespace RestoRapido.Controllers
             {
                 //Aller chercher toutes les alertes du serveur
                 SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
-                SqlCommand alertes = new SqlCommand("SELECT i_TableNum FROM CTables INNER JOIN CAlertes ON CTables.CTableID = CAlertes.CTableID INNER JOIN CTableUtilisateurs ON CAlertes.CTableID = CTableUtilisateurs.CTableID WHERE CTableUtilisateurs.UtilisateurID = " + Session["ID"], conn);
+                SqlCommand alertes = new SqlCommand("SELECT i_TableNum FROM CTables INNER JOIN CAlertes ON CTables.CTableID = CAlertes.CTableID INNER JOIN UtilisateurCTables ON CAlertes.CTableID = UtilisateurCTables.CTable_CTableID WHERE UtilisateurCTables.Utilisateur_UtilisateurID = " + Session["ID"], conn);
                 alertes.Connection = conn;
                 conn.Open();
                 SqlDataReader dr = alertes.ExecuteReader();
@@ -65,7 +65,7 @@ namespace RestoRapido.Controllers
             {
                 //Supprimer toutes les alertes qui ont le même UtilisateurID que l'ID du serveur
                 SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
-                SqlCommand alertes = new SqlCommand("DELETE CAlertes FROM CAlertes INNER JOIN CTableUtilisateurs on CAlertes.CTableID = CTableUtilisateurs.CTableID WHERE CTableUtilisateurs.UtilisateurID = " + Session["ID"], conn);
+                SqlCommand alertes = new SqlCommand("DELETE CAlertes FROM CAlertes INNER JOIN UtilisateurCTables on CAlertes.CTableID = UtilisateurCTables.CTable_CTableID WHERE UtilisateurCTables.Utilisateur_UtilisateurID = " + Session["ID"], conn);
 
                 alertes.Connection = conn;
                 conn.Open();
@@ -137,18 +137,22 @@ namespace RestoRapido.Controllers
 
             foreach (var table in db.Tables)
             {
-                CTableUtilisateurs tableUtilisateur = new CTableUtilisateurs();
 
                 if (selectedTablesHS.Contains(table.CTableID.ToString()))
                 {
 
                     if (!serveurTables.Contains(table.CTableID))
                     {
-                        serveurToUpdate.Tables.Add(table);
+                        SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                        SqlCommand ajouterTableServeur = new SqlCommand("INSERT INTO UtilisateurCTables VALUES (" + ServeurID + "," + table.CTableID + ")", conn);
 
-                        tableUtilisateur.CTableID = table.CTableID;
-                        tableUtilisateur.UtilisateurID = ServeurID;
-                        db.TableUtilisateurs.Add(tableUtilisateur);
+                        ajouterTableServeur.Connection = conn;
+                        conn.Open();
+
+                        ajouterTableServeur.ExecuteReader();
+
+                        conn.Close();
+
                     }
                 }
                 else
@@ -156,13 +160,13 @@ namespace RestoRapido.Controllers
                     if (serveurTables.Contains(table.CTableID))
                     {
                         SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
-                        SqlCommand supprimerTableServeur = new SqlCommand("DELETE CTableUtilisateurs FROM CTableUtilisateurs WHERE CTableUtilisateurs.UtilisateurID = " + ServeurID + " AND CTableUtilisateurs.CTableID = " + table.CTableID, conn);
+                        SqlCommand supprimerTableServeur = new SqlCommand("DELETE UtilisateurCTables FROM UtilisateurCTables WHERE UtilisateurCTables.Utilisateur_UtilisateurID = " + ServeurID + " AND UtilisateurCTables.CTable_CTableID = " + table.CTableID, conn);
 
                         supprimerTableServeur.Connection = conn;
                         conn.Open();
                         supprimerTableServeur.ExecuteReader();
 
-                        serveurToUpdate.Tables.Remove(table);
+                        conn.Close();
                     }
                 }
             }
