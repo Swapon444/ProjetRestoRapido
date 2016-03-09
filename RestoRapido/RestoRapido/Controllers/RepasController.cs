@@ -207,7 +207,7 @@ namespace RestoRapido.Controllers
                     imgData = reader.ReadBytes(Convert.ToInt32(file.InputStream.Length));
                 }
 
-                using (SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV26.mdf;Initial Catalog=RestoRapido;Integrated Security=True"))
                 {
                     string sql = "UPDATE CRepas SET m_imgImage = @image WHERE m_iRepasId = @RepId";
 

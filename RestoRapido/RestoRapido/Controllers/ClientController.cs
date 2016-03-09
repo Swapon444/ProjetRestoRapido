@@ -35,7 +35,7 @@ namespace RestoRapido.Controllers
 
             if (@Session["Type"].ToString() == "Client")
             {
-                SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV25.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV26.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
                 conn.Open();
 
                 //Regarder tout d'abord si le server n'a pas déjà été alerté par le même client

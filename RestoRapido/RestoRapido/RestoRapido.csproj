@@ -182,6 +182,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\ApiCommandesController.cs" />
     <Compile Include="API\ApiModifierController.cs" />
     <Compile Include="API\ApiLoginController.cs" />
     <Compile Include="API\ApiRepasController.cs" />

@@ -19,6 +19,8 @@ namespace RestoRapido.Models
         [DisplayName("Commentaire")]
         public string mCommentaire { get; set; }
 
+        public int mEtoiles { get; set; }
+
         public int m_iRepasId { get; set; }
         public CRepas mRepas { get; set; }
 
