@@ -4,9 +4,9 @@
     ViewBag.Title = "Supprimer un restaurant";
 }
 
-<h2>Supprimer un restaurant</h2>
+<h2>@ViewBag.Title</h2>
 
-<h3>êtes vous sur de vouloir supprimer ce restaurant?</h3>
+<h3>Êtes-vous certain de vouloir supprimer ce restaurant ?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -17,15 +17,13 @@
         <dd>
             @Html.DisplayFor(model => model.resNom)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.resPostal)
+            @Html.DisplayNameFor(model => model.resNoCiv)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.resPostal)
+            @Html.DisplayFor(model => model.resNoCiv)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.resRue)
         </dt>
@@ -35,12 +33,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.resNoCiv)
+            @Html.DisplayNameFor(model => model.resPostal)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.resNoCiv)
+            @Html.DisplayFor(model => model.resPostal)
         </dd>
+
+        
+
+        
 
     </dl>
 
@@ -49,7 +51,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Supprimer" class="btn btn-default" /> |
-            @Html.ActionLink("Retoure aux restaurants", "Index")
+            @Html.ActionLink("Retour aux restaurants", "Index")
         </div>
     }
 </div>

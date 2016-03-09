@@ -4,7 +4,7 @@
     ViewBag.Title = "Restaurants";
 }
 
-<h2>Restaurants</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Créer un restaurant", "Create")
@@ -13,8 +13,8 @@
 @using (Html.BeginForm())
 {
     <p>
-        Trouver par noms: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
+        Trouver par nom : @Html.TextBox("SearchString")
+        <input type="submit" value="Rechercher" />
     </p>
 }
 <table class="table">
@@ -23,14 +23,16 @@
             @Html.ActionLink("Nom", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.resPostal)
+            @Html.DisplayNameFor(model => model.resNoCiv)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.resRue)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.resNoCiv)
+            @Html.DisplayNameFor(model => model.resPostal)
         </th>
+        
+        
         <th></th>
     </tr>
 
@@ -40,18 +42,20 @@
             @Html.DisplayFor(modelItem => item.resNom)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.resPostal)
+            @Html.DisplayFor(modelItem => item.resNoCiv)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.resRue)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.resNoCiv)
+            @Html.DisplayFor(modelItem => item.resPostal)
         </td>
+        
+        
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CRestoID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CRestoID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CRestoID })
+            @Html.ActionLink("Modifier", "Edit", new { id=item.CRestoID }) |
+            @Html.ActionLink("Détails", "Details", new { id=item.CRestoID }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.CRestoID })
         </td>
     </tr>
 }

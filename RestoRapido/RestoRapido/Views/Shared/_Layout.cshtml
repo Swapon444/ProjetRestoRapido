@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="dropdown">
-                        <button class="dropbtn">Gerer </button>
+                        <button class="dropbtn">Gérer </button>
                         <div class="dropdown-content">
                             @Html.ActionLink("Mon compte", "Index", "Administrateur")
                             @Html.ActionLink("Consulter les Commandes", "Index", "Commandes")
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="dropdown">
-                        <button class="dropbtn">Gerer </button>
+                        <button class="dropbtn">Gérer </button>
                         <div class="dropdown-content">
                             @Html.ActionLink("Mon compte", "Index", "Gerant")
                             @Html.ActionLink("Consulter les Commandes", "Index", "Commandes")
@@ -62,7 +62,7 @@
                 @if ((string)Session["Type"] == "Serveur")
                 {
                     <div class="dropdown">
-                        <button class="dropbtn">Gerer </button>
+                        <button class="dropbtn">Gérer </button>
                         <div class="dropdown-content">
                             @Html.ActionLink("Mon compte", "Index", "Serveur")
                             @Html.ActionLink("Choisir les Tables", "SelectTable", "Serveur")
@@ -89,7 +89,7 @@
                     </div>
 
                     <div class="dropdown">
-                        <button class="dropbtn">Gerer </button>
+                        <button class="dropbtn">Gérer </button>
                         <div class="dropdown-content">
                             @Html.ActionLink("Mon compte", "Index", "Client")
                             @Html.ActionLink("Appeler votre serveur", "AppelerServeur", "Client")

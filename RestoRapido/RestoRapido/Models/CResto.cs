@@ -19,10 +19,10 @@ namespace RestoRapido.Models
         [RegularExpression(@"^[A-Z]\d[A-Z] \d[A-Z]\d$", ErrorMessage = "Le code postal doit être au format A1A 1A1")]
         public string resPostal { get; set; }
         [DisplayName("Rue")]
-        [RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Veuillez entrer des charactère valide")]
+        [RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Veuillez entrer des caractères valides")]
         public string resRue { get; set; }
-        [DisplayName("Numéro Civil")]
-        [RegularExpression(@"^[0-9]*$", ErrorMessage = "Veuillez entrer le numéro d'établissement")]
+        [DisplayName("Numéro civique")]
+        [RegularExpression(@"^[0-9]*$", ErrorMessage = "Veuillez entrer le numéro de l'adresse")]
         public string resNoCiv { get; set; }
 
         public virtual ICollection<CTable> Tables { get; set; }

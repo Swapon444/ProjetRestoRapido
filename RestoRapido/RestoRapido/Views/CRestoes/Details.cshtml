@@ -5,7 +5,7 @@
     ViewBag.Title = "Détails sur le restaurant";
 }
 
-<h2>Détails sur le restaurant</h2>
+<h2>@ViewBag.Title</h2>
 
 <div>
     <hr />
@@ -19,11 +19,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.resPostal)
+            @Html.DisplayNameFor(model => model.resNoCiv)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.resPostal)
+            @Html.DisplayFor(model => model.resNoCiv)
         </dd>
 
         <dt>
@@ -35,12 +35,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.resNoCiv)
+            @Html.DisplayNameFor(model => model.resPostal)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.resNoCiv)
+            @Html.DisplayFor(model => model.resPostal)
         </dd>
+
+        
+
+        
 
     </dl>
 </div>
@@ -72,5 +76,5 @@
 </div>
 
 <p>
-    @Html.ActionLink("Retoure aux restaurants", "Index")
+    @Html.ActionLink("Retour aux restaurants", "Index")
 </p>

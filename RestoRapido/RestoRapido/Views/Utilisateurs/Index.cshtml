@@ -7,16 +7,17 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Ajouter un utilisateur", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UtilisateurMDP)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.UtilisateurNomUsager)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UtilisateurMDP)
+        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.UtilisateurNom)
         </th>
@@ -62,11 +63,12 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.UtilisateurMDP)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.UtilisateurNomUsager)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UtilisateurMDP)
+        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.UtilisateurNom)
         </td>
@@ -107,9 +109,9 @@
             @Html.DisplayFor(modelItem => item.m_boMollusque)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UtilisateurID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UtilisateurID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UtilisateurID })
+            @Html.ActionLink("Modifier", "Edit", new { id=item.UtilisateurID }) |
+            @Html.ActionLink("Détails", "Details", new { id=item.UtilisateurID }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.UtilisateurID })
         </td>
     </tr>
 }
