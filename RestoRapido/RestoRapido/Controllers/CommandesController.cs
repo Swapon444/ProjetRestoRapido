@@ -178,28 +178,13 @@ namespace RestoRapido.Controllers
                 }
 
                 ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                ViewBag.DateSortParm = sortOrder == "Prix" ? "prix_desc" : "Prix";
-                ViewBag.AllergyParam = String.IsNullOrEmpty(Allergy) ? "Show" : "Hide";
-
+                ViewBag.PrixSortParm = sortOrder == "Prix" ? "prix_desc" : "Prix";
+                ViewBag.AllergyParam = String.IsNullOrEmpty(Allergy) ? "Show" : null;
+                ViewBag.TitreAllergie = Allergy == "Show" ? true : false;
                 var Menu = (from s in db.Menus
                             where s.m_iMenuId == 1
                             select s).FirstOrDefault();
 
-                switch (sortOrder)
-                {
-                    case "name_desc":
-                        Menu.m_Repas = Menu.m_Repas.OrderByDescending(x => x.m_strNom).ToList();
-                        break;
-                    case "Prix":
-                        Menu.m_Repas = Menu.m_Repas.OrderBy(s => s.m_iPrix).ToList();
-                        break;
-                    case "prix_desc":
-                        Menu.m_Repas = Menu.m_Repas.OrderByDescending(s => s.m_iPrix).ToList();
-                        break;
-                    default:
-                        Menu.m_Repas = Menu.m_Repas.OrderBy(x => x.m_strNom).ToList();
-                        break;
-                }
 
                 int UseId = Convert.ToInt32(@Session["ID"]);
 
@@ -212,21 +197,38 @@ namespace RestoRapido.Controllers
                 foreach (var rep in Repas)
                 {
 
-                    if (((User.m_boArachide == rep.m_boArachide) && (User.m_boBle == rep.m_boBle) && (User.m_boCrustace == rep.m_boCrustace)
-                        && (User.m_boFruitCoque == rep.m_boFruitCoque) && (User.m_boLait == rep.m_boMollusque) && (User.m_boOeuf == rep.m_boOeuf) &&
-                        (User.m_boPoisson == rep.m_boPoisson) && (User.m_boSesame == rep.m_boSesame) && (User.m_boSoja == rep.m_boSoja)) || (Allergy == "Show"))
+                    if ((!(User.m_boArachide && rep.m_boArachide) && !(User.m_boBle && rep.m_boBle) && !(User.m_boCrustace && rep.m_boCrustace)
+                        && !(User.m_boFruitCoque && rep.m_boFruitCoque) && !(User.m_boLait && rep.m_boMollusque) && !(User.m_boOeuf && rep.m_boOeuf) &&
+                        !(User.m_boPoisson && rep.m_boPoisson) && !(User.m_boSesame && rep.m_boSesame) && !(User.m_boSoja && rep.m_boSoja)) || (Allergy != null))
                     {
                         foreach (var rabais in rep.RepasRabais)
                         {
                             if ((rabais.RabaisDateDebut <= DateTime.Now) && (rabais.RabaisDateFin >= DateTime.Now))
                             {
-                                rep.m_iPrix = rep.m_iPrix - (rep.m_iPrix * (rabais.RabaisPrix / 100));
+                                rep.m_iPrix = rep.m_iPrix - (rep.m_iPrix * Convert.ToDecimal((rabais.RabaisPrix / 100.00)));
                             }
                         }
                         SansAllergie.Add(rep);
                     }
 
                 }
+
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        SansAllergie = SansAllergie.OrderByDescending(x => x.m_strNom).ToList();
+                        break;
+                    case "Prix":
+                        SansAllergie = SansAllergie.OrderBy(s => s.m_iPrix).ToList();
+                        break;
+                    case "prix_desc":
+                        SansAllergie = SansAllergie.OrderByDescending(s => s.m_iPrix).ToList();
+                        break;
+                    default:
+                        SansAllergie = SansAllergie.OrderBy(x => x.m_strNom).ToList();
+                        break;
+                }
+
                 Menu.m_Repas = SansAllergie;
                 return View(Menu);
             }

@@ -4,26 +4,33 @@
 <h3>
     @Html.DisplayFor(model => model.m_strNom)
 </h3>
-@Html.ActionLink("Ignorer les allergies", "CommanderClient", new { Allergy = ViewBag.AllergyParam })
+@if (ViewBag.TitreAllergie)
+{
+    @Html.ActionLink("Ignorer les allergies", "CommanderClient", new { Allergy = ViewBag.AllergyParam })
+}
+else
+{
+    @Html.ActionLink("Afficher les allergies", "CommanderClient", new { Allergy = ViewBag.AllergyParam })
+}
 @using (Html.BeginForm("AjouterCmd", "Commandes"))
 {
     <table class="table">
         <tr>
-            <th>
+            <td>
                 @Html.ActionLink("Nom", "CommanderClient", new { sortOrder = ViewBag.NameSortParm })
-            </th>
-            <th>
-                @Html.ActionLink("Prix", "CommanderClient", new { sortOrder = ViewBag.PriceSortParm })
-            </th>
-            <th>
+            </td>
+            <td>
+                @Html.ActionLink("Prix", "CommanderClient", new { sortOrder = ViewBag.PrixSortParm })
+            </td>
+            <td>
                 Allergie
-            </th>
-            <th>
+            </td>
+            <td>
                 Quantité
-            </th>
-            <th>
+            </td>
+            <td>
                 Note
-            </th>
+            </td>
         </tr>
 
         @foreach (var item in Model.m_Repas)
@@ -36,43 +43,41 @@
                     @Html.DisplayFor(modelItem => item.m_iPrix)
                 </td>
                 <td>
-                    @{
-                        if (item.m_boArachide)
-                        {
-                            Html.DisplayNameFor(modelItem => item.m_boArachide);
-                        }
-                        if (item.m_boBle)
-                        {
-                            Html.DisplayNameFor(modelItem => item.m_boBle);
-                        }
-                        if (item.m_boCrustace)
-                        {
-                            Html.DisplayNameFor(modelItem => item.m_boCrustace);
-                        }
-                        if (item.m_boFruitCoque)
-                        {
-                            Html.DisplayNameFor(modelItem => item.m_boFruitCoque);
-                        }
-                        if (item.m_boLait)
-                        {
-                            Html.DisplayNameFor(modelItem => item.m_boLait);
-                        }
-                        if (item.m_boMollusque)
-                        {
-                            Html.DisplayNameFor(modelItem => item.m_boMollusque);
-                        }
-                        if (item.m_boPoisson)
-                        {
-                            Html.DisplayNameFor(modelItem => item.m_boPoisson);
-                        }
-                        if (item.m_boSesame)
-                        {
-                            Html.DisplayNameFor(modelItem => item.m_boSesame);
-                        }
-                        if (item.m_boSoja)
-                        {
-                            Html.DisplayNameFor(modelItem => item.m_boSoja);
-                        }
+                    @if (item.m_boArachide)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boArachide);
+                    }
+                    @if (item.m_boBle)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boBle);
+                    }
+                    @if (item.m_boCrustace)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boCrustace);
+                    }
+                    @if (item.m_boFruitCoque)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boFruitCoque);
+                    }
+                    @if (item.m_boLait)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boLait);
+                    }
+                    @if (item.m_boMollusque)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boMollusque);
+                    }
+                    @if (item.m_boPoisson)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boPoisson);
+                    }
+                    @if (item.m_boSesame)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boSesame);
+                    }
+                    @if (item.m_boSoja)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boSoja);
                     }
                 </td>
 
@@ -85,7 +90,7 @@
                 </td>
 
             </tr>
-                        }
+        }
     </table>
     <br />
     <br />
@@ -98,4 +103,4 @@
             <input type="submit" value="Commander" class="btn btn-default" />
         </div>
     </div>
-                        }
+}
