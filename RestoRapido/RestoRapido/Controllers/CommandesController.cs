@@ -74,6 +74,29 @@ namespace RestoRapido.Controllers
 
         }
 
+        public ActionResult CommandeRapport(FormCollection collection)
+        {
+            var DateString = collection.Get("CommandeRapport");
+            if (@Session["Connexion"] != null)
+            {
+                if ((bool)@Session["Connexion"] == false)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+
+                else
+                {
+                    var DateRapport = DateTime.Parse(DateString);
+                    var Cmd = from s in db.Commandes
+                              where s.mCmdDate == DateRapport && s.mCmdStatusCommande == 1
+                              select s;
+                    return View(Cmd.ToList());
+                }
+            }
+            else
+                return RedirectToAction("Login", "Account");
+        }
+
 
 
         // GET: Commandes

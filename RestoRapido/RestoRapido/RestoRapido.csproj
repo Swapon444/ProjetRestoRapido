@@ -424,6 +424,7 @@
     <Content Include="Views\Utilisateurs\Index.cshtml" />
     <Content Include="Views\Commandes\SelectionTable.cshtml" />
     <Content Include="Views\Repas\SelectionImage.cshtml" />
+    <Content Include="Views\Commandes\CommandeRapport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\images\" />

@@ -735,3 +735,6 @@ C:\ProjetRestoRapido\RestoRapido\RestoRapido\bin\System.Web.Http.WebHost.xml
 C:\Users\1271285\Documents\GitHub\ProjetRestoRapido\RestoRapido\RestoRapido\bin\fr\System.Net.Http.Formatting.resources.dll
 C:\Users\1271285\Documents\GitHub\ProjetRestoRapido\RestoRapido\RestoRapido\bin\fr\System.Web.Http.resources.dll
 C:\Users\1271285\Documents\GitHub\ProjetRestoRapido\RestoRapido\RestoRapido\bin\fr\System.Web.Http.WebHost.resources.dll
+P:\ProjetRestoRapido\RestoRapido\RestoRapido\bin\fr\System.Net.Http.Formatting.resources.dll
+P:\ProjetRestoRapido\RestoRapido\RestoRapido\bin\fr\System.Web.Http.resources.dll
+P:\ProjetRestoRapido\RestoRapido\RestoRapido\bin\fr\System.Web.Http.WebHost.resources.dll

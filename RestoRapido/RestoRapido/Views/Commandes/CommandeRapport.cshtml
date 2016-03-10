@@ -1,0 +1,61 @@
+﻿@model IEnumerable<RestoRapido.Models.CCommande>
+@{
+    ViewBag.Title = "CommandeRapport";
+}
+
+<h2>CommandeRapport</h2>
+
+<table class="table">
+    <tr style="text-align: left">
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdResto.resNom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdTable.i_TableNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mUtilisateurClient.UtilisateurNomUsager)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdPrixAvantTaxes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdPrixTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdDate)
+        </th>
+        <th>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr style="text-align: left">
+            <td>
+                @Html.DisplayFor(modelItem => item.mCmdResto.resNom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mCmdTable.i_TableNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mUtilisateurClient.UtilisateurNomUsager)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mCmdPrixAvantTaxes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mCmdPrixTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mCmdDate)
+            </td>
+            <td>
+                @Html.ActionLink("Détails", "Details", new { id = item.mCmdID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+

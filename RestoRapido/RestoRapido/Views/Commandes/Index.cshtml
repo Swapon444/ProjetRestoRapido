@@ -12,7 +12,17 @@ else
 }
 
 
+@if (ViewBag.Type == "Administrateur" || ViewBag.Type == "Gérant")
+{
+    @using (Html.BeginForm("CommandeRapport", "Commandes"))
+    {
+        <div>
+            <input type="date" name="DateRapport">
+            <input type="submit" value="Voir Rapport" class="btn btn-default" />
+        </div>
 
+    }
+}
 
 <p>
     <div height="50px" style="border-style: solid;">
