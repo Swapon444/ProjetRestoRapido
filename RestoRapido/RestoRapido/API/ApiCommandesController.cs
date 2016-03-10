@@ -10,6 +10,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Data.Entity;
 
+
+
 namespace RestoRapido.API
 {
 
@@ -17,8 +19,8 @@ namespace RestoRapido.API
     public class ApiCommandesController : ApiController
     {
 
-        private CRestoContext db = new CRestoContext();
 
+        private CRestoContext db = new CRestoContext();
 
 
         public IEnumerable<Object> getCommandes(string id)
@@ -35,8 +37,11 @@ namespace RestoRapido.API
         }
 
 
-        public int UpdateCommandeRepas(IEnumerable<Object> _Json)
+
+        [System.Web.Http.HttpGet]
+        public int UpdateCommandeRepas(int _tempo, string _Json)
         {
+             
             /*
 
                
@@ -44,25 +49,30 @@ namespace RestoRapido.API
 
             */
 
+            string[] tabTempo = _Json.Split('.');
 
-            foreach (var d in _Json)
+
+            for (int i = 0; i < tabTempo.Length; i = i + 3)
             {
                 using (SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV26.mdf;Initial Catalog=RestoRapido;Integrated Security=True"))
                 {
-                    string sql = "UPDATE CCmdRepas SET mEtoiles = @cmdEtoile WHERE mCmdRepID = @comID";
+                    string sql = "UPDATE CCmdRepas SET mEtoiles = @cmdEtoile, mCommentaire = @comment WHERE mCmdRepID = @comID";
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
-                        cmd.Parameters.AddWithValue("@cmdEtoile", 5);
-                        cmd.Parameters.AddWithValue("@comID", 1);
+                        cmd.Parameters.AddWithValue("@cmdEtoile", Convert.ToInt32(tabTempo[i]));
+                        cmd.Parameters.AddWithValue("@comment", tabTempo[i + 1]);
+                        cmd.Parameters.AddWithValue("@comID", Convert.ToInt32(tabTempo[i + 2]));
                         conn.Open();
                         cmd.ExecuteNonQuery();
                         conn.Close();
                     }
                 }
 
-
             }
+
+
+
 
             return 0;
 
