@@ -76,7 +76,7 @@ namespace RestoRapido.Controllers
 
         public ActionResult CommandeRapport(FormCollection collection)
         {
-            var DateString = collection.Get("CommandeRapport");
+            var DateString = collection.Get("DateRapport");
             if (@Session["Connexion"] != null)
             {
                 if ((bool)@Session["Connexion"] == false)
@@ -86,9 +86,12 @@ namespace RestoRapido.Controllers
 
                 else
                 {
-                    var DateRapport = DateTime.Parse(DateString);
+                    DateTime DateRapport = DateTime.Parse(DateString);
+
+                    DateTime tempo = DateRapport.AddDays(1);
+
                     var Cmd = from s in db.Commandes
-                              where s.mCmdDate == DateRapport && s.mCmdStatusCommande == 1
+                              where s.mCmdDate >= DateRapport && s.mCmdDate < tempo && s.mCmdStatusCommande == 1
                               select s;
                     return View(Cmd.ToList());
                 }

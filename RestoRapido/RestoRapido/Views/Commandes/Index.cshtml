@@ -14,7 +14,7 @@ else
 
 @if (ViewBag.Type == "Administrateur" || ViewBag.Type == "Gérant")
 {
-    @using (Html.BeginForm("CommandeRapport", "Commandes"))
+    using (Html.BeginForm("CommandeRapport", "Commandes"))
     {
         <div>
             <input type="date" name="DateRapport">
