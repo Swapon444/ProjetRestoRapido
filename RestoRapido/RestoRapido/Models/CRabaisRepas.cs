@@ -32,11 +32,15 @@ namespace RestoRapido.Models
 
         // Date de début du rabais
         [DisplayName("Date de début")]
-        public string RabaisDateDebut { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime RabaisDateDebut { get; set; }
 
         // Date de fin du rabais
         [DisplayName("Date de fin")]
-        public string RabaisDateFin { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime RabaisDateFin { get; set; }
 
         public virtual CRepas Repas { get; set; }
         #endregion

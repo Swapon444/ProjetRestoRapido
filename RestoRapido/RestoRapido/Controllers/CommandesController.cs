@@ -218,7 +218,7 @@ namespace RestoRapido.Controllers
                     {
                         foreach (var rabais in rep.RepasRabais)
                         {
-                            if ((DateTime.Parse(rabais.RabaisDateDebut) <= DateTime.Now) && (DateTime.Parse(rabais.RabaisDateFin) >= DateTime.Now))
+                            if ((rabais.RabaisDateDebut <= DateTime.Now) && (rabais.RabaisDateFin >= DateTime.Now))
                             {
                                 rep.m_iPrix = rep.m_iPrix - (rep.m_iPrix * (rabais.RabaisPrix / 100));
                             }
