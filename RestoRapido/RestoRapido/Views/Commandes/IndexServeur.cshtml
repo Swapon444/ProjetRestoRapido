@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<RestoRapido.Models.CCommande>
 
-@{
-    ViewBag.Title = "Vos Commandes";
-}
 
 
 <h2>Liste des Commandes</h2>
@@ -69,7 +66,7 @@
                     @Html.DisplayFor(modelItem => item.mCmdDate)
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.mCmdID })
+                    @Html.ActionLink("Détails", "Details", new { id = item.mCmdID })
                 </td>
             </tr>
     }

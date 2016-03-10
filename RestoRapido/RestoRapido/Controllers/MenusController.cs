@@ -19,47 +19,52 @@ namespace RestoRapido.Controllers
         // GET: Menus
         public ActionResult Index(string sortOrder, string searchString)
         {
-            ViewBag.NomSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateDebutSortParm = sortOrder == "DateDebut" ? "date_debut_desc" : "DateDebut";
-            ViewBag.DateFinSortParm = sortOrder == "DateFin" ? "date_fin_desc" : "DateFin";
-            ViewBag.NbRepasSortParm = sortOrder == "NbRepas" ? "nb_repas_desc" : "NbRepas";
-
-            var menus = from s in db.Menus select s;
-
-            if (!string.IsNullOrEmpty(searchString))
+            if (@Session["Type"] != null)
             {
-                menus = menus.Where(s => s.m_strNom.Contains(searchString));
+                ViewBag.NomSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                ViewBag.DateDebutSortParm = sortOrder == "DateDebut" ? "date_debut_desc" : "DateDebut";
+                ViewBag.DateFinSortParm = sortOrder == "DateFin" ? "date_fin_desc" : "DateFin";
+                ViewBag.NbRepasSortParm = sortOrder == "NbRepas" ? "nb_repas_desc" : "NbRepas";
+
+                var menus = from s in db.Menus select s;
+
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    menus = menus.Where(s => s.m_strNom.Contains(searchString));
+                }
+
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        menus = menus.OrderByDescending(s => s.m_strNom);
+                        break;
+                    case "DateDebut":
+                        menus = menus.OrderBy(s => s.m_DateDebut);
+                        break;
+                    case "date_debut_desc":
+                        menus = menus.OrderByDescending(s => s.m_DateDebut);
+                        break;
+                    case "DateFin":
+                        menus = menus.OrderBy(s => s.m_DateFin);
+                        break;
+                    case "date_fin_desc":
+                        menus = menus.OrderByDescending(s => s.m_DateFin);
+                        break;
+                    case "NbRepas":
+                        menus = menus.OrderBy(s => s.m_Repas.Count);
+                        break;
+                    case "nb_repas_desc":
+                        menus = menus.OrderByDescending(s => s.m_Repas.Count);
+                        break;
+                    default:
+                        menus = menus.OrderBy(s => s.m_strNom);
+                        break;
+                }
+
+                return View(menus.ToList());
             }
 
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    menus = menus.OrderByDescending(s => s.m_strNom);
-                    break;
-                case "DateDebut":
-                    menus = menus.OrderBy(s => s.m_DateDebut);
-                    break;
-                case "date_debut_desc":
-                    menus = menus.OrderByDescending(s => s.m_DateDebut);
-                    break;
-                case "DateFin":
-                    menus = menus.OrderBy(s => s.m_DateFin);
-                    break;
-                case "date_fin_desc":
-                    menus = menus.OrderByDescending(s => s.m_DateFin);
-                    break;
-                case "NbRepas":
-                    menus = menus.OrderBy(s => s.m_Repas.Count);
-                    break;
-                case "nb_repas_desc":
-                    menus = menus.OrderByDescending(s => s.m_Repas.Count);
-                    break;
-                default:
-                    menus = menus.OrderBy(s => s.m_strNom);
-                    break;
-            }
-
-            return View(menus.ToList());
+            return View("../Home/Index");
         }
 
         // GET: Menus/Details/5
@@ -67,7 +72,7 @@ namespace RestoRapido.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("../Home/Index");
             }
             CMenu cMenu = db.Menus.Find(id);
             if (cMenu == null)
@@ -80,7 +85,10 @@ namespace RestoRapido.Controllers
         // GET: Menus/Create
         public ActionResult Create()
         {
-            return View();
+            if (@Session["Type"] != null)
+                return View();
+
+            return View("../Home/Index");
         }
 
         // POST: Menus/Create
@@ -112,7 +120,7 @@ namespace RestoRapido.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("../Home/Index");
             }
 
             CMenu cMenu = db.Menus
@@ -132,6 +140,7 @@ namespace RestoRapido.Controllers
 
         void RemplirAssignationsRepas(CMenu menu)
         {
+
             var allRepas = db.Repas;
             var menuRepas = new HashSet<int>(menu.m_Repas.Select(r => r.m_iRepasId));
             var viewModel = new List<CRepasAssignes>();

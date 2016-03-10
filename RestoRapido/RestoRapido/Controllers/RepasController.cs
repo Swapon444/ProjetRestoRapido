@@ -21,33 +21,39 @@ namespace RestoRapido.Controllers
         // GET: Repas
         public ActionResult Index(string sortOrder, string searchString)
         {
-            ViewBag.NomSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.PrixSortParm = sortOrder == "Prix" ? "prix_desc" : "Prix";
+            if (@Session["Type"] != null)
+                if (@Session["Type"].ToString() == "Gerant")
+                {
+                    ViewBag.NomSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                    ViewBag.PrixSortParm = sortOrder == "Prix" ? "prix_desc" : "Prix";
 
-            var repas = from s in db.Repas select s;
+                    var repas = from s in db.Repas select s;
 
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                repas = repas.Where(s => s.m_strNom.Contains(searchString));
-            }
+                    if (!string.IsNullOrEmpty(searchString))
+                    {
+                        repas = repas.Where(s => s.m_strNom.Contains(searchString));
+                    }
 
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    repas = repas.OrderByDescending(s => s.m_strNom);
-                    break;
-                case "Prix":
-                    repas = repas.OrderBy(s => s.m_iPrix);
-                    break;
-                case "prix_desc":
-                    repas = repas.OrderByDescending(s => s.m_iPrix);
-                    break;
-                default:
-                    repas = repas.OrderBy(s => s.m_strNom);
-                    break;
-            }
+                    switch (sortOrder)
+                    {
+                        case "name_desc":
+                            repas = repas.OrderByDescending(s => s.m_strNom);
+                            break;
+                        case "Prix":
+                            repas = repas.OrderBy(s => s.m_iPrix);
+                            break;
+                        case "prix_desc":
+                            repas = repas.OrderByDescending(s => s.m_iPrix);
+                            break;
+                        default:
+                            repas = repas.OrderBy(s => s.m_strNom);
+                            break;
+                    }
 
-            return View(repas.ToList());
+                    return View(repas.ToList());
+                }
+
+            return View("../Home/Index");
         }
 
         // GET: Repas/Details/5
@@ -68,7 +74,11 @@ namespace RestoRapido.Controllers
         // GET: Repas/Create
         public ActionResult Create()
         {
-            return View();
+            if (@Session["Type"] != null)
+                if (@Session["Type"].ToString() == "Gerant")
+                    return View();
+
+            return View("../Home/Index");
         }
 
         // POST: Repas/Create
@@ -100,7 +110,7 @@ namespace RestoRapido.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("../Home/Index");
             }
             CRepas cRepas = db.Repas.Find(id);
             if (cRepas == null)
@@ -139,7 +149,7 @@ namespace RestoRapido.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("../Home/Index");
             }
             CRepas cRepas = db.Repas.Find(id);
             if (cRepas == null)
@@ -176,7 +186,7 @@ namespace RestoRapido.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("../Home/Index");
             }
 
 
@@ -192,7 +202,7 @@ namespace RestoRapido.Controllers
         {
 
             if (Session["SpecialID"] == null)
-                return RedirectToAction("Login", "Account");
+                return View("../Home/Index");
 
 
             if (file != null)

@@ -24,7 +24,7 @@
                      <div class="dropdown">
                         <button class="dropbtn">Ajouter </button>
                         <div class="dropdown-content">
-                            @Html.ActionLink(".. un utilisateur", "Creation", "Administrateur")
+                            @Html.ActionLink(".. un utilisateur", "Create", "Utilisateurs")
                             @Html.ActionLink(".. un restaurant", "Create", "CRestoes")
                         </div>
                     </div>
@@ -33,7 +33,9 @@
                         <button class="dropbtn">Gérer </button>
                         <div class="dropdown-content">
                             @Html.ActionLink("Mon compte", "Index", "Administrateur")
-                            @Html.ActionLink("Consulter les Commandes", "Index", "Commandes")
+                            @Html.ActionLink("Consulter les commandes", "Index", "Commandes")
+                            @Html.ActionLink("Les utilisateurs", "Index", "Utilisateurs")
+                            @Html.ActionLink("Les restaurants", "Index", "CRestoes")
                         </div>
                     </div>
                 }
@@ -43,10 +45,10 @@
                     <div class="dropdown">
                         <button class="dropbtn">Ajouter </button>
                         <div class="dropdown-content">
-                            @Html.ActionLink("Ajouter un Utilisateur", "Creation", "Gerant")
-                            @Html.ActionLink("Ajouter un Menu", "Index", "Menus")
-                            @Html.ActionLink("Ajouter un Repas", "Index", "Repas")
-                            @Html.ActionLink("Ajouter un Rabais", "Index", "RabaisRepas")
+                            @Html.ActionLink(".. un utilisateur", "Create", "Utilisateurs")
+                            @Html.ActionLink(".. un menu", "Index", "Menus")
+                            @Html.ActionLink(".. un repas", "Index", "Repas")
+                            @Html.ActionLink(".. un rabais", "Index", "RabaisRepas")
                         </div>
                     </div>
 
@@ -65,9 +67,9 @@
                         <button class="dropbtn">Gérer </button>
                         <div class="dropdown-content">
                             @Html.ActionLink("Mon compte", "Index", "Serveur")
-                            @Html.ActionLink("Choisir les Tables", "SelectTable", "Serveur")
-                            @Html.ActionLink("Mes Alertes", "Alertes", "Serveur")
-                            @Html.ActionLink("Consulter les Commandes", "Index", "Commandes")
+                            @Html.ActionLink("Choisir les tables", "SelectTable", "Serveur")
+                            @Html.ActionLink("Mes alertes", "Alertes", "Serveur")
+                            @Html.ActionLink("Consulter les commandes", "Index", "Commandes")
                         </div>
                     </div>
                 }

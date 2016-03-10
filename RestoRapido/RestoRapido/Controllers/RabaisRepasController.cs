@@ -17,8 +17,15 @@ namespace RestoRapido.Controllers
         // GET: RabaisRepas
         public ActionResult Index()
         {
-            var rabais = db.Rabais.Include(c => c.Repas);
-            return View(rabais.ToList());
+            if (@Session["Type"] != null)
+                if (@Session["Type"].ToString() == "Gerant")
+                {
+                    var rabais = db.Rabais.Include(c => c.Repas);
+                    return View(rabais.ToList());
+                }
+
+            return View("../Home/Index");
+            
         }
 
         // GET: RabaisRepas/Details/5
@@ -39,8 +46,13 @@ namespace RestoRapido.Controllers
         // GET: RabaisRepas/Create
         public ActionResult Create()
         {
-            ViewBag.m_iRepasId = new SelectList(db.Repas, "m_iRepasId", "m_strNom");
-            return View();
+            if (@Session["Type"] != null)
+                if (@Session["Type"].ToString() == "Gerant")
+                {
+                    ViewBag.m_iRepasId = new SelectList(db.Repas, "m_iRepasId", "m_strNom");
+                    return View();
+                }
+            return View("../Home/Index");
         }
 
         // POST: RabaisRepas/Create

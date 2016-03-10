@@ -19,45 +19,10 @@ namespace RestoRapido.Controllers
         public ActionResult Index()
         {
             if (@Session["Type"] != null)
-            {
                 if (@Session["Type"].ToString() == "Administrateur")
                     return View();
-                return View("../Shared/Error");
-            }
-            else
-                return View("../Shared/Error");
-        }
 
-
-
-        public ActionResult Creation()
-        {
-            if (@Session["Type"] != null)
-            {
-                if (@Session["Type"].ToString() == "Administrateur")
-                    return View();
-                return View("../Shared/Error");
-            }
-            else
-                return View("../Shared/Error");
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Creation([Bind(Include = "UtilisateurID,UtilisateurMDP,UtilisateurNomUsager,UtilisateurNom,UtilisateurPrenom,UtilisateurType,m_boBle,m_boLait,m_boOeuf,m_boArachide,m_boSoja,m_boFruitCoque,m_boPoisson,m_boSesame,m_boCrustace,m_boMollusque")] Utilisateur utilisateur)
-        {
-            //Objectif : Créer un compte avec les valeurs reçues en paramètre
-
-            if (ModelState.IsValid)
-            {
-                utilisateur.UtilisateurMDP = CEncryption.CalculateMD5Hash(utilisateur.UtilisateurMDP);
-                db.Utilisateurs.Add(utilisateur);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(utilisateur);
+            return View("../Home/Index");
         }
 
         protected override void Dispose(bool disposing)

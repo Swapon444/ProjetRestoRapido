@@ -1,13 +1,10 @@
 ﻿@model IEnumerable<RestoRapido.Models.CMenu>
 
-@{
-    ViewBag.Title = "Index";
-}
 
-<h2>Menus</h2>
+<h2>Les Menus</h2>
 
 <p>
-    @Html.ActionLink("Nouveau", "Create")
+    @Html.ActionLink("Ajouter un menu", "Create")
 </p>
 
 @using (Html.BeginForm())

@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<RestoRapido.Models.CCommande>
 
-@{
-    ViewBag.Title = "Vos Commandes";
-}
 
 @if (ViewBag.Type == "Client")
 {
@@ -93,7 +90,7 @@ else
                     @Html.DisplayFor(modelItem => item.mCmdDate)
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.mCmdID })
+                    @Html.ActionLink("Détails", "Details", new { id = item.mCmdID })
                 </td>
             </tr>
         }
@@ -156,7 +153,7 @@ else
                     @Html.DisplayFor(modelItem => item.mCmdDate)
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.mCmdID })
+                    @Html.ActionLink("Détails", "Details", new { id = item.mCmdID })
                     @if (ViewBag.Type != "Client")
                     {
                         <br>

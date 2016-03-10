@@ -137,7 +137,7 @@ namespace RestoRapido.Controllers
 
             switch (type)
             {
-                //Afficher la bonne vue selon le type du compte
+                //Afficher la bonne vue selon le type de compte
                 case "Administrateur":
                     return View("../Administrateur/Index");
                 case "Gerant":
@@ -147,7 +147,7 @@ namespace RestoRapido.Controllers
                 case "Client":
                     {
 
-                        //Si l'utilisateur est un client, lui affecté la table qu'il a choisi
+                        //Si l'utilisateur est un client, lui affecter la table qu'il a choisie
 
                         SqlCommand checktable = new SqlCommand("SELECT CTable_CTableID FROM UtilisateurCTables WHERE " + id + " = Utilisateur_UtilisateurID", conn);
                         checktable.Connection = conn;
@@ -167,7 +167,7 @@ namespace RestoRapido.Controllers
                     return Login(returnUrl, 0, 0);
             }
         }
-
+        /*
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -460,7 +460,7 @@ namespace RestoRapido.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
-        }
+        }*/
 
         //
         // POST: /Account/LogOff

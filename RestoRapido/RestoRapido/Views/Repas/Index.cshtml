@@ -1,13 +1,9 @@
 ﻿@model IEnumerable<RestoRapido.Models.CRepas>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Repas</h2>
+<h2>Les Repas</h2>
 
 <p>
-    @Html.ActionLink("Nouveau", "Create")
+    @Html.ActionLink("Ajouter un repas", "Create")
 </p>
 
 @using (Html.BeginForm())
@@ -107,7 +103,7 @@
             @Html.ActionLink("Modifier", "Edit", new { id=item.m_iRepasId }) |
             @Html.ActionLink("Détails", "Details", new { id=item.m_iRepasId }) 
             <br>
-            @Html.ActionLink("Ajouter Image", "SelectionImage", new { id = item.m_iRepasId })|
+            @Html.ActionLink("Ajouter une image", "SelectionImage", new { id = item.m_iRepasId })|
             @Html.ActionLink("Supprimer", "Delete", new { id=item.m_iRepasId }) 
         </td>
     </tr>

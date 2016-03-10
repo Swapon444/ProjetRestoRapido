@@ -1,13 +1,9 @@
 ﻿@model RestoRapido.Models.CCommande
 
-@{
-    ViewBag.Title = "Details";
-}
 
-<h2>Details</h2>
+<h2>Détails d'une commande</h2>
 
 <div>
-    <h4>CCommande</h4>
 
     <hr />
 
@@ -19,7 +15,7 @@
         <dd>
             @Html.DisplayFor(model => model.mCmdDate)        
         </dd>
-        <br>
+        
         <dt>
             @Html.DisplayNameFor(model => model.mCmdResto.resNom)    
         </dt>
@@ -27,7 +23,7 @@
         <dd>
             @Html.DisplayFor(model => model.mCmdResto.resNom)
        </dd>
-        <br>
+      
 
         <dt>
             @Html.DisplayNameFor(model => model.mCmdTable.i_TableNum)        
@@ -36,7 +32,7 @@
         <dd>
             @Html.DisplayFor(model => model.mCmdTable.i_TableNum)        
         </dd>
-        <br>
+       
         <dt>
             @Html.DisplayNameFor(model => model.mUtilisateurClient.UtilisateurNomUsager)        
         </dt>
@@ -44,7 +40,7 @@
         <dd>
             @Html.DisplayFor(model => model.mUtilisateurClient.UtilisateurNomUsager)        
         </dd>
-        <br>
+        
         <dt>
             @Html.DisplayNameFor(model => model.mCmdCommentCommandes)        
         </dt>
@@ -106,14 +102,14 @@
 
             <br>
           <label> Montant Total : </label> @Html.DisplayFor(model => model.mCmdPrixTotal)
-    <div> 
+    </div> 
 
 </div>
 
 <p>
-    @if (Session["Type"] == "Client")
+    @if ((string)Session["Type"] == "Client")
     {
-        @Html.ActionLink("Retour", "Index")
+        @Html.ActionLink("Retour à la liste des commandes", "Index")
     }
     else
     {

@@ -1,10 +1,7 @@
 ﻿@model RestoRapido.Models.CCommande
 
-@{
-    ViewBag.Title = "Details";
-}
 
-<h2>Détails</h2>
+<h2>Supprimer une commande</h2>
 
 <div>
 
@@ -53,6 +50,7 @@
         </dd>
 
     </dl>
+</div>
 
     <label> Liste des Repas : </label>
 
@@ -103,7 +101,7 @@
 
             <div class="form-actions no-color">
                 <input type="submit" value="Supprimer" class="btn btn-default" /> |
-                @Html.ActionLink("Retour", "Index")
+                @Html.ActionLink("Retour à la liste des commandes", "Index")
             </div>
         }
     </div>

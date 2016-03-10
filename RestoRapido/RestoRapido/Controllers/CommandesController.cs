@@ -70,7 +70,7 @@ namespace RestoRapido.Controllers
             }
 
             else
-                return RedirectToAction("Login", "Account");
+                return View("../Home/Index");
 
         }
 

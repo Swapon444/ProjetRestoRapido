@@ -1,23 +1,11 @@
 ﻿@model RestoRapido.Models.Utilisateur
 
-@{
-    ViewBag.Title = "Delete";
-}
+<h2>Supprimer un utilisateur</h2>
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>Êtes-vous certain de vouloir supprimer cet utilisateur ?</h3>
 <div>
-    <h4>Utilisateur</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UtilisateurMDP)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UtilisateurMDP)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.UtilisateurNomUsager)
@@ -51,94 +39,14 @@
             @Html.DisplayFor(model => model.UtilisateurType)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.m_boBle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.m_boBle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.m_boLait)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.m_boLait)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.m_boOeuf)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.m_boOeuf)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.m_boArachide)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.m_boArachide)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.m_boSoja)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.m_boSoja)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.m_boFruitCoque)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.m_boFruitCoque)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.m_boPoisson)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.m_boPoisson)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.m_boSesame)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.m_boSesame)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.m_boCrustace)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.m_boCrustace)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.m_boMollusque)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.m_boMollusque)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Retour à la liste des utilisateurs", "Index")
         </div>
     }
 </div>

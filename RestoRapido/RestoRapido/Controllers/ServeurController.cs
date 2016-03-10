@@ -18,68 +18,59 @@ namespace RestoRapido.Controllers
 
         public ActionResult Index()
         {
-            if (@Session["Type"] == null)
-                return View("../Shared/Error");
+            if (@Session["Type"] != null)
+                if (@Session["Type"].ToString() == "Serveur")
+                    return View();
 
-            else if (@Session["Type"].ToString() == "Serveur")
-                return View();
-            else
-                return View("../Shared/Error");
+            return View("../Home/Index");
         }
 
         public ActionResult Alertes()
         {
             //Objectif : Afficher les alertes d'un serveur
 
-            if (@Session["Type"] == null)
-                return View("../Shared/Error");
+            if (@Session["Type"] != null)
+                if (@Session["Type"].ToString() == "Serveur")
+                {
+                    //Aller chercher toutes les alertes du serveur
+                    SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV26.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                    SqlCommand alertes = new SqlCommand("SELECT i_TableNum FROM CTables INNER JOIN CAlertes ON CTables.CTableID = CAlertes.CTableID INNER JOIN UtilisateurCTables ON CAlertes.CTableID = UtilisateurCTables.CTable_CTableID WHERE UtilisateurCTables.Utilisateur_UtilisateurID = " + Session["ID"], conn);
+                    alertes.Connection = conn;
+                    conn.Open();
+                    SqlDataReader dr = alertes.ExecuteReader();
 
-           else if (@Session["Type"].ToString() == "Serveur")
-            {
-                //Aller chercher toutes les alertes du serveur
-                SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV26.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
-                SqlCommand alertes = new SqlCommand("SELECT i_TableNum FROM CTables INNER JOIN CAlertes ON CTables.CTableID = CAlertes.CTableID INNER JOIN UtilisateurCTables ON CAlertes.CTableID = UtilisateurCTables.CTable_CTableID WHERE UtilisateurCTables.Utilisateur_UtilisateurID = " + Session["ID"], conn);
-                alertes.Connection = conn;
-                conn.Open();
-                SqlDataReader dr = alertes.ExecuteReader();
+                    List<string> Tables = new List<string>();
 
-                List<string> Tables = new List<string>();
-
-                while (dr.Read()) //Mettre dans la liste toutes les tables qui ont appelé le serveur
-                    Tables.Add("Table #" + dr.GetInt32(0).ToString());
+                    while (dr.Read()) //Mettre dans la liste toutes les tables qui ont appelé le serveur
+                        Tables.Add("Table #" + dr.GetInt32(0).ToString());
 
 
-                return View(Tables);
-            }
-            else
-                return View("../Shared/Error");
+                    return View(Tables);
+                }
+
+            return View("../Home/Index");
         }
 
         public ActionResult Supprimer()
         {
             //Objectif : Supprimer les alertes d'un serveur
-            if (@Session["Type"] == null)
-                return View("../Shared/Error");
+            if (@Session["Type"] != null)
+                if (@Session["Type"].ToString() == "Serveur")
+                {
+                    //Supprimer toutes les alertes qui ont le même UtilisateurID que l'ID du serveur
+                    SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV26.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                    SqlCommand alertes = new SqlCommand("DELETE CAlertes FROM CAlertes INNER JOIN UtilisateurCTables on CAlertes.CTableID = UtilisateurCTables.CTable_CTableID WHERE UtilisateurCTables.Utilisateur_UtilisateurID = " + Session["ID"], conn);
 
-          else if (@Session["Type"].ToString() == "Serveur")
-            {
-                //Supprimer toutes les alertes qui ont le même UtilisateurID que l'ID du serveur
-                SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV26.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
-                SqlCommand alertes = new SqlCommand("DELETE CAlertes FROM CAlertes INNER JOIN UtilisateurCTables on CAlertes.CTableID = UtilisateurCTables.CTable_CTableID WHERE UtilisateurCTables.Utilisateur_UtilisateurID = " + Session["ID"], conn);
-
-                alertes.Connection = conn;
-                conn.Open();
-                alertes.ExecuteReader();
+                    alertes.Connection = conn;
+                    conn.Open();
+                    alertes.ExecuteReader();
 
 
-                return View("Index");
-            }
-            else
-                return View("../Shared/Error");
+                    return View("Index");
+                }
+
+            return View("../Home/Index");
         }
-
-
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -91,31 +82,43 @@ namespace RestoRapido.Controllers
 
         public ActionResult SelectTable()
         {
-            int ID = Convert.ToInt32(Session["ID"]);
+            if (@Session["Type"] != null)
+                if (@Session["Type"].ToString() == "Serveur")
+                {
+                    int ID = Convert.ToInt32(Session["ID"]);
 
-            Utilisateur serveur = db.Utilisateurs
-                .Include(i => i.Tables)
-                .Where(i => i.UtilisateurID == ID)
-                .Single();
+                    Utilisateur serveur = db.Utilisateurs
+                        .Include(i => i.Tables)
+                        .Where(i => i.UtilisateurID == ID)
+                        .Single();
 
-            PopulateAssignedTableData(serveur);
-            return View(serveur);
+                    PopulateAssignedTableData(serveur);
+                    return View(serveur);
+                }
+
+            return View("../Home/Index");
         }
 
         public ActionResult SaveSelectTable(string[] selectedTables)
         {
-            int ID = Convert.ToInt32(Session["ID"]);
+            if (@Session["Type"] != null)
+                if (@Session["Type"].ToString() == "Serveur")
+                {
+                    int ID = Convert.ToInt32(Session["ID"]);
 
-            Utilisateur serveurToUpdate = db.Utilisateurs
-                .Include(i => i.Tables)
-                .Where(i => i.UtilisateurID == ID)
-                .Single();
+                    Utilisateur serveurToUpdate = db.Utilisateurs
+                        .Include(i => i.Tables)
+                        .Where(i => i.UtilisateurID == ID)
+                        .Single();
 
-            UpdateServeurTables(selectedTables, serveurToUpdate);
+                    UpdateServeurTables(selectedTables, serveurToUpdate);
 
-            db.SaveChanges();
+                    db.SaveChanges();
 
-            return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+
+            return View("../Home/Index");
         }
 
         private void UpdateServeurTables(string[] selectedTables, Utilisateur serveurToUpdate)

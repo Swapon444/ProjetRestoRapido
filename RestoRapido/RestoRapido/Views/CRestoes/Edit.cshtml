@@ -1,11 +1,8 @@
 ﻿@model RestoRapido.Models.CResto
 @using RestoRapido.Models
 
-@{
-    ViewBag.Title = "Modification du restaurant";
-}
 
-<h2>@ViewBag.Title</h2>
+<h2>Modifier un restaurant</h2>
 
 
 @using (Html.BeginForm())
@@ -90,7 +87,7 @@
     @Html.ActionLink("Ajouter une table", "ajoutertable", new { id = Model.CRestoID })
 </div>
 <div>
-    @Html.ActionLink("Retour aux restaurants", "Index")
+   @Html.ActionLink("Retour à la liste des restaurants", "Index")
 </div>
 
 @section Scripts {

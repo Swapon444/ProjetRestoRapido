@@ -17,7 +17,13 @@ namespace RestoRapido.Controllers
         // GET: Utilisateurs1
         public ActionResult Index()
         {
-            return View(db.Utilisateurs.ToList());
+            if (@Session["Type"] != null)
+                if ((@Session["Type"].ToString() == "Administrateur") || ((@Session["Type"].ToString() == "Gerant")))
+                    return View(db.Utilisateurs.ToList());
+
+            return View("../Home/Index");
+
+           
         }
 
         // GET: Utilisateurs1/Details/5
@@ -25,7 +31,7 @@ namespace RestoRapido.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("../Home/Index");
             }
             Utilisateur utilisateur = db.Utilisateurs.Find(id);
             if (utilisateur == null)
@@ -38,7 +44,14 @@ namespace RestoRapido.Controllers
         // GET: Utilisateurs1/Create
         public ActionResult Create()
         {
-            return View();
+            if (@Session["Type"] != null)
+            {
+                if ((@Session["Type"].ToString() == "Administrateur") || ((@Session["Type"].ToString() == "Gerant")))
+                    return View();
+                return View("../Home/Index");
+            }
+            else
+                return View("../Home/Index");
         }
 
         // POST: Utilisateurs1/Create
@@ -50,6 +63,7 @@ namespace RestoRapido.Controllers
         {
             if (ModelState.IsValid)
             {
+                utilisateur.UtilisateurMDP = CEncryption.CalculateMD5Hash(utilisateur.UtilisateurMDP);
                 db.Utilisateurs.Add(utilisateur);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -94,7 +108,7 @@ namespace RestoRapido.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("../Home/Index");
             }
             Utilisateur utilisateur = db.Utilisateurs.Find(id);
             if (utilisateur == null)

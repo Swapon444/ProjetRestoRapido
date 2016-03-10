@@ -1,10 +1,7 @@
 ﻿@model RestoRapido.Models.CRepas
 
-@{
-    ViewBag.Title = "Details";
-}
 
-<h2>Détails</h2>
+<h2>Détails du repas</h2>
 
 <div>
     <hr />
@@ -117,5 +114,5 @@
 </div>
 <p>
     @Html.ActionLink("Modifier", "Edit", new { id = Model.m_iRepasId }) |
-    @Html.ActionLink("Retour", "Index")
+    @Html.ActionLink("Retour à la liste des repas", "Index")
 </p>
