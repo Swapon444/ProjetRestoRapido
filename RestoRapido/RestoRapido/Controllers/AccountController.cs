@@ -89,7 +89,7 @@ namespace RestoRapido.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl, int? Restaurants)
+        public ActionResult Login(LoginViewModel model, string returnUrl, int? Restaurants)
         {
             //Objectif : Authentifier un utilisateur
 
