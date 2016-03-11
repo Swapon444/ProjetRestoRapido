@@ -27,11 +27,15 @@ namespace RestoRapido.Controllers
 
         public ActionResult AppelerServeur()
         {
+            string strCon = System.Web
+                      .Configuration
+                      .WebConfigurationManager
+                      .ConnectionStrings["CRestoContext"].ConnectionString;
             //Objectif : Notifier le serveur par la table utilisée par le client courant
             if (@Session["Type"] != null)
                 if (@Session["Type"].ToString() == "Client")
                 {
-                    SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV26.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                    SqlConnection conn = new SqlConnection(strCon);
                     conn.Open();
 
                     //Regarder tout d'abord si le server n'a pas déjà été alerté par le même client

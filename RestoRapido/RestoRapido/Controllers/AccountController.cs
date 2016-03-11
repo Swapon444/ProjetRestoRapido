@@ -13,7 +13,6 @@ using System.Data.SqlClient;
 
 namespace RestoRapido.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -92,7 +91,10 @@ namespace RestoRapido.Controllers
         public ActionResult Login(LoginViewModel model, string returnUrl, int? Restaurants)
         {
             //Objectif : Authentifier un utilisateur
-
+            string strCon = System.Web
+                      .Configuration
+                      .WebConfigurationManager
+                      .ConnectionStrings["CRestoContext"].ConnectionString;
             string type = ""; //Type du compte de l'utilisateur
             string prenom = ""; //Prénom de l'utilisateur
             int id = -1; //Id de l'utilisateur
@@ -103,7 +105,7 @@ namespace RestoRapido.Controllers
             {
                 return View(model);
             }
-            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV26.mdf;Initial Catalog=RestoRapido;Integrated Security=True"); 
+            SqlConnection conn = new SqlConnection(strCon); 
             SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "' AND UtilisateurMDP = '" + CEncryption.CalculateMD5Hash(model.Password.ToString()) + "'", conn);
            
             

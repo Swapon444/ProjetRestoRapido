@@ -41,7 +41,10 @@ namespace RestoRapido.API
         [System.Web.Http.HttpGet]
         public int UpdateCommandeRepas(int _tempo, string _Json)
         {
-             
+            string strCon = System.Web
+                     .Configuration
+                     .WebConfigurationManager
+                     .ConnectionStrings["CRestoContext"].ConnectionString;
             /*
 
                
@@ -54,7 +57,7 @@ namespace RestoRapido.API
 
             for (int i = 0; i < tabTempo.Length; i = i + 3)
             {
-                using (SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV26.mdf;Initial Catalog=RestoRapido;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection(strCon))
                 {
                     string sql = "UPDATE CCmdRepas SET mEtoiles = @cmdEtoile, mCommentaire = @comment WHERE mCmdRepID = @comID";
 

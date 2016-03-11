@@ -15,9 +15,12 @@ namespace RestoRapido.Controllers
         [HttpGet]
         public List<object> Modif(int id, string login, bool boBle, bool boLait, bool boOeuf, bool boArachide, bool boSoja, bool boFruitCoque, bool boPoisson, bool boSesame, bool boCrustace, bool boMollusque)
         {
+            string strCon = System.Web
+                      .Configuration
+                      .WebConfigurationManager
+                      .ConnectionStrings["CRestoContext"].ConnectionString;
 
-
-            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV26.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+            SqlConnection conn = new SqlConnection(strCon);
             SqlCommand checkuser = new SqlCommand("SELECT * FROM Utilisateurs WHERE UtilisateurNomUsager = '" + login + "'", conn);
             checkuser.Connection = conn;
             conn.Open();

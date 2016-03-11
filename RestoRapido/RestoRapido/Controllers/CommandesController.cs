@@ -105,7 +105,10 @@ namespace RestoRapido.Controllers
         // GET: Commandes
         public ActionResult IndexServeur()
         {
-
+            string strCon = System.Web
+                      .Configuration
+                      .WebConfigurationManager
+                      .ConnectionStrings["CRestoContext"].ConnectionString;
             if (@Session["Connexion"] != null)
             {
                 if ((bool)@Session["Connexion"] == false)
@@ -123,7 +126,7 @@ namespace RestoRapido.Controllers
 
                     commandes = commandes.Include(c => c.mCmdResto).Include(c => c.mCmdTable).Include(c => c.mUtilisateurClient);
 
-                    SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV26.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
+                    SqlConnection conn = new SqlConnection(strCon);
                     SqlCommand cmd = new SqlCommand("SELECT DISTINCT CTables.i_TableNum FROM CCommandes INNER JOIN CTables ON CCommandes.CTableID = CTables.CTableID INNER JOIN UtilisateurCTables ON CTables.CTableID = UtilisateurCTables.CTable_CTableID INNER JOIN Utilisateurs ON UtilisateurCTables.Utilisateur_UtilisateurID = Utilisateurs.UtilisateurID WHERE CCommandes.mCmdStatusCommande = 0 AND UtilisateurCTables.Utilisateur_UtilisateurID = " + Session["ID"] + " AND CCommandes.CRestoID = " + Session["RestoID"], conn);
                     cmd.Connection = conn;
                     conn.Open();
@@ -336,8 +339,11 @@ namespace RestoRapido.Controllers
 
                 decimal ddSomme = Convert.ToDecimal(dSomme);
                 decimal ddSommeTotale = Convert.ToDecimal(dSommeTotale);
-
-                using (SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV26.mdf;Initial Catalog=RestoRapido;Integrated Security=True"))
+                string strCon = System.Web
+                      .Configuration
+                      .WebConfigurationManager
+                      .ConnectionStrings["CRestoContext"].ConnectionString;
+                using (SqlConnection conn = new SqlConnection(strCon))
                 {
                     string sql = "UPDATE CCommandes SET mCmdPrixAvantTaxes = @Prix, mCmdPrixTotal = @PrixTotal WHERE mCmdID = @comID";
 
@@ -366,6 +372,10 @@ namespace RestoRapido.Controllers
         // GET: Commandes
         public ActionResult PayerFacture(int? id)
         {
+            string strCon = System.Web
+                      .Configuration
+                      .WebConfigurationManager
+                      .ConnectionStrings["CRestoContext"].ConnectionString;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -378,7 +388,7 @@ namespace RestoRapido.Controllers
                 return HttpNotFound();
             }
 
-            using (SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestoRapidoV26.mdf;Initial Catalog=RestoRapido;Integrated Security=True"))
+            using (SqlConnection conn = new SqlConnection(strCon))
             {
                 string sql = "UPDATE CCommandes SET mCmdStatusCommande = 1 WHERE mCmdID = @comID";
 

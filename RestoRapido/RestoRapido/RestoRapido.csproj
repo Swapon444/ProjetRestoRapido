@@ -211,6 +211,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603101631142_InitialCreate.cs" />
+    <Compile Include="Migrations\201603101631142_InitialCreate.Designer.cs">
+      <DependentUpon>201603101631142_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CAlerte.cs" />
     <Compile Include="Models\CCmdRepas.cs" />
@@ -238,9 +243,9 @@
     <Compile Include="ViewModels\RepasZCommandes.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\dbRestoRapidoV25.mdf" />
-    <Content Include="App_Data\dbRestoRapidoV25_log.ldf">
-      <DependentUpon>dbRestoRapidoV25.mdf</DependentUpon>
+    <Content Include="App_Data\dbRestoRapidoV26.mdf" />
+    <Content Include="App_Data\dbRestoRapidoV26_log.ldf">
+      <DependentUpon>dbRestoRapidoV26.mdf</DependentUpon>
     </Content>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
@@ -320,6 +325,7 @@
     <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="ClassDiagram1.cd" />
+    <None Include="Properties\PublishProfiles\ProjetRestoRapidoC.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -373,20 +379,8 @@
     <Content Include="Views\CRestoes\Details.cshtml" />
     <Content Include="Views\CRestoes\Edit.cshtml" />
     <Content Include="Views\CRestoes\Index.cshtml" />
-    <Content Include="Views\CTables\Create.cshtml" />
-    <Content Include="Views\CTables\Delete.cshtml" />
-    <Content Include="Views\CTables\Details.cshtml" />
-    <Content Include="Views\CTables\Edit.cshtml" />
-    <Content Include="Views\CTables\Index.cshtml" />
-    <Content Include="Views\Administrateur\Creation.cshtml" />
     <Content Include="Views\Administrateur\Index.cshtml" />
-    <Content Include="Views\CAlertes\Create.cshtml" />
-    <Content Include="Views\CAlertes\Delete.cshtml" />
-    <Content Include="Views\CAlertes\Details.cshtml" />
-    <Content Include="Views\CAlertes\Edit.cshtml" />
-    <Content Include="Views\CAlertes\Index.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
-    <Content Include="Views\Gerant\Creation.cshtml" />
     <Content Include="Views\Gerant\Index.cshtml" />
     <Content Include="Views\Serveur\Alertes.cshtml" />
     <Content Include="Views\Serveur\Index.cshtml" />
@@ -438,6 +432,11 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201603101631142_InitialCreate.resx">
+      <DependentUpon>201603101631142_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
