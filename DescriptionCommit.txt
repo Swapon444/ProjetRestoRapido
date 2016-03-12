@@ -1,2 +1,0 @@
-Il y avait des problèmes pour creer une nouvelle base de données, voir la string de connecion pour la correction
-Les classes tables et codeQR sont faites mais non testées

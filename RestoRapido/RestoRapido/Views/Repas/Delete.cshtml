@@ -1,0 +1,43 @@
+﻿@model RestoRapido.Models.CRepas
+
+
+<h2>Supprimer un repas</h2>
+
+<h3>Êtes-vous certain de vouloir supprimer ce repas ?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.m_strNom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.m_strNom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.m_iPrix)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.m_iPrix)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.m_strDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.m_strDescription)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Retour à la liste des repas", "Index")
+        </div>
+    }
+</div>

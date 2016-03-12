@@ -13,19 +13,10 @@ namespace RestoRapido.Controllers
 
         public ActionResult Index()
         {
-            return View();
-        }
+            var Utilisateurs = db.Utilisateurs.ToList();
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            //vider la variable de session sur l'arriver sur la page d'accueil
+            Session.Clear();
 
             return View();
         }

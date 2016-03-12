@@ -18,7 +18,87 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("RestoRapido", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    
+                @if((string)Session["Type"] == "Administrateur")
+                {
+                     <div class="dropdown">
+                        <button class="dropbtn">Ajouter </button>
+                        <div class="dropdown-content">
+                            @Html.ActionLink(".. un utilisateur", "Create", "Utilisateurs")
+                            @Html.ActionLink(".. un restaurant", "Create", "CRestoes")
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Gérer </button>
+                        <div class="dropdown-content">
+                            @Html.ActionLink("Mon compte", "Index", "Administrateur")
+                            @Html.ActionLink("Consulter les commandes", "Index", "Commandes")
+                            @Html.ActionLink("Les utilisateurs", "Index", "Utilisateurs")
+                            @Html.ActionLink("Les restaurants", "Index", "CRestoes")
+                        </div>
+                    </div>
+                }
+
+                @if ((string)Session["Type"] == "Gerant")
+                {
+                    <div class="dropdown">
+                        <button class="dropbtn">Ajouter </button>
+                        <div class="dropdown-content">
+                            @Html.ActionLink(".. un utilisateur", "Create", "Utilisateurs")
+                            @Html.ActionLink(".. un menu", "Index", "Menus")
+                            @Html.ActionLink(".. un repas", "Index", "Repas")
+                            @Html.ActionLink(".. un rabais", "Index", "RabaisRepas")
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Gérer </button>
+                        <div class="dropdown-content">
+                            @Html.ActionLink("Mon compte", "Index", "Gerant")
+                            @Html.ActionLink("Consulter les Commandes", "Index", "Commandes")
+                        </div>
+                    </div>
+                }
+
+                @if ((string)Session["Type"] == "Serveur")
+                {
+                    <div class="dropdown">
+                        <button class="dropbtn">Gérer </button>
+                        <div class="dropdown-content">
+                            @Html.ActionLink("Mon compte", "Index", "Serveur")
+                            @Html.ActionLink("Choisir les tables", "SelectTable", "Serveur")
+                            @Html.ActionLink("Mes alertes", "Alertes", "Serveur")
+                            @Html.ActionLink("Consulter les commandes", "Index", "Commandes")
+                        </div>
+                    </div>
+                }
+
+                @if ((string)Session["Type"] == "Client")
+                {
+                    <div class="dropdown">
+                        <button class="dropbtn">Commander </button>
+                        <div class="dropdown-content">
+                            @Html.ActionLink("Commander un repas", "Index", "Commandes")
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Menus </button>
+                        <div class="dropdown-content">
+                            @Html.ActionLink("Voir les menus", "Details/" + Session["RestoID"].ToString(), "Menus")
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Gérer </button>
+                        <div class="dropdown-content">
+                            @Html.ActionLink("Mon compte", "Index", "Client")
+                            @Html.ActionLink("Appeler votre serveur", "AppelerServeur", "Client")
+                        </div>
+                    </div>
+                }
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

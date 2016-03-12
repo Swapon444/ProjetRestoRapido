@@ -1,0 +1,51 @@
+﻿@model IEnumerable<RestoRapido.Models.CRabaisRepas>
+
+@{
+    ViewBag.Title = "Index des rabais";
+}
+
+<h2>Les rabais</h2>
+
+<p>
+    @Html.ActionLink("Ajouter un rabais", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Repas.m_strNom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RabaisPrix)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RabaisDateDebut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RabaisDateFin)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Repas.m_strNom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RabaisPrix)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RabaisDateDebut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RabaisDateFin)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.RabaisID }) |
+            @Html.ActionLink("Détails", "Details", new { id=item.RabaisID }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.RabaisID })
+        </td>
+    </tr>
+}
+
+</table>

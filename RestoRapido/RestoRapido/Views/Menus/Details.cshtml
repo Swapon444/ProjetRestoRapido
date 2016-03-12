@@ -1,0 +1,66 @@
+﻿@model RestoRapido.Models.CMenu
+
+
+<h2>Détails du menu</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.m_strNom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.m_strNom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.m_DateDebut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.m_DateDebut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.m_DateFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.m_DateFin)
+        </dd>
+
+        <dt>
+            Repas
+        </dt>
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Nom du repas</th>
+                    <th>Prix du repas</th>
+                    <th>Desription du repas</th>
+                </tr>
+                @foreach (var item in Model.m_Repas)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.m_strNom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.m_iPrix)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.m_strDescription)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.m_iMenuId }) |
+    @Html.ActionLink("Retour à la liste des menus", "Index")
+</p>

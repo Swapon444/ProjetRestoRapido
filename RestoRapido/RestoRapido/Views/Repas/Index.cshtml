@@ -1,0 +1,112 @@
+﻿@model IEnumerable<RestoRapido.Models.CRepas>
+
+<h2>Les Repas</h2>
+
+<p>
+    @Html.ActionLink("Ajouter un repas", "Create")
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Rechercher par nom : @Html.TextBox("SearchString")
+        <input type="submit" value="Rechercher"/>
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Nom", "Index", new { sortOrder = ViewBag.NomSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Prix", "Index", new { sortOrder = ViewBag.PrixSortParm })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.m_strDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.m_boBle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.m_boLait)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.m_boOeuf)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.m_boArachide)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.m_boSoja)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.m_boFruitCoque)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.m_boPoisson)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.m_boSesame)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.m_boCrustace)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.m_boMollusque)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_strNom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_iPrix)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_strDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_boBle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_boLait)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_boOeuf)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_boArachide)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_boSoja)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_boFruitCoque)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_boPoisson)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_boSesame)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_boCrustace)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_boMollusque)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.m_iRepasId }) |
+            @Html.ActionLink("Détails", "Details", new { id=item.m_iRepasId }) 
+            <br>
+            @Html.ActionLink("Ajouter une image", "SelectionImage", new { id = item.m_iRepasId })|
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.m_iRepasId }) 
+        </td>
+    </tr>
+}
+
+</table>

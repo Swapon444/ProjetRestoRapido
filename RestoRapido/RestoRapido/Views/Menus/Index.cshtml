@@ -1,0 +1,57 @@
+﻿@model IEnumerable<RestoRapido.Models.CMenu>
+
+
+<h2>Les Menus</h2>
+
+<p>
+    @Html.ActionLink("Ajouter un menu", "Create")
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Rechercher par nom : @Html.TextBox("SearchString")
+        <input type="submit" value="Rechercher"/>
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Nom", "Index", new { sortOrder = ViewBag.NomSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Date de début", "Index", new { sortOrder = ViewBag.DateDebutSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Date de fin", "Index", new { sortOrder = ViewBag.DateFinSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Nombre de repas", "Index", new { sortOrder = ViewBag.NbRepasSortParm })
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_strNom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_DateDebut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_DateFin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.m_Repas.Count)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.m_iMenuId }) |
+            @Html.ActionLink("Détails", "Details", new { id=item.m_iMenuId }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.m_iMenuId })
+        </td>
+    </tr>
+}
+
+</table>

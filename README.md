@@ -8,3 +8,5 @@ verreaultfrank = Francis Verreault,
 AntoineMonzerol = Antoine Monzerol,
 GratMaster = Alexandre Gratton,
 FrankyStark11 = Francis Marsolais
+
+url : http://projetrestorapidoc.azurewebsites.net/

@@ -30,21 +30,29 @@ namespace RestoRapido.Models
         [Key]
         public int m_iMenuId { get; set; }
 
-        // Nom affiché du menu      
+        // Nom affiché du menu 
+        [Required]
         [DisplayName("Nom")]
+        [StringLength(50, MinimumLength = 1)]
         public string m_strNom { get; set; }
 
-        // Indique la date ou le menu commencera à être actif     
+        // Indique la date ou le menu commencera à être actif 
+        [Required]
+        [DataType(DataType.Date)]
         [DisplayName("Date de début")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime m_DateDebut { get; set; }
 
         // Indique la date ou le menu finit d'être actif
+        [Required]
+        [DataType(DataType.Date)]
         [DisplayName("Date de fin")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime m_DateFin { get; set; }
 
-        /* Collection contenant des CMenuRepas pour permettre de lier le menu à
+        /* Collection contenant des CRepas pour permettre de lier le menu à
            des repas */
-        public ICollection<CMenuRepas> m_MenuRepas;
+        public virtual ICollection<CRepas> m_Repas { get; set; }
 
         #endregion
     }

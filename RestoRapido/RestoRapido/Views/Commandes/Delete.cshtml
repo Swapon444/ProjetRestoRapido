@@ -1,0 +1,107 @@
+﻿@model RestoRapido.Models.CCommande
+
+
+<h2>Supprimer une commande</h2>
+
+<div>
+
+    <hr />
+
+    <dl>
+        <dt>
+            <label> Date </label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdDate)
+        </dd>
+        <br>
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdResto.resNom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdResto.resNom)
+        </dd>
+        <br>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdTable.i_TableNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdTable.i_TableNum)
+        </dd>
+        <br>
+        <dt>
+            @Html.DisplayNameFor(model => model.mUtilisateurClient.UtilisateurNomUsager)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mUtilisateurClient.UtilisateurNomUsager)
+        </dd>
+        <br>
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdCommentCommandes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdCommentCommandes)
+        </dd>
+
+    </dl>
+</div>
+
+    <label> Liste des Repas : </label>
+
+    <table border="1" align="center">
+
+        <tr>
+            <th>
+                NOM
+            </th>
+            <th>
+                PRIX
+            </th>
+        </tr>
+
+        @{
+            List<RestoRapido.Models.CRepas> Repas = ViewBag.YourMeet;
+
+            foreach (var item in Repas)
+            {
+                <tr style="text-align: left">
+                    <td>
+                        @item.m_strNom
+                    </td>
+                    <td>
+                        @(item.m_iPrix + ".00 $")
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+
+    <br>
+
+    <div style="text-align:center">
+        <label> Montant Avant Taxes : </label> @(Model.mCmdPrixAvantTaxes)
+
+        <br>
+        <label> Montant Total : </label> @(Model.mCmdPrixTotal)
+        <div>
+
+        </div>
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Supprimer" class="btn btn-default" /> |
+                @Html.ActionLink("Retour à la liste des commandes", "Index")
+            </div>
+        }
+    </div>

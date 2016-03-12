@@ -16,6 +16,13 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+        @if(Session["Prenom"] != null)
+        {
+            <li>@Html.ActionLink("Déconnexion", "Index", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>   
+        }  
+     </ul>
 }

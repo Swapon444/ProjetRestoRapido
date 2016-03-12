@@ -52,12 +52,24 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -109,6 +121,14 @@
     <Reference Include="Antlr3.Runtime">
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing, Version=0.14.0.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.14.0.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.presentation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -162,30 +182,48 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\ApiCommandesController.cs" />
+    <Compile Include="API\ApiCreerController.cs" />
+    <Compile Include="API\ApiFacturesController.cs" />
+    <Compile Include="API\ApiModifierController.cs" />
+    <Compile Include="API\ApiLoginController.cs" />
+    <Compile Include="API\ApiRepasController.cs" />
+    <Compile Include="API\CmdRepasController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CCommandesController.cs" />
-    <Compile Include="Controllers\CMenusController.cs" />
-    <Compile Include="Controllers\CRepasController.cs" />
+    <Compile Include="Controllers\AdministrateurController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\CommandesController.cs" />
     <Compile Include="Controllers\CRestoesController.cs" />
-    <Compile Include="Controllers\CTablesController.cs" />
+    <Compile Include="Controllers\GerantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MenusController.cs" />
+    <Compile Include="Controllers\RabaisRepasController.cs" />
+    <Compile Include="Controllers\RepasController.cs" />
+    <Compile Include="Controllers\ServeurController.cs" />
     <Compile Include="Controllers\UtilisateursController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603101631142_InitialCreate.cs" />
+    <Compile Include="Migrations\201603101631142_InitialCreate.Designer.cs">
+      <DependentUpon>201603101631142_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CCodeQR.cs" />
+    <Compile Include="Models\CAlerte.cs" />
+    <Compile Include="Models\CCmdRepas.cs" />
     <Compile Include="Models\CCommande.cs" />
+    <Compile Include="Models\CEncryption.cs" />
     <Compile Include="Models\CMenu.cs" />
-    <Compile Include="Models\CMenuContext.cs" />
-    <Compile Include="Models\CMenuInitializer.cs" />
     <Compile Include="Models\CMenuRepas.cs" />
+    <Compile Include="Models\CRabaisRepas.cs" />
     <Compile Include="Models\CRepas.cs" />
     <Compile Include="Models\CResto.cs" />
     <Compile Include="Models\CRestoContext.cs" />
@@ -199,8 +237,16 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AssignedTableData.cs" />
+    <Compile Include="ViewModels\CRepasAssignes.cs" />
+    <Compile Include="ViewModels\RabaisAssignes.cs" />
+    <Compile Include="ViewModels\RepasZCommandes.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\dbRestoRapidoV26.mdf" />
+    <Content Include="App_Data\dbRestoRapidoV26_log.ldf">
+      <DependentUpon>dbRestoRapidoV26.mdf</DependentUpon>
+    </Content>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\EntityFramework.dll" />
@@ -272,10 +318,14 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="bin\RestoRapido.dll.config" />
+    <Content Include="bin\RestoRapido.dll.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
     <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="ClassDiagram1.cd" />
+    <None Include="Properties\PublishProfiles\ProjetRestoRapidoC.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -324,39 +374,56 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Utilisateurs\Create.cshtml" />
-    <Content Include="Views\Utilisateurs\Delete.cshtml" />
-    <Content Include="Views\Utilisateurs\Details.cshtml" />
-    <Content Include="Views\Utilisateurs\Edit.cshtml" />
-    <Content Include="Views\Utilisateurs\Index.cshtml" />
-    <Content Include="Views\CTables\Create.cshtml" />
-    <Content Include="Views\CTables\Delete.cshtml" />
-    <Content Include="Views\CTables\Details.cshtml" />
-    <Content Include="Views\CTables\Edit.cshtml" />
-    <Content Include="Views\CTables\Index.cshtml" />
     <Content Include="Views\CRestoes\Create.cshtml" />
     <Content Include="Views\CRestoes\Delete.cshtml" />
     <Content Include="Views\CRestoes\Details.cshtml" />
     <Content Include="Views\CRestoes\Edit.cshtml" />
     <Content Include="Views\CRestoes\Index.cshtml" />
-    <Content Include="Views\CCommandes\Create.cshtml" />
-    <Content Include="Views\CCommandes\Delete.cshtml" />
-    <Content Include="Views\CCommandes\Details.cshtml" />
-    <Content Include="Views\CCommandes\Edit.cshtml" />
-    <Content Include="Views\CCommandes\Index.cshtml" />
-    <Content Include="Views\CMenus\Create.cshtml" />
-    <Content Include="Views\CMenus\Delete.cshtml" />
-    <Content Include="Views\CMenus\Details.cshtml" />
-    <Content Include="Views\CMenus\Edit.cshtml" />
-    <Content Include="Views\CMenus\Index.cshtml" />
-    <Content Include="Views\CRepas\Create.cshtml" />
-    <Content Include="Views\CRepas\Delete.cshtml" />
-    <Content Include="Views\CRepas\Details.cshtml" />
-    <Content Include="Views\CRepas\Edit.cshtml" />
-    <Content Include="Views\CRepas\Index.cshtml" />
+    <Content Include="Views\Administrateur\Index.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Gerant\Index.cshtml" />
+    <Content Include="Views\Serveur\Alertes.cshtml" />
+    <Content Include="Views\Serveur\Index.cshtml" />
+    <Content Include="Views\Account\Creation.cshtml" />
+    <Content Include="Views\Account\MainPageAdmin.cshtml" />
+    <Content Include="Views\Account\MainPageClient.cshtml" />
+    <Content Include="Views\Account\MainPageGerant.cshtml" />
+    <Content Include="Views\Account\MainPageServeur.cshtml" />
+    <Content Include="Views\Commandes\Create.cshtml" />
+    <Content Include="Views\Commandes\Delete.cshtml" />
+    <Content Include="Views\Commandes\Details.cshtml" />
+    <Content Include="Views\Commandes\Edit.cshtml" />
+    <Content Include="Views\Commandes\Index.cshtml" />
+    <Content Include="Views\Commandes\IndexServeur.cshtml" />
+    <Content Include="Views\Commandes\CommanderClient.cshtml" />
+    <Content Include="Views\Serveur\SelectTable.cshtml" />
+    <Content Include="Views\Menus\Create.cshtml" />
+    <Content Include="Views\Menus\Delete.cshtml" />
+    <Content Include="Views\Menus\Details.cshtml" />
+    <Content Include="Views\Menus\Edit.cshtml" />
+    <Content Include="Views\Menus\Index.cshtml" />
+    <Content Include="Views\Repas\Create.cshtml" />
+    <Content Include="Views\Repas\Delete.cshtml" />
+    <Content Include="Views\Repas\Details.cshtml" />
+    <Content Include="Views\Repas\Edit.cshtml" />
+    <Content Include="Views\Repas\Index.cshtml" />
+    <Content Include="Views\Commandes\IndexAGS.cshtml" />
+    <Content Include="Views\RabaisRepas\Create.cshtml" />
+    <Content Include="Views\RabaisRepas\Delete.cshtml" />
+    <Content Include="Views\RabaisRepas\Details.cshtml" />
+    <Content Include="Views\RabaisRepas\Edit.cshtml" />
+    <Content Include="Views\RabaisRepas\Index.cshtml" />
+    <Content Include="Views\Utilisateurs\Create.cshtml" />
+    <Content Include="Views\Utilisateurs\Delete.cshtml" />
+    <Content Include="Views\Utilisateurs\Details.cshtml" />
+    <Content Include="Views\Utilisateurs\Edit.cshtml" />
+    <Content Include="Views\Utilisateurs\Index.cshtml" />
+    <Content Include="Views\Commandes\SelectionTable.cshtml" />
+    <Content Include="Views\Repas\SelectionImage.cshtml" />
+    <Content Include="Views\Commandes\CommandeRapport.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -365,6 +432,11 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201603101631142_InitialCreate.resx">
+      <DependentUpon>201603101631142_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -13,11 +13,11 @@ using System.Data.SqlClient;
 
 namespace RestoRapido.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private CRestoContext db = new CRestoContext();
 
         public AccountController()
         {
@@ -56,50 +56,120 @@ namespace RestoRapido.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login(string returnUrl, int? _IDResto, int? _IDTable)
         {
             ViewBag.ReturnUrl = returnUrl;
+
+            if (_IDResto == null || _IDResto == 0)
+            {
+                @Session["Mobile"] = false;
+
+            }
+
+            else
+            {
+                @Session["Mobile"] = true;
+                @Session["RestoID"] = _IDResto;
+                @Session["TableID"] = _IDTable;
+            }
+
+
+            var restaurants = from s in db.Resto
+                            select s;
+
+            ViewBag.Restos = restaurants.ToList();
             return View();
         }
+
+        
 
         //
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl, int? Restaurants)
         {
-            string type = "";
+            //Objectif : Authentifier un utilisateur
+            string strCon = System.Web
+                      .Configuration
+                      .WebConfigurationManager
+                      .ConnectionStrings["CRestoContext"].ConnectionString;
+            string type = ""; //Type du compte de l'utilisateur
+            string prenom = ""; //Prénom de l'utilisateur
+            int id = -1; //Id de l'utilisateur
+            int tableId = -1; //Id de la table de l'utilisateur
+            // bool siConnecter = false;
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dbRestaurant.mdf;Initial Catalog=RestoRapido;Integrated Security=True");
-            SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "'", conn);
+            SqlConnection conn = new SqlConnection(strCon); 
+            SqlCommand checkuser = new SqlCommand("SELECT UtilisateurType,UtilisateurPrenom, UtilisateurID FROM Utilisateurs WHERE UtilisateurNomUsager = '" + model.Email.ToString() + "' AND UtilisateurMDP = '" + CEncryption.CalculateMD5Hash(model.Password.ToString()) + "'", conn);
+           
+            
+            checkuser.Connection = conn;
             conn.Open();
             SqlDataReader dr = checkuser.ExecuteReader();
 
-            while (dr.Read())
+
+            while (dr.Read()) //Si le select retourne un champ
             {
                 type = dr.GetString(0);
+                prenom = dr.GetString(1);
+                id = dr.GetInt32(2);
             }
+
             
+            if (dr.HasRows) //Si le datareader n'est pas vide, affecter les variables de session 
+            {
+                
+                Session["Type"] = type;
+
+                if ((bool)Session["Mobile"] == false)
+                    Session["RestoID"] = Restaurants;
+
+                Session["Prenom"] = prenom;
+                Session["ID"] = id;
+                Session["Connexion"] = true;
+            }
+
+            conn.Close();
+
             switch (type)
             {
+                //Afficher la bonne vue selon le type de compte
                 case "Administrateur":
-                    return View("MainPageAdmin");
-                case "Gérant":
-                    return View("MainPageGerant");
+                    return View("../Administrateur/Index");
+                case "Gerant":
+                    return View("../Gerant/Index");
                 case "Serveur":
-                    return View("MainPageServeur");
+                    return View("../Serveur/Index");
                 case "Client":
-                    return View("MainPageClient");
+                    {
+
+                        //Si l'utilisateur est un client, lui affecter la table qu'il a choisie
+
+                        SqlCommand checktable = new SqlCommand("SELECT CTable_CTableID FROM UtilisateurCTables WHERE " + id + " = Utilisateur_UtilisateurID", conn);
+                        checktable.Connection = conn;
+                        conn.Open();
+                        SqlDataReader dr2 = checktable.ExecuteReader();
+
+
+                        while (dr2.Read())
+                            tableId = dr2.GetInt32(0);
+
+                        Session["Table"] = tableId;
+
+                        return View("../Client/Index");
+                    }
                 default:
                     ModelState.AddModelError("", "Tentative de connexion non valide.");
-                    return View(model);
+                    return Login(returnUrl, 0, 0);
             }
         }
-
+        /*
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -352,7 +422,7 @@ namespace RestoRapido.Controllers
                     // Si l'utilisateur n'a pas de compte, invitez alors celui-ci à créer un compte
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { NomUtilisateur = loginInfo.Email });
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
 
@@ -376,7 +446,7 @@ namespace RestoRapido.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.NomUtilisateur, Email = model.NomUtilisateur };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -392,7 +462,7 @@ namespace RestoRapido.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
-        }
+        }*/
 
         //
         // POST: /Account/LogOff

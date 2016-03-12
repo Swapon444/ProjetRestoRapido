@@ -1,0 +1,17 @@
+﻿
+
+
+<h2>Sélection des tables</h2>
+
+@using (Html.BeginForm("AjouterTableSession", "Commandes"))
+{
+        
+    <label> Listes des Tables : </label>
+    
+    @Html.DropDownList("listeTables", null, htmlAttributes: new { @class = "form-control" })
+
+    <br>
+    
+    <input type="submit" value="Commander" class="btn btn-default" />
+}
+

@@ -1,38 +1,34 @@
 ﻿@model IEnumerable<RestoRapido.Models.CResto>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
+<h2>Les Restaurants</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Créer un restaurant", "Create")
 </p>
-
+@*Rajouter une champ de recherche de nom*@
 @using (Html.BeginForm())
 {
     <p>
-        Recherche par noms: @Html.TextBox("searchString")
+        Trouver par nom : @Html.TextBox("SearchString")
         <input type="submit" value="Rechercher" />
     </p>
 }
-
 <table class="table">
     <tr>
         <th>
-            <!-- va trier par nom lorsque l'on clique sur le lien -->
             @Html.ActionLink("Nom", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.resPostal)
+            @Html.DisplayNameFor(model => model.resNoCiv)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.resRue)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.resNoCiv)
+            @Html.DisplayNameFor(model => model.resPostal)
         </th>
+        
+        
         <th></th>
     </tr>
 
@@ -42,18 +38,20 @@
             @Html.DisplayFor(modelItem => item.resNom)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.resPostal)
+            @Html.DisplayFor(modelItem => item.resNoCiv)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.resRue)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.resNoCiv)
+            @Html.DisplayFor(modelItem => item.resPostal)
         </td>
+        
+        
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CRestoID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CRestoID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CRestoID })
+            @Html.ActionLink("Modifier", "Edit", new { id=item.CRestoID }) |
+            @Html.ActionLink("Détails", "Details", new { id=item.CRestoID }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.CRestoID })
         </td>
     </tr>
 }

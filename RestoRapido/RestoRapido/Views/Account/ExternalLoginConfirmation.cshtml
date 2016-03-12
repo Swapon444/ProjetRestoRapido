@@ -1,8 +1,8 @@
 ﻿@model RestoRapido.Models.ExternalLoginConfirmationViewModel
 @{
-    ViewBag.Title = "S’inscrire";
+    ViewBag.Title = "Inscription";
 }
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 <h3>Associer votre compte @ViewBag.LoginProvider.</h3>
 
 @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))

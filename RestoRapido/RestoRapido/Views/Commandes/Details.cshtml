@@ -1,0 +1,119 @@
+﻿@model RestoRapido.Models.CCommande
+
+
+<h2>Détails d'une commande</h2>
+
+<div>
+
+    <hr />
+
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdDate)        
+        </dt>
+        
+        <dd>
+            @Html.DisplayFor(model => model.mCmdDate)        
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdResto.resNom)    
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdResto.resNom)
+       </dd>
+      
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdTable.i_TableNum)        
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdTable.i_TableNum)        
+        </dd>
+       
+        <dt>
+            @Html.DisplayNameFor(model => model.mUtilisateurClient.UtilisateurNomUsager)        
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mUtilisateurClient.UtilisateurNomUsager)        
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.mCmdCommentCommandes)        
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mCmdCommentCommandes)
+        </dd>
+
+    </dl>
+
+    <label> Liste des Repas : </label>
+
+    <table border="1" align="center" >
+
+        <tr>
+            <th>
+                NOM
+            </th>
+
+            <th>
+                QUANTITÉ
+            </th>
+            <th>
+                PRIX
+            </th>
+            <th>
+                COMMENTAIRES
+            </th>
+        </tr>
+
+        @{
+            List<RestoRapido.Models.CCmdRepas> Repas = ViewBag.YourMeet;
+
+            foreach (var item in Repas)
+            {
+                <tr style="text-align: left">
+                    <td width="40px">
+                        @item.mRepas.m_strNom
+                    </td>
+                    <td width="40px" style="text-align:center">
+                        @item.mNbRep
+                    </td>
+                    <td width="40px" style="text-align:center">
+                        @(item.mRepas.m_iPrix * item.mNbRep)
+                    </td>
+                    <td width="40px">
+                        @item.mCommentaire
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+   
+    <br>
+
+    <div style="text-align:center">
+          <label> Montant Avant Taxes : </label> @Html.DisplayFor(model => model.mCmdPrixAvantTaxes)
+
+            <br>
+          <label> Montant Total : </label> @Html.DisplayFor(model => model.mCmdPrixTotal)
+    </div> 
+
+</div>
+
+<p>
+    @if ((string)Session["Type"] == "Client")
+    {
+        @Html.ActionLink("Retour à la liste des commandes", "Index")
+    }
+    else
+    {
+        @Html.ActionLink("Retour", "IndexAGS")
+    }
+      
+</p>

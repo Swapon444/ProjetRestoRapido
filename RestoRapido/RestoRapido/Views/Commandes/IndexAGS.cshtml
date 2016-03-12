@@ -1,0 +1,145 @@
+﻿@model IEnumerable<RestoRapido.Models.CCommande>
+
+
+
+<h2>Vos Commandes</h2>
+
+<p>
+    <div height="50px" style="border-style: solid;">
+        @if (ViewBag.SiPaye == true)
+        {
+            @Html.ActionLink("Commander", "Create", null, new { @style = "font-size: 20px;" })
+        }
+
+        else
+        {
+            @Html.ActionLink("Payer la Facture", "PayerFacture", new { id = ViewBag.cmdAPayer }, new { @style = "font-size: 20px;" })
+        }
+
+    </div>
+</p>
+
+<br>
+
+<h4 style="text-align:left; font-weight: bold; font-style: italic;">Commandes en Cours :</h4>
+
+<table class="table">
+    <tr style="text-align: left">
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdResto.resNom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdTable.i_TableNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mUtilisateurClient.UtilisateurNomUsager)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdPrixAvantTaxes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdPrixTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdDate)
+        </th>
+        <th>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.mCmdStatusCommande == 0)
+        {
+            <tr style="text-align: left">
+                <td>
+                    @Html.DisplayFor(modelItem => item.mCmdResto.resNom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mCmdTable.i_TableNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mUtilisateurClient.UtilisateurNomUsager)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mCmdPrixAvantTaxes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mCmdPrixTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mCmdDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Détails", "Details", new { id = item.mCmdID })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+
+<br>
+
+<h4 style="text-align:left;  font-weight: bold; font-style: italic;">Commandes Antérieures :</h4>
+
+
+<table class="table">
+    <tr style="text-align: left">
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdResto.resNom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdTable.i_TableNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mUtilisateurClient.UtilisateurNomUsager)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdPrixAvantTaxes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdPrixTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mCmdDate)
+        </th>
+
+        <th>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.mCmdStatusCommande == 1)
+        {
+            <tr style="text-align: left">
+                <td>
+                    @Html.DisplayFor(modelItem => item.mCmdResto.resNom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mCmdTable.i_TableNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mUtilisateurClient.UtilisateurNomUsager)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mCmdPrixAvantTaxes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mCmdPrixTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mCmdDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Détails", "Details", new { id = item.mCmdID })
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+
+@Html.ActionLink("Retour", "Index")

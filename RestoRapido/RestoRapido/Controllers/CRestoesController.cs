@@ -17,40 +17,32 @@ namespace RestoRapido.Controllers
         // GET: CRestoes
         public ActionResult Index(string sortOrder, string searchString)
         {
-            //ViewBag.salut = "salut";
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DataSortParm = sortOrder == "Data" ? "data+desc" : "";
+            if (@Session["Type"] != null)
+                if (@Session["Type"].ToString() == "Administrateur")
+                {
+                    ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                    ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+                    var restos = from s in db.Resto
+                                 select s;
 
-            //prend tous les étudiants dans la BD
-            var etudiants = from s in db.Resto
-                            select s;
+                    if (!String.IsNullOrEmpty(searchString))
+                    {
+                        restos = restos.Where(s => s.resNom.Contains(searchString));
+                    }
+                    switch (sortOrder)
+                    {
+                        case "name_desc":
+                            restos = restos.OrderByDescending(s => s.resNom);
+                            break;
+                        default:
+                            restos = restos.OrderBy(s => s.resNom);
+                            break;
+                    }
 
-            //permet de rechercher dans la table
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                etudiants = etudiants.Where(s => s.resNom.Contains(searchString)
-                                            || s.resPostal.Contains(searchString)
-                                            || s.resRue.Contains(searchString)
-                                            || s.resNoCiv.Contains(searchString)
-                                            );
+                    return View(restos.ToList());
+                }
 
-            }
-
-            //fait l'ordre
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    etudiants = etudiants.OrderByDescending(s => s.resNom);
-                    break;
-                default:
-                    etudiants = etudiants.OrderBy(s => s.resNom);
-                    break;
-
-
-            }
-
-
-            return View(etudiants);
+            return View("../Home/Index");
         }
 
         // GET: CRestoes/Details/5
@@ -71,7 +63,11 @@ namespace RestoRapido.Controllers
         // GET: CRestoes/Create
         public ActionResult Create()
         {
-            return View();
+            if (@Session["Type"] != null)
+                if (@Session["Type"].ToString() == "Administrateur")
+                    return View();
+
+            return View("../Home/Index");
         }
 
         // POST: CRestoes/Create
@@ -155,6 +151,57 @@ namespace RestoRapido.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        /*
+        Permet de supprimer une table
+            id : Clé primaire du restaurant
+            idTable = Clé primaire de la table
+        */
+        public ActionResult supprimertable(int id, int idTable)
+        {
+            if (@Session["Type"] != null)
+                if (@Session["Type"].ToString() == "Administrateur")
+                {
+                    CTable Table = db.Tables.Find(idTable); //va chercher la table
+
+                    db.Tables.Remove(Table); //enlève cette table
+
+                    db.SaveChanges(); //Sauvegarde la BD
+
+                    return RedirectToAction("Edit", new { ID = id });
+                }
+            
+            return View("../Home/Index");
+        }
+
+        /*
+        Permet d'ajouter une table
+            id : clé primaire du restaurant
+        */
+        public ActionResult ajoutertable(int id)
+        {
+            if (@Session["Type"] != null)
+                if (@Session["Type"].ToString() == "Administrateur")
+                {
+                    CResto cResto = db.Resto.Find(id); //va chercher le restaurant
+                    try
+                    {
+                        //Ajoute la table au restaurant
+                        cResto.Tables.Add(new CTable(cResto.Tables.Last().i_TableNum + 1, id));
+                    }
+                    catch (Exception e)
+                    {
+                        cResto.Tables.Add(new CTable(1, id));
+                    }
+
+                    db.SaveChanges(); //Sauvegarde la BD
+
+                    return RedirectToAction("Edit", new { ID = id });
+                }
+
+            return View("../Home/Index");
         }
     }
 }

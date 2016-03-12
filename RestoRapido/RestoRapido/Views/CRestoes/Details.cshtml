@@ -1,13 +1,10 @@
 ﻿@model RestoRapido.Models.CResto
+@using RestoRapido.Models
 
-@{
-    ViewBag.Title = "Details";
-}
 
-<h2>Details</h2>
+<h2>Détails sur le restaurant</h2>
 
 <div>
-    <h4>CResto</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,11 +16,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.resPostal)
+            @Html.DisplayNameFor(model => model.resNoCiv)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.resPostal)
+            @Html.DisplayFor(model => model.resNoCiv)
         </dd>
 
         <dt>
@@ -35,16 +32,46 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.resNoCiv)
+            @Html.DisplayNameFor(model => model.resPostal)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.resNoCiv)
+            @Html.DisplayFor(model => model.resPostal)
         </dd>
+
+        
+
+        
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CRestoID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.CRestoID })
+</p>
+<h2>Les tables du restaurant</h2>
+<div>
+    <table class="table">
+        <tr>
+            <th>Numéro de table</th>
+        </tr>
+        @if (Model.Tables != null)
+        {
+            foreach (var item in Model.Tables)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.i_TableNum)
+                    </td>
+                    <td>
+
+                        @Html.GenerateQrCode(item.str_TableCodeQR)
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+<p>
+    @Html.ActionLink("Retour à la liste des restaurants", "Index")
 </p>

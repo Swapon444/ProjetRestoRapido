@@ -1,0 +1,106 @@
+﻿@model RestoRapido.Models.CMenu
+
+<h2>Commander un repas</h2>
+<h3>
+    @Html.DisplayFor(model => model.m_strNom)
+</h3>
+@if (ViewBag.TitreAllergie)
+{
+    @Html.ActionLink("Ignorer les allergies", "CommanderClient", new { Allergy = ViewBag.AllergyParam })
+}
+else
+{
+    @Html.ActionLink("Afficher les allergies", "CommanderClient", new { Allergy = ViewBag.AllergyParam })
+}
+@using (Html.BeginForm("AjouterCmd", "Commandes"))
+{
+    <table class="table">
+        <tr>
+            <td>
+                @Html.ActionLink("Nom", "CommanderClient", new { sortOrder = ViewBag.NameSortParm })
+            </td>
+            <td>
+                @Html.ActionLink("Prix", "CommanderClient", new { sortOrder = ViewBag.PrixSortParm })
+            </td>
+            <td>
+                Allergie
+            </td>
+            <td>
+                Quantité
+            </td>
+            <td>
+                Note
+            </td>
+        </tr>
+
+        @foreach (var item in Model.m_Repas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.m_strNom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.m_iPrix)
+                </td>
+                <td>
+                    @if (item.m_boArachide)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boArachide);
+                    }
+                    @if (item.m_boBle)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boBle);
+                    }
+                    @if (item.m_boCrustace)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boCrustace);
+                    }
+                    @if (item.m_boFruitCoque)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boFruitCoque);
+                    }
+                    @if (item.m_boLait)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boLait);
+                    }
+                    @if (item.m_boMollusque)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boMollusque);
+                    }
+                    @if (item.m_boPoisson)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boPoisson);
+                    }
+                    @if (item.m_boSesame)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boSesame);
+                    }
+                    @if (item.m_boSoja)
+                    {
+                        @Html.DisplayNameFor(modelItem => item.m_boSoja);
+                    }
+                </td>
+
+                <td>
+                    <input type="number" name="Rep @item.m_iRepasId" min="0" value="0">
+                </td>
+
+                <td>
+                    <input type="text" name="Note @item.m_iRepasId" placeholder="Note du repas...">
+                </td>
+
+            </tr>
+        }
+    </table>
+    <br />
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            Note de la commande : <br />
+            <textarea name="CmdNote" rows="7" cols="50"></textarea>
+            <br />
+            <br />
+            <input type="submit" value="Commander" class="btn btn-default" />
+        </div>
+    </div>
+}
